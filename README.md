@@ -1,3 +1,10 @@
+# Installation and Launch Instructions:
+
+- Install MinGW and CMake (version 3.25 or higher).
+- Download the repository containing the above files.
+- Run run.bat to configure, build, install, and launch the program.
+
+
 
 # Container Performance Comparison (Vector, List, Deque)
 This document analyzes how the choice of container (vector, list, deque) affects program performance when managing student data under different grouping strategies. Performance metrics considered include memory efficiency and execution time (reading, sorting, grouping).
