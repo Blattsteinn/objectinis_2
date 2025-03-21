@@ -5,10 +5,7 @@
 
     // ------------------------
     /// calculations.cpp
-    float average(Studentas temp);
-    float median(Studentas temp);
-    void calculate_everything(Studentas &temp);
-    void sortGrades(vector<float>& grades);
+    /// moved to a class
 
 
 

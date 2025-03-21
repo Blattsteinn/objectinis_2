@@ -151,8 +151,8 @@
         
                 vector<Studentas> studentList = read_student_records(ndCount, iss);
                 
-                for( auto student : studentList){
-                    calculate_everything(student);
+                for( auto &student : studentList){
+                    student.calculate_everything();
                     insert_student(student_list, student);
                 }
             } catch (const char* msg) {
