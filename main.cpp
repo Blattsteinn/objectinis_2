@@ -17,38 +17,20 @@ int main(){
 
         if(program_choice == 5) { break; } // Nutraukiamas programos darbas
         switch(program_choice){
-            case 1:   // 1 - ivedimas rankas
-
-                temp.initializeVardas(0);
-                temp.initializePavarde(0);
-                temp.initializeGrades(0);
-                temp.initializeExam(0);
-            
-                temp.calculate_everything();
+            case 1: {   // 1 - ivedimas rankas
+                temp = userChoice_1();
                 insert_student(list_of_students, temp);
 
                 break;
-
+            }
             case 2:   // 2 - atsitiktinis pazymiu generavimas
-
-                temp.initializeVardas(0);
-                temp.initializePavarde(0);
-                temp.initializeGrades(1);
-                temp.initializeExam(1);
-
-                temp.calculate_everything();
+                temp = userChoice_2();
                 insert_student(list_of_students, temp);
 
                 break;
 
             case 3:   // 3 - generuoti ir pazymius ir studentu vardus, pavardes
-
-                temp.initializeVardas(1);
-                temp.initializePavarde(1);
-                temp.initializeGrades(1);
-                temp.initializeExam(1);
-
-                temp.calculate_everything();
+                temp = userChoice_3();
                 insert_student(list_of_students, temp);
 
                 break;

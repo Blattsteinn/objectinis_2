@@ -27,6 +27,10 @@
     void sort_students(vector<Studentas> &student_list);
     void sort_students(vector<Studentas> &student_list, int choice);
 
+    Studentas userChoice_1();
+    Studentas userChoice_2();
+    Studentas userChoice_3();
+
     // ---------------------------
     // random_generating.cpp
     

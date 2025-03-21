@@ -37,14 +37,11 @@ class Studentas {
         galutinisMed = 0.0f;
     }
     
-
-    // Initializations
-    void initializeVardas(int i);
-    void initializePavarde(int i);
-
-    void initializeGrades(int i);
-    void initializeExam(int i);
-
+    // Setters
+    void setVardas(const string& v) { vardas = v; }
+    void setPavarde(const string& p) { pavarde = p; }
+    void setGrades(const vector<float>& g) { pazymiai = g; }
+    void setExam(int exam) { egzaminoRezultatas = exam; }
 
     // Getters
     string getVardas() const { return vardas; }
@@ -62,7 +59,7 @@ class Studentas {
 
 
     // Friend function for easier printing
-    friend ostream& operator<<(ostream &out, Studentas &s) {
+    friend ostream& operator<<(ostream &out, const Studentas &s) {
         out << left << setw(15) << s.pavarde
             << setw(15) << s.vardas
             << fixed << setprecision(2) << setw(22) << s.galutinisVid
@@ -70,4 +67,5 @@ class Studentas {
             << "\n";
         return out;
     }
+    
 };
