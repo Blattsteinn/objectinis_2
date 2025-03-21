@@ -4,15 +4,6 @@
 #include <vector>
 using std::vector;
 
-#include <list>
-using std::list;
-
-#include <deque>
-using std::deque;
-
-template <typename T>
-using StudentContainer = vector<T>;  // Can be changed to list<T> or deque<T> as needed.
-
 // --- I/O Streams ---
 #include <iostream>
 using std::cout;
@@ -77,7 +68,7 @@ struct Studentas {
     string vardas;
     string pavarde;
     
-    StudentContainer<float> pazymiai;
+    vector<float> pazymiai;
     int egzaminoRezultatas;
     
     float galutinisVid;

@@ -18,56 +18,45 @@
 
     }
 
-// --- calculates final score for average & median
-    void calculate_everything(Studentas &temp){
-        temp.galutinisVid = average(temp) * 0.4 + temp.egzaminoRezultatas *0.6;
-        temp.galutinisMed = median<StudentContainer>(temp) * 0.4 + temp.egzaminoRezultatas *0.6;
+// --- calculates median
+    float median(Studentas temp) {
+        float mediana = 0; 
+        if (temp.pazymiai.empty()) {
+            cout << "[Klaida] Negalima apskaiciuoti vidurkio, nes nera ivertinimu. Mediana - 0" << endl;
+            return 0;
+        }
 
-    }
+        // Use the helper function
+        sortGrades(temp.pazymiai);
 
-// --- checks whenever a value is within a needed range
-    int check_the_value(string message, string errorMessage,int minVal,int maxVal){
-        while (true)
-        {
-            cout << message;
-            int value; 
-            if (!(cin >> value)){  // <-- if cin fails
-                cout << errorMessage << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                continue;  // <-- prompt back again
-            }
+        int pazymiu_kiekis = temp.pazymiai.size();
 
-            if (value < minVal || value > maxVal){  // <-- if the number is not within the given range 
-                cout << errorMessage << endl;
-                continue;  // <-- prompt back again
-            }
+        if(pazymiu_kiekis % 2 == 1) { // Odd number of elements
+            // For non-list, you need to get the element via iterators
+            auto it = temp.pazymiai.begin();
+            std::advance(it, pazymiu_kiekis / 2);
+            mediana = *it;
+            return mediana;
+        } else { // Even number of elements
+            auto it1 = temp.pazymiai.begin();
+            std::advance(it1, pazymiu_kiekis / 2);
 
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            return value;
+            auto it2 = temp.pazymiai.begin();
+            std::advance(it2, (pazymiu_kiekis / 2) - 1);
+
+            mediana = (*it1 + *it2) / 2.0;
+            return mediana;
         }
     }
 
-// --- returns a menu
-    string consoleText_userChoice() {
-        return R"(
-            [Programos eigos pasirinkimas]
-            
-    1 - rankinis ivedimas, 
-    2 - generuoti pazymius, 
-    3 - generuoti ir pazymius, ir studentu vardus, pavardes, 
-    4 - nuskaityti duomenis is failo, 
-    5 - baigti darba
+// --- calculates final score for average & median
+    void calculate_everything(Studentas &temp){
+        temp.galutinisVid = average(temp) * 0.4 + temp.egzaminoRezultatas *0.6;
+        temp.galutinisMed = median(temp) * 0.4 + temp.egzaminoRezultatas *0.6;
 
-    6 - failu generavimas
-    7 - testavimas
-
-                [Pasirinkimas]: )";
     }
 
-// --- returns a random number within wanted range a <= x <= b;
-    int randomNumber(int a, int b) {
-        static std::mt19937 gen{std::random_device{}()}; // paleidziama tik karta
-        std::uniform_int_distribution<int> distr(a, b);
-        return distr(gen);
+// --- sort for std::vector & std::list
+    void sortGrades(vector<float>& grades) {
+        std::sort(grades.begin(), grades.end());
     }

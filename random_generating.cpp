@@ -1,11 +1,15 @@
-#pragma once
-
 #include "my_library.h"
 #include "my_functions.h"
 
-// --- Generates random amount of grades
-    template <template<typename, typename...> class Container>
-    Container<float> random_grade(){
+
+// --- returns a random number within wanted range a <= x <= b;
+    int randomNumber(int a, int b) {
+        static std::mt19937 gen{std::random_device{}()}; // paleidziama tik karta
+        std::uniform_int_distribution<int> distr(a, b);
+        return distr(gen);
+    }
+
+    vector<float> random_grade(){
         Studentas temp;
 
         int amount_to_generate = randomNumber(2,8);  // Generates a random number to determine how many grades the student will have
@@ -17,20 +21,16 @@
         return temp.pazymiai;
     }
 
-    
 // --- Generates random name & last name
-
-    template <template<typename, typename...> class Container>
     string random_name() {
-        Container<std::string> vardai = {"John", "Alice", "Michael", "Emily", "David", "Sophia"};
+        vector<std::string> vardai = {"John", "Alice", "Michael", "Emily", "David", "Sophia"};
         auto it = vardai.begin();
         std::advance(it, randomNumber(0, vardai.size() - 1));
         return *it;
     }
 
-    template <template<typename, typename...> class Container>
     string random_last_name() {
-        Container<std::string> vardai = {"Smith", "Johnson", "Brown", "Williams", "Jones", "Miller"};
+        vector<std::string> vardai = {"Smith", "Johnson", "Brown", "Williams", "Jones", "Miller"};
         auto it = vardai.begin();
         std::advance(it, randomNumber(0, vardai.size() - 1));
         return *it;

@@ -3,7 +3,7 @@
 
 int main(){
 
-    StudentContainer<Studentas> list_of_students;
+    vector<Studentas> list_of_students;
     Studentas temp;   
 
     int program_choice{};
@@ -23,7 +23,7 @@ int main(){
                 cout << "Pavarde: ";  cin >> temp.pavarde;
 
                     // --- Rankinis pazymiu ivedimas --- 
-                temp.pazymiai = enter_grades_manually<StudentContainer>();
+                temp.pazymiai = enter_grades_manually();
                 temp.egzaminoRezultatas = check_the_value("Egzamino ivertinimas: ", "[Klaida] iveskite skaiciu nuo 1-10", 1, 10);
             
                 calculate_everything(temp);
@@ -35,7 +35,7 @@ int main(){
                 cout << "Vardas: ";   cin >> temp.vardas;
                 cout << "Pavarde: ";  cin >> temp.pavarde;
 
-                temp.pazymiai = random_grade<StudentContainer>();
+                temp.pazymiai = random_grade();
                 temp.egzaminoRezultatas = randomNumber(1, 10); cout << "Egzamino rezultatas: " << temp.egzaminoRezultatas << endl;
                 calculate_everything(temp);
                 insert_student(list_of_students, temp);
@@ -43,9 +43,9 @@ int main(){
                 break;
 
             case 3:   // 3 - generuoti ir pazymius ir studentu vardus, pavardes
-                temp.vardas = random_name<StudentContainer>();  cout << "Sugeneruotas vardas: " << temp.vardas << endl;
-                temp.pavarde = random_last_name<StudentContainer>(); cout << "Sugeneruota pavarde: " << temp.pavarde << endl;
-                temp.pazymiai = random_grade<StudentContainer>();
+                temp.vardas = random_name();  cout << "Sugeneruotas vardas: " << temp.vardas << endl;
+                temp.pavarde = random_last_name(); cout << "Sugeneruota pavarde: " << temp.pavarde << endl;
+                temp.pazymiai = random_grade();
                 temp.egzaminoRezultatas = randomNumber(1, 10); cout << "Egzamino rezultatas: " << temp.egzaminoRezultatas << endl;
 
                 calculate_everything(temp);
@@ -69,13 +69,13 @@ int main(){
                 strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3): ", "[Klaida] iveskite skaiciu nuo 1-3", 1,3);
                 switch(strategy_choice){
                     case 1:
-                        strategy_1<StudentContainer>();
+                        cout << "Hello! 1";
                         break;
                     case 2:
-                        strategy_1<StudentContainer>();
+                        cout << "Hello! 2";
                         break;
                     case 3: 
-                        strategy_1<StudentContainer>();
+                        cout << "Hello! 3";
                         break;
                     default: break;
                 }
