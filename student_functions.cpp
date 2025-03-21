@@ -29,33 +29,6 @@
         student_list.push_back(temp);
     }
 
-
-// --- Manual user entry for grades ---
-    vector<float> enter_grades_manually() {
-        vector<float> grades;  // <--- This is a container of floats
-        float grade;
-        int track_grades = 1;
-
-        std::cout << "[Pazymiu ivedimas] ivedant -1 nutraukiamas darbas" << std::endl;
-        while (true) {
-            std::string prompt = std::to_string(track_grades) + " pazymys: ";
-            grade = check_the_value(prompt, "[Klaida] ivertinimo ribos nuo 1 iki 10", -1, 10);
-
-            if (grade == -1) {
-                break;
-            } else if (grade == 0) {
-                std::cout << "[Klaida] ivertinimo ribos nuo 1 iki 10" << std::endl;
-                continue;
-            }
-
-            track_grades++;
-            grades.push_back(grade);
-        }
-
-        return grades;
-    }
-
-
 // ---------- Sort functions for std::vector & std::deque ----------
 
     // --- Sorts students depending on user input  ---
@@ -80,11 +53,11 @@
                 break;
             case 3:
                 sort(student_list.begin(), student_list.end(),
-                        [](const Studentas &a, const Studentas &b) { return a.galutinisVid < b.galutinisVid; });
+                        [](const Studentas &a, const Studentas &b) { return a.getGalutinisVid() < b.getGalutinisVid(); });
                 break;
             case 4:
                 sort( student_list.begin(), student_list.end(),
-                        [](const Studentas &a, const Studentas &b) { return a.galutinisMed < b.galutinisMed; });
+                        [](const Studentas &a, const Studentas &b) { return a.getGalutinisMed() < b.getGalutinisMed(); });
                 break;
             default:
                 break;
@@ -105,11 +78,11 @@
             break;
         case 3:
             sort(student_list.begin(), student_list.end(),
-                      [](const Studentas &a, const Studentas &b) { return a.galutinisVid < b.galutinisVid; });
+                      [](const Studentas &a, const Studentas &b) { return a.getGalutinisVid() < b.getGalutinisVid(); });
             break;
         case 4:
             sort( student_list.begin(), student_list.end(),
-                      [](const Studentas &a, const Studentas &b) { return a.galutinisMed < b.galutinisMed; });
+                      [](const Studentas &a, const Studentas &b) { return a.getGalutinisMed() < b.getGalutinisMed(); });
             break;
         default:
             break;

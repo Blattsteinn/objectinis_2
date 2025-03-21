@@ -6,16 +6,14 @@ class Studentas {
     private:
     string vardas;
     string pavarde;
-    
-    int egzaminoRezultatas;
-
-    public:
 
     vector<float> pazymiai;
+    int egzaminoRezultatas;
 
-    
     float galutinisVid;
     float galutinisMed;
+
+    public:
 
     // Default constructor: initializes members to default values.
     Studentas()
@@ -28,10 +26,23 @@ class Studentas {
         calculate_everything();
     }
 
+    ~Studentas() {
+        vardas.clear();
+        pavarde.clear();
+        pazymiai.clear();
+
+        egzaminoRezultatas = 0;
+        galutinisVid = 0.0f;
+        galutinisMed = 0.0f;
+    }
+    
+
     void initializeVardas(int i);
     void initializePavarde(int i);
 
+    void initializeGrades(int i);
     void initializeExam(int i);
+
 
     // Getters
     string getVardas() const { return vardas; }

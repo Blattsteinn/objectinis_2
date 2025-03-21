@@ -15,15 +15,13 @@ int main(){
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-5", 1,7);
         cout << endl;
 
-        temp.pazymiai.clear();
         if(program_choice == 5) { break; } // Nutraukiamas programos darbas
         switch(program_choice){
             case 1:   // 1 - ivedimas rankas
+
                 temp.initializeVardas(0);
                 temp.initializePavarde(0);
-
-                    // --- Rankinis pazymiu ivedimas --- 
-                temp.pazymiai = enter_grades_manually();
+                temp.initializeGrades(0);
                 temp.initializeExam(0);
             
                 temp.calculate_everything();
@@ -32,28 +30,27 @@ int main(){
                 break;
 
             case 2:   // 2 - atsitiktinis pazymiu generavimas
+
                 temp.initializeVardas(0);
                 temp.initializePavarde(0);
-
-
-                temp.pazymiai = random_grade();
+                temp.initializeGrades(1);
                 temp.initializeExam(1);
 
                 temp.calculate_everything();
-                
                 insert_student(list_of_students, temp);
 
                 break;
 
             case 3:   // 3 - generuoti ir pazymius ir studentu vardus, pavardes
+
                 temp.initializeVardas(1);
                 temp.initializePavarde(1);
-
-                temp.pazymiai = random_grade();
+                temp.initializeGrades(1);
                 temp.initializeExam(1);
 
                 temp.calculate_everything();
                 insert_student(list_of_students, temp);
+
                 break;
 
             case 4: {   // 4 - skaityti duomenu faila
@@ -94,8 +91,6 @@ int main(){
 
     if(list_of_students.size() != 0){
         sort_students(list_of_students);
-
-        //print_students(list_of_students);
         print_to_file(list_of_students, "rezultatai.txt");
     
     } else {

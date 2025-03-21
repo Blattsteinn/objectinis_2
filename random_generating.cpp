@@ -10,15 +10,15 @@
     }
 
     vector<float> random_grade(){
-        Studentas temp;
+        vector<float> grades;
 
         int amount_to_generate = randomNumber(2,8);  // Generates a random number to determine how many grades the student will have
         for(int i = 0; i< amount_to_generate; i++){
             int random_generated_grade = randomNumber(1, 10);   // Generates a grade
-            temp.pazymiai.push_back(random_generated_grade);
+            grades.push_back(random_generated_grade);
         }
 
-        return temp.pazymiai;
+        return grades;
     }
 
 // --- Generates random name & last name
