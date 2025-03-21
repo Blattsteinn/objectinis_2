@@ -5,12 +5,6 @@
 
 
     // ------------------------
-    /// calculations.cpp
-    /// moved to a class
-
-
-
-    // ------------------------
     /// file_functions.cpp
     namespace fs = std::filesystem;
     string create_folder(string folder_name);
@@ -27,9 +21,8 @@
     // ---------------------------
     /// student_functions.cpp
 
-    void print_students(vector<Studentas> &studentas);
+    void print_students(vector<Studentas> &studentas); 
     void insert_student(vector<Studentas> &student_list, Studentas &student);
-    vector<float> enter_grades_manually();
 
     void sort_students(vector<Studentas> &student_list);
     void sort_students(vector<Studentas> &student_list, int choice);
@@ -39,9 +32,9 @@
     
     int randomNumber(int a, int b);
     vector<float> random_grade();
+
     string random_name();
     string random_last_name();
-
 
     // ---------------------------
     // additional_functions.cpp

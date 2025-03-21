@@ -2,7 +2,7 @@
 #include "my_functions.h"
 
 
-// --- Reads the entire file into a string in a universal way ---
+    // --- Reads the entire file into a string ---
     string readFileToString(const string &file_name) {
         // Open the file in binary mode with the pointer at the end.
         ifstream file(file_name, ios::binary | ios::ate);
@@ -26,7 +26,7 @@
         return content;
     }
 
-// --- Counts the number of ND (NDn) in the header ---
+    // --- Counts the number of ND in the header ---
     int wordCount(istringstream& iss) {
         string header;
         getline(iss, header);
@@ -38,6 +38,112 @@
         // ND count is total words minus 3 (name, lastName, exam score)
         return words.size() - 3;
     }
+
+    // --- Reads student records  ---   
+    //  ndCount - instances of NDn in the file; &iss - stream of the file.
+    //  Skips processing further records if any record is malformed.
+    //  Returns a container of Studentas objects 
+    vector<Studentas> read_student_records(int ndCount, std::istringstream& iss) {
+        vector<Studentas> records;
+
+        while (true) {
+            string vardas, pavarde;
+            float egzaminoRezultatas;
+
+            if (!(iss >> vardas >> pavarde))
+                break;  // End of file or read error.
+            
+            
+            vector<float> pazymiai;
+            pazymiai.clear();
+
+            for (int i = 0; i < ndCount; i++) {
+                float grade;
+                if (!(iss >> grade)) {
+                    throw "[Klaida] Netinkamas duomenu failas!";
+                }
+                pazymiai.push_back(grade);
+            }
+            
+            // Read exam score.
+            if (!(iss >> egzaminoRezultatas)) {
+                throw "[Klaida] Netinkamas duomenu failas!";
+            }
+            
+            Studentas temp(vardas, pavarde, pazymiai, egzaminoRezultatas);
+            records.push_back(temp);
+        }
+        return records;
+    }
+
+
+    // --- Appends the student container and calculates everything ---
+    // file_name -  ***.txt file
+    // &student_list - container of Student structs
+    void appendingContainerViaFile(string file_name, vector <Studentas> &student_list){
+        {   
+            try{
+                string content = readFileToString(file_name);
+                istringstream iss(content);  // Stream for parsing the file
+                int ndCount = wordCount(iss);
+            
+        
+                vector<Studentas> studentList = read_student_records(ndCount, iss);
+                
+                for( auto &student : studentList){
+                    student.calculate_everything();
+                    insert_student(student_list, student);
+                }
+            } catch (const char* msg) {
+                cerr << msg << endl;
+            }
+        }
+    }
+
+    // -- Outputs students into a .txt file (preferred way)
+    void print_to_file(vector<Studentas> list_of_students, string file_name){
+
+        // Create an output string stream
+        std::ostringstream buffer;
+
+            buffer <<'\n' 
+            << left << setw(15) << "Pavarde" 
+            << setw(15) << "Vardas" 
+            << setw(15) << "Galutinis (Vid.)  /  " 
+            << setw(15) << "Galutinis (Med.)" 
+            << "\n-------------------------------------------------------------\n";
+
+        string folder_name = create_folder("Rezultatai");
+        fs::path full_path = fs::path(folder_name) / file_name;      // Combine folder and file name
+
+        ofstream isvedimas(full_path.string());
+        for (auto& s : list_of_students) {
+            buffer << s;   // Check class Studentas for printing logic
+
+        }
+        isvedimas << buffer.str();
+        isvedimas.close();
+
+        cout << endl;
+        cout << "Rezultatai issaugoti: " << full_path.string() << '\n' << endl; 
+
+    }
+
+// --- File / folder generating
+    string create_folder(string folder_name) {
+        // Define the folder path relative to the current working directory.
+        fs::path folderPath = fs::current_path() / folder_name;
+    
+        // Create the folder if it does not exist.
+        if (!fs::exists(folderPath)) {
+            if (!fs::create_directories(folderPath)) {
+                std::cerr << "[Klaida]: Nepavyko sukurti aplanko: " << folderPath << std::endl;
+                return "";
+            }
+        }
+        return folderPath.string();
+    }
+
 
     void generate_files(int student_size) { // size = 10^student_size
     
@@ -89,110 +195,3 @@
         // ----
     }
 
-
-    string create_folder(string folder_name) {
-        // Define the folder path relative to the current working directory.
-        fs::path folderPath = fs::current_path() / folder_name;
-    
-        // Create the folder if it does not exist.
-        if (!fs::exists(folderPath)) {
-            if (!fs::create_directories(folderPath)) {
-                std::cerr << "[Klaida]: Nepavyko sukurti aplanko: " << folderPath << std::endl;
-                return "";
-            }
-        }
-        return folderPath.string();
-    }
-
-// --- Reads student records  ---   
-    //  ndCount - instances of NDn in the file; &iss - stream of the file.
-    //  Skips processing further records if any record is malformed.
-    //  Returns a container of Studentas objects 
-
-    vector<Studentas> read_student_records(int ndCount, std::istringstream& iss) {
-        vector<Studentas> records;
-
-        while (true) {
-
-            string vardas, pavarde;
-            float egzaminoRezultatas;
-
-            if (!(iss >> vardas >> pavarde))
-                break;  // End of file or read error.
-            
-            
-            vector<float> pazymiai;
-            pazymiai.clear();
-
-            for (int i = 0; i < ndCount; i++) {
-                float grade;
-                if (!(iss >> grade)) {
-                    throw "[Klaida] Netinkamas duomenu failas!";
-                }
-                pazymiai.push_back(grade);
-            }
-            
-            // Read exam score.
-            if (!(iss >> egzaminoRezultatas)) {
-                throw "[Klaida] Netinkamas duomenu failas!";
-            }
-            
-            Studentas temp(vardas, pavarde, pazymiai, egzaminoRezultatas);
-            records.push_back(temp);
-        }
-        return records;
-    }
-
-
-// --- Appends the student container and calculates everything ---
-    // file_name - needed .txt file
-    // &student_list - container of Student structs
-
-    void appendingContainerViaFile(string file_name, vector <Studentas> &student_list){
-        {   
-            try{
-                string content = readFileToString(file_name);
-                istringstream iss(content);  // Stream for parsing the file
-                int ndCount = wordCount(iss);
-            
-        
-                vector<Studentas> studentList = read_student_records(ndCount, iss);
-                
-                for( auto &student : studentList){
-                    student.calculate_everything();
-                    insert_student(student_list, student);
-                }
-            } catch (const char* msg) {
-                cerr << msg << endl;
-            }
-        }
-    }
-
-    // -- Outputs students into a .txt file (preferred way)
-    void print_to_file(vector<Studentas> list_of_students, string file_name){
-
-        // Create an output string stream
-        std::ostringstream buffer;
-
-            buffer <<'\n' 
-            << left << setw(15) << "Pavarde" 
-            << setw(15) << "Vardas" 
-            << setw(15) << "Galutinis (Vid.)  /  " 
-            << setw(15) << "Galutinis (Med.)" 
-            << "\n-------------------------------------------------------------\n";
-
-        string folder_name = create_folder("Rezultatai");
-        fs::path full_path = fs::path(folder_name) / file_name;      // Combine folder and file name
-
-        ofstream isvedimas(full_path.string());
-        for (auto& s : list_of_students) {
-            buffer << s;   //Check struct Studentas for printing logic
-
-        }
-        isvedimas << buffer.str();
-        isvedimas.close();
-
-        cout << endl;
-        cout << "Rezultatai issaugoti: " << full_path.string() << '\n' << endl; 
-
-    }

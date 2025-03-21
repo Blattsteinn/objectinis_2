@@ -3,11 +3,9 @@
 
 #include "my_functions.h"
 
-    void Studentas::sortGrades() {
-    sort(pazymiai.begin(), pazymiai.end());
-}
 
-    // --- calculates the average score
+    // --- Calculation functions
+
     float Studentas::calculateMean(){
         float sum = 0;
         float vidurkis = 0;
@@ -24,14 +22,13 @@
 
     }
 
-    // --- calculates median
     float Studentas::calculateMedian() {
         if (pazymiai.empty()) {
             cout << "[Klaida] Negalima apskaiciuoti vidurkio, nes nera ivertinimu. Mediana - 0" << endl;
             return 0;
         }
         
-        sortGrades();
+        sort(pazymiai.begin(), pazymiai.end());
         size_t n = pazymiai.size();
         
         if (n % 2 != 0) {
@@ -48,7 +45,8 @@
 
     }
 
-    
+    // --- Initialization functions
+
     void Studentas::initializeVardas(int i){
         switch(i){
             case 0:
@@ -80,6 +78,7 @@
 
         }
     }
+
     void Studentas::initializeGrades(int i){
         switch(i){
             case 0: {
@@ -116,8 +115,6 @@
 
         }
     }
-
-
 
     void Studentas::initializeExam(int i){
         switch(i){

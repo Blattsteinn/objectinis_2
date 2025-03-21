@@ -15,17 +15,18 @@ class Studentas {
 
     public:
 
-    // Default constructor: initializes members to default values.
+    // Default constructor
     Studentas()
         : vardas(""), pavarde(""), egzaminoRezultatas(0),
           galutinisVid(0.0f), galutinisMed(0.0f) {}
 
-    // Parameterized constructor: initializes with provided values and calculates final scores.
+    // Parameterized constructor
     Studentas(const string& vardas, const string& pavarde, const vector<float>& pazymiai, int egzaminoRezultatas)
         : vardas(vardas), pavarde(pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
         calculate_everything();
     }
 
+    // Destructor
     ~Studentas() {
         vardas.clear();
         pavarde.clear();
@@ -37,6 +38,7 @@ class Studentas {
     }
     
 
+    // Initializations
     void initializeVardas(int i);
     void initializePavarde(int i);
 
@@ -54,11 +56,12 @@ class Studentas {
 
 
     // Member functions
-    void sortGrades();
     float calculateMean();
 	float calculateMedian();
-    void calculate_everything();
+    void calculate_everything();  // Calls both calculateMean and calculateMedian and assigns them.
 
+
+    // Friend function for easier printing
     friend ostream& operator<<(ostream &out, Studentas &s) {
         out << left << setw(15) << s.pavarde
             << setw(15) << s.vardas

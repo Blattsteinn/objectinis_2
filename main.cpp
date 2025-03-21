@@ -12,7 +12,7 @@ int main(){
     cout << "This is v1.1 !" << endl;
     while(true){ 
         
-        program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-5", 1,7);
+        program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
         cout << endl;
 
         if(program_choice == 5) { break; } // Nutraukiamas programos darbas
@@ -53,7 +53,7 @@ int main(){
 
                 break;
 
-            case 4: {   // 4 - skaityti duomenu faila
+            case 4: {   // 4 - Duomenu failo skaitymas
                 appendingContainerViaFile("kursiokai.txt", list_of_students);
                 cout << "Duomenys sekmingai nuskaityti is failo." << endl;
 
