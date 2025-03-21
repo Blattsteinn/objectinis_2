@@ -1,18 +1,37 @@
-# Installation and Launch Instructions:
+# v1.0 final release.
+This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
+
+ ## Previous releases
+- v.pradine-release – Initial release. The program accepts user input, generates random grades and names, and calculates the final score using both the arithmetic mean and median.
+- v0.1 – Introduced an additional C++ file that implements functionality using C arrays instead of std::vector.
+- v0.2 – Added a sorting function, along with capabilities to read from and write to text files.
+- v0.3 – Refactored the code by dividing functions across multiple .cpp and .h files for improved organization. Implemented exception handling for file reading errors and user input validation.
+- v0.4 – Integrated file generation and performance testing features that evaluate the efficiency of reading data, sorting students into groups, and writing each group to a separate file.
+- v1.0-pre-release – Enhanced the program to support three different container types (vector, deque, and list) based on user selection.
+   
+# Installation and Launch Instructions (cross platform):
 
 - Install MinGW and CMake (version 3.25 or higher).
 - Download the repository containing the above files.
-- Run run.bat to configure, build, install, and launch the program.
-
-
+- Run run.bat to configure, build, install the program.
+- Launch the program (studentai)
 
 # Container Performance Comparison (Vector, List, Deque)
-This document analyzes how the choice of container (vector, list, deque) affects program performance when managing student data under different grouping strategies. Performance metrics considered include memory efficiency and execution time (reading, sorting, grouping).
+This analyzes how the choice of container (vector, list, deque)  affects program performance when managing student data under different grouping strategies. Performance metrics considered include memory efficiency and execution time (reading, sorting, grouping). The tests are conducted with varying file sizes, with 1,000; 10,000; 100,000; 1,000,000 & 10,000,000 students data.
 
 Full test results can be found here - [Test results.xlsx](https://github.com/user-attachments/files/19260760/Test.results.xlsx)
 
-System parameters: ....
+System parameters:
+- Operating System: Windows 11
+- Compiler: g++ 14.2.0 (MinGW)
+- Processor: AMD Ryzen 7 8845HS (3.80 GHz, 8 Cores, 16 Threads)
+- Memory: 16 GB DDR5
+- Storage: 1TB NVMe SSD
 
+ You can change the container by opening my_library.h & editing the code. The default container is vector.
+
+ - Average is calculated using the results of 5 different tests
+ - Testing uses the same input files
 ## 1st strategy 
 This strategy involves splitting a container of students into two new containers of the same type: one for "good" students and one for "bad" students. 
 
@@ -21,7 +40,6 @@ In this approach, the same student is stored in two containers making it memory 
 
 
 ## Results
-
 **Deque average**
 Memory inefficient, has issues working with large sizes
 | Size       | Read Avg (s) | Sort Avg (s) | Group Avg (s) | Total Avg (s) |
@@ -70,9 +88,7 @@ This strategy involves splitting a student container using only one new containe
 - **Vector:** Becomes **unusable beyond 100,000 objects**.
 
 ## 3rd strategy
-This strategy tilizes efficient STL methods to optimize container handling when grouping students into two groups.
-
-
+Uses 2nd strategy, but also utilizes efficient STL methods to optimize container handling when grouping students into two groups. (std::find_if, .assign(), .erase())
 
 ## Grouping Performance Comparison to 1st & 2nd strategy
  (average results)
