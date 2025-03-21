@@ -78,3 +78,17 @@
 
         }
     }
+
+    void Studentas::initializeExam(int i){
+        switch(i){
+            case 0:
+                egzaminoRezultatas = check_the_value("Egzamino ivertinimas: ", "[Klaida] iveskite skaiciu nuo 1-10", 1, 10);
+                break;
+            case 1:
+                egzaminoRezultatas = randomNumber(1, 10);
+                cout << "Sugeneruotas rezultatas: " << getEgzaminoRezultatas() << endl;
+                break;
+            default: break;
+
+        }
+    }

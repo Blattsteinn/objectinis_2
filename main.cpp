@@ -24,7 +24,7 @@ int main(){
 
                     // --- Rankinis pazymiu ivedimas --- 
                 temp.pazymiai = enter_grades_manually();
-                temp.egzaminoRezultatas = check_the_value("Egzamino ivertinimas: ", "[Klaida] iveskite skaiciu nuo 1-10", 1, 10);
+                temp.initializeExam(0);
             
                 temp.calculate_everything();
                 insert_student(list_of_students, temp);
@@ -37,7 +37,8 @@ int main(){
 
 
                 temp.pazymiai = random_grade();
-                temp.egzaminoRezultatas = randomNumber(1, 10); cout << "Egzamino rezultatas: " << temp.egzaminoRezultatas << endl;
+                temp.initializeExam(1);
+
                 temp.calculate_everything();
                 
                 insert_student(list_of_students, temp);
@@ -49,7 +50,7 @@ int main(){
                 temp.initializePavarde(1);
 
                 temp.pazymiai = random_grade();
-                temp.egzaminoRezultatas = randomNumber(1, 10); cout << "Egzamino rezultatas: " << temp.egzaminoRezultatas << endl;
+                temp.initializeExam(1);
 
                 temp.calculate_everything();
                 insert_student(list_of_students, temp);

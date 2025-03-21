@@ -6,11 +6,13 @@ class Studentas {
     private:
     string vardas;
     string pavarde;
+    
+    int egzaminoRezultatas;
 
     public:
 
     vector<float> pazymiai;
-    int egzaminoRezultatas;
+
     
     float galutinisVid;
     float galutinisMed;
@@ -28,6 +30,8 @@ class Studentas {
 
     void initializeVardas(int i);
     void initializePavarde(int i);
+
+    void initializeExam(int i);
 
     // Getters
     string getVardas() const { return vardas; }
