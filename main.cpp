@@ -19,8 +19,8 @@ int main(){
         if(program_choice == 5) { break; } // Nutraukiamas programos darbas
         switch(program_choice){
             case 1:   // 1 - ivedimas rankas
-                cout << "Vardas: ";   cin >> temp.vardas;
-                cout << "Pavarde: ";  cin >> temp.pavarde;
+                temp.initializeVardas(0);
+                temp.initializePavarde(0);
 
                     // --- Rankinis pazymiu ivedimas --- 
                 temp.pazymiai = enter_grades_manually();
@@ -32,8 +32,9 @@ int main(){
                 break;
 
             case 2:   // 2 - atsitiktinis pazymiu generavimas
-                cout << "Vardas: ";   cin >> temp.vardas;
-                cout << "Pavarde: ";  cin >> temp.pavarde;
+                temp.initializeVardas(0);
+                temp.initializePavarde(0);
+
 
                 temp.pazymiai = random_grade();
                 temp.egzaminoRezultatas = randomNumber(1, 10); cout << "Egzamino rezultatas: " << temp.egzaminoRezultatas << endl;
@@ -44,8 +45,9 @@ int main(){
                 break;
 
             case 3:   // 3 - generuoti ir pazymius ir studentu vardus, pavardes
-                temp.vardas = random_name();  cout << "Sugeneruotas vardas: " << temp.vardas << endl;
-                temp.pavarde = random_last_name(); cout << "Sugeneruota pavarde: " << temp.pavarde << endl;
+                temp.initializeVardas(1);
+                temp.initializePavarde(1);
+
                 temp.pazymiai = random_grade();
                 temp.egzaminoRezultatas = randomNumber(1, 10); cout << "Egzamino rezultatas: " << temp.egzaminoRezultatas << endl;
 

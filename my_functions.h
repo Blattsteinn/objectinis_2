@@ -1,6 +1,7 @@
 #pragma once
 
 #include "my_library.h"
+#include "student.h"
 
 
     // ------------------------

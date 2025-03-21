@@ -1,6 +1,8 @@
 #include "my_library.h"
 #include "student.h"
 
+#include "my_functions.h"
+
     void Studentas::sortGrades() {
     sort(pazymiai.begin(), pazymiai.end());
 }
@@ -46,3 +48,33 @@
 
     }
 
+    
+    void Studentas::initializeVardas(int i){
+        switch(i){
+            case 0:
+                cout << "Vardas: ";
+                cin >> vardas;
+                break;
+            case 1:
+                vardas = random_name();
+                cout << "Sugeneruotas vardas: " << getVardas() << endl;
+                break;
+            default: break;
+
+        }
+    }
+
+    void Studentas::initializePavarde(int i){
+        switch(i){
+            case 0:
+                cout << "Pavarde: ";
+                cin >> pavarde;
+                break;
+            case 1:
+                pavarde = random_last_name();
+                cout << "Sugeneruota pavarde: " << getVardas() << endl;
+                break;
+            default: break;
+
+        }
+    }

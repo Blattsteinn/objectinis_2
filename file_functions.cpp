@@ -111,27 +111,34 @@
 
     vector<Studentas> read_student_records(int ndCount, std::istringstream& iss) {
         vector<Studentas> records;
+
         while (true) {
-            Studentas r;
-            if (!(iss >> r.vardas >> r.pavarde))
+
+            string vardas, pavarde;
+            float egzaminoRezultatas;
+
+            if (!(iss >> vardas >> pavarde))
                 break;  // End of file or read error.
             
-            // Clear any existing grades (if any) and read exactly ndCount grades.
-            r.pazymiai.clear();
+            
+            vector<float> pazymiai;
+            pazymiai.clear();
+
             for (int i = 0; i < ndCount; i++) {
                 float grade;
                 if (!(iss >> grade)) {
                     throw "[Klaida] Netinkamas duomenu failas!";
                 }
-                r.pazymiai.push_back(grade);
+                pazymiai.push_back(grade);
             }
             
             // Read exam score.
-            if (!(iss >> r.egzaminoRezultatas)) {
+            if (!(iss >> egzaminoRezultatas)) {
                 throw "[Klaida] Netinkamas duomenu failas!";
             }
             
-            records.push_back(r);
+            Studentas temp(vardas, pavarde, pazymiai, egzaminoRezultatas);
+            records.push_back(temp);
         }
         return records;
     }

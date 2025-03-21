@@ -72,11 +72,11 @@
         switch (choice) {
             case 1:
                 sort(student_list.begin(), student_list.end(),
-                        [](const Studentas &a, const Studentas &b) { return a.vardas < b.vardas; });
+                        [](const Studentas &a, const Studentas &b) { return a.getVardas() < b.getVardas(); });
                 break;
             case 2:
                 sort(student_list.begin(), student_list.end(),
-                        [](const Studentas &a, const Studentas &b) { return a.pavarde < b.pavarde; });
+                        [](const Studentas &a, const Studentas &b) { return a.getPavarde() < b.getPavarde(); });
                 break;
             case 3:
                 sort(student_list.begin(), student_list.end(),
@@ -97,11 +97,11 @@
     switch (choice) {
         case 1:
             sort(student_list.begin(), student_list.end(),
-                      [](const Studentas &a, const Studentas &b) { return a.vardas < b.vardas; });
+                      [](const Studentas &a, const Studentas &b) { return a.getVardas() < b.getVardas(); });
             break;
         case 2:
             sort(student_list.begin(), student_list.end(),
-                      [](const Studentas &a, const Studentas &b) { return a.pavarde < b.pavarde; });
+                      [](const Studentas &a, const Studentas &b) { return a.getPavarde() < b.getPavarde(); });
             break;
         case 3:
             sort(student_list.begin(), student_list.end(),

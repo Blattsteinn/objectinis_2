@@ -3,17 +3,42 @@
 #include "my_library.h"
 
 class Studentas {
-    public:
+    private:
     string vardas;
     string pavarde;
-    
+
+    public:
+
     vector<float> pazymiai;
     int egzaminoRezultatas;
     
     float galutinisVid;
     float galutinisMed;
 
+    // Default constructor: initializes members to default values.
+    Studentas()
+        : vardas(""), pavarde(""), egzaminoRezultatas(0),
+          galutinisVid(0.0f), galutinisMed(0.0f) {}
 
+    // Parameterized constructor: initializes with provided values and calculates final scores.
+    Studentas(const string& vardas, const string& pavarde, const vector<float>& pazymiai, int egzaminoRezultatas)
+        : vardas(vardas), pavarde(pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
+        calculate_everything();
+    }
+
+    void initializeVardas(int i);
+    void initializePavarde(int i);
+
+    // Getters
+    string getVardas() const { return vardas; }
+    string getPavarde() const { return pavarde; }
+    vector<float> getPazymiai() const { return pazymiai; }
+    int getEgzaminoRezultatas() const { return egzaminoRezultatas; }
+    float getGalutinisVid() const { return galutinisVid; }
+    float getGalutinisMed() const { return galutinisMed; }
+
+
+    // Member functions
     void sortGrades();
     float calculateMean();
 	float calculateMedian();
