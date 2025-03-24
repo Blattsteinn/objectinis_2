@@ -17,12 +17,12 @@ int main(){
 
         if(program_choice == 5) { break; } // Nutraukiamas programos darbas
         switch(program_choice){
-            case 1: {   // 1 - ivedimas rankas
+            case 1:   // 1 - ivedimas rankas
                 temp = userChoice_1();
                 insert_student(list_of_students, temp);
 
                 break;
-            }
+            
             case 2:   // 2 - atsitiktinis pazymiu generavimas
                 temp = userChoice_2();
                 insert_student(list_of_students, temp);
@@ -48,22 +48,14 @@ int main(){
                 }
                 break;
 
-            case 7: 
-                strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3): ", "[Klaida] iveskite skaiciu nuo 1-3", 1,3);
-                switch(strategy_choice){
-                    case 1:
-                        cout << "Hello! 1";
-                        break;
-                    case 2:
-                        cout << "Hello! 2";
-                        break;
-                    case 3: 
-                        cout << "Hello! 3";
-                        break;
-                    default: break;
-                }
-                
-                break;           
+            case 7:
+                cout << "Grupavimo testavimas" << endl;
+                    for(int i=1; i<6; i++){
+                        cout << i << " testas" << endl;
+                        testing();
+                    }
+
+                break;
 
             default: break;  // The program shouldn't reach this point
 
