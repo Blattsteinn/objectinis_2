@@ -49,12 +49,26 @@ int main(){
                 break;
 
             case 7:
-                cout << "Grupavimo testavimas" << endl;
+            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas: ", "[Klaida] iveskite skaiciu nuo 1-4", 1,4);
+
+            switch(strategy_choice){
+                case 1:
+                    strategy_1();
+                    break;
+                case 2:
+                    strategy_2();
+                    break;
+                case 3: 
+                    strategy_3();
+                    break;
+                case 4:
+                    cout << "Grupavimo testavimas" << endl;
                     for(int i=1; i<6; i++){
                         cout << i << " testas" << endl;
                         testing();
                     }
-
+                default: break;
+            }
                 break;
 
             default: break;  // The program shouldn't reach this point

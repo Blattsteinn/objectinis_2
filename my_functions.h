@@ -45,4 +45,9 @@
     string consoleText_userChoice();
     int check_the_value(string message, string errorMessage,int minVal,int maxVal);  // checks if a give value is within range./
 
+    // ---------------------------
+    // testing.cpp
     void testing();
+    void strategy_1();
+    void strategy_2();
+    void strategy_3();
