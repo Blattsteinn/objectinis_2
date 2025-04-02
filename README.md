@@ -43,6 +43,7 @@ Gouping performance using classes
 |-----------|---------------|---------------|---------------|
 | 100,000   | 0.00840548    | 0.0092536     | 0.00834536    |
 | 1,000,000 | 0.08980532    | 0.08771468    | 0.0799193     |
+| .exe size | 335KB         | 338KB         | 571KB         |
 
 Gouping performance using structs
 | File      | Average (-o1) | Average (-o2) | Average (-o3) |
