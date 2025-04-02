@@ -50,6 +50,7 @@ Gouping performance using structs
 |-----------|---------------|---------------|---------------|
 | 100,000   | 0.0155993     | 0.01317164    | 0.01357718    |
 | 1,000,000 | 0.1269012     | 0.1168168     | 0.1159462     |
+| .exe size | 323KB         | 287KB         | 286KB         |
 
 Full test results can be found here - [Testavimas v1.1.xlsx](https://github.com/user-attachments/files/19428354/Testavimas.v1.1.xlsx)
 
