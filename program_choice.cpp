@@ -74,3 +74,34 @@ Studentas userChoice_2() {
 }
 
 Studentas userChoice_3() {
+    Studentas s;
+    string name, surname;
+    vector<float> grades;
+    int exam;
+
+    name = random_name();
+    s.setVardas(name);
+    cout << "Sugeneruotas vardas: " << name << endl;
+
+    surname = random_last_name();
+    s.setPavarde(surname);
+    cout << "Sugeneruota pavarde: " << surname << endl;
+
+
+    // --- Get random grades -----------------------------  
+    grades = random_grade();
+            cout << "Gauti pazymiai: ";
+            for(auto const &grade : grades){
+                cout << grade << " ";
+            }
+            cout << endl;
+    s.setGrades(grades);
+
+    exam = randomNumber(1,10);
+    s.setExam(exam);
+    cout << "Sugeneruotas egzamino rezultatas: " << exam << endl;
+
+    s.calculate_everything();
+
+    return s;
+}
