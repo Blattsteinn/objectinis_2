@@ -24,8 +24,11 @@
         egzaminoRezultatas{other.egzaminoRezultatas},
         galutinisVid{other.galutinisVid},
         galutinisMed{other.galutinisMed}
-    {
 
+    {
+        other.egzaminoRezultatas = 0;
+        other.galutinisVid = 0.0f;
+        other.galutinisMed = 0.0f;
     }
 
     // Copy constructor operator

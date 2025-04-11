@@ -1,6 +1,21 @@
 #include "my_library.h"
 #include "my_functions.h"
 
+string consoleText_testing12() {
+    return R"(
+        [Metodo pasirinkimas]
+        
+1 - copy constructor, 
+2 - move constructor, 
+3 - copy assignment operator 
+4 - move assignment operator, 
+
+5 - exit testing
+
+            [Pasirinkimas]: )";
+}
+
+
     // Template function to measure the execution time of any callable
     template<typename Func>
     double measureTime(Func func) {
@@ -11,7 +26,109 @@
     }
 
 void testing_v12(){
+    int strategy_choice;
+
     
+    while(strategy_choice != 5){
+        strategy_choice = check_the_value(consoleText_testing12(), "[Klaida] iveskite skaiciu nuo 1-5", 1,5);
+
+        switch(strategy_choice) {
+        case 1: {
+            vector<float> grades = {8.5f, 9.0f, 7.5f};
+            Studentas A("John", "Doe", grades, 10);
+
+            cout << "Move constructor" << endl;
+            cout << "Student A: ";
+            cout << A << endl;
+            cout << endl;
+
+            cout << "Initializing and copying to B" << endl;
+            Studentas B = A;
+
+            cout << "End result --->" << endl;
+            cout << "Student B: ";
+            cout << B << endl;
+
+            cout << "Student A: ";
+            cout << A << endl;
+        }
+        break;
+
+        case 2:  {
+            vector<float> grades = {8.5f, 9.0f, 7.5f};
+            Studentas A("John", "Doe", grades, 10);
+
+            cout << "Move constructor" << endl;
+            cout << "Student A: ";
+            cout << A << endl;
+            cout << endl;
+
+            cout << "Initializing and copying to B" << endl;
+            Studentas B(std::move(A));
+
+            cout << "End result --->" << endl;
+            cout << "Student B: ";
+            cout << B << endl;
+
+            cout << "Student A: ";
+            cout << A << endl;
+        }
+        break;
+
+        case 3: {
+            vector<float> grades = {8.5f, 9.0f, 7.5f};
+            Studentas A("John", "Doe", grades, 10);
+
+            cout << "Copy constructor assignment" << endl;
+            cout << "Initializing student B " << endl;
+            Studentas B;
+
+            cout << "Student A: ";
+            cout << A << endl;
+            cout << endl;
+
+            cout << "Assigning B to A" << endl;
+            B = A;
+
+            cout << "End result --->" << endl;
+            cout << "Student B: ";
+            cout << B << endl;
+
+            cout << "Student A: ";
+            cout << A << endl;
+        }
+        break;
+
+        case 4: {
+            vector<float> grades = {8.5f, 9.0f, 7.5f};
+            Studentas A("John", "Doe", grades, 10);
+            
+            cout << "Move constructor assignment" << endl;
+            cout << "Initializing student B " << endl;
+            Studentas B;
+
+            cout << "Student A: ";
+            cout << A << endl;
+            cout << endl;
+
+            cout << "Moving B to A" << endl;
+            B = std::move(A);
+
+            cout << "End result --->" << endl;
+            cout << "Student B: ";
+            cout << B << endl;
+
+            cout << "Student A: ";
+            cout << A << endl;
+        }
+        break;
+
+        case 5: return; 
+        break;
+
+        default: break;
+    }
+    }
 }
 
 void testing_v11(){

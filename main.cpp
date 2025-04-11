@@ -10,6 +10,8 @@ int main(){
     int strategy_choice{};
 
     cout << "This is v1.2!" << endl;
+    
+    testing_v12();
 
     while(false){ 
         
