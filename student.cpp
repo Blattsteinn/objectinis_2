@@ -2,7 +2,16 @@
 #include "student.h"
 
 #include "my_functions.h"
+/* copy konstruktorius
+1. išskiria naują vietą
+2. perkopijuoja reikšmes iš vektoriaus v 
 
+Vector::Vector(const Vector& v): sz{v.sz},elem{new double[v.sz]} { 
+    // copy konstruktorius, inicializuojame sz, išskiriame atminti elem
+    for (int i=0; i!=sz; ++i) 
+            elem[i] = v.elem[i]; // nukopijuojame elementus paeiliui
+  } 
+            */
 
     // --- Calculation functions
 

@@ -37,6 +37,14 @@ class Studentas {
         galutinisMed = 0.0f;
     }
     
+    // Copy constructor
+    Studentas::Studentas(const Studentas& other): vardas(other.vardas), pavarde(other.pavarde),
+            pazymiai(other.pazymiai), egzaminoRezultatas(other.egzaminoRezultatas), galutinisVid(other.galutinisVid), galutinisMed(other.galutinisMed)
+            {
+
+            }
+
+
     // Setters
     void setVardas(const string& v) { vardas = v; }
     void setPavarde(const string& p) { pavarde = p; }
