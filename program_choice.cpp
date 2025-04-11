@@ -3,8 +3,7 @@
 
 // -- Actions depending on userChoice -->
 
-Studentas userChoice_1() {
-    Studentas s;
+std::istream& operator>>(std::istream& in, Studentas& s) {
     string name, surname;
     vector<float> grades;
     int exam;
@@ -41,7 +40,7 @@ Studentas userChoice_1() {
 
     s.calculate_everything();
 
-    return s;
+    return in;
 }
 
 Studentas userChoice_2() {

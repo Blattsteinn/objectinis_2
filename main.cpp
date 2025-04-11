@@ -9,8 +9,9 @@ int main(){
     int program_choice{};
     int strategy_choice{};
 
-    cout << "This is v1.1 !" << endl;
-    while(true){ 
+    cout << "This is v1.2!" << endl;
+
+    while(false){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
         cout << endl;
@@ -18,7 +19,7 @@ int main(){
         if(program_choice == 5) { break; } // Nutraukiamas programos darbas
         switch(program_choice){
             case 1:   // 1 - ivedimas rankas
-                temp = userChoice_1();
+                cin >> temp;
                 insert_student(list_of_students, temp);
 
                 break;
@@ -49,8 +50,9 @@ int main(){
                 break;
 
             case 7:
-            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas: ", "[Klaida] iveskite skaiciu nuo 1-4", 1,4);
-
+            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas, 5 - klasiu testavimas: "
+                , "[Klaida] iveskite skaiciu nuo 1-5", 1,5);
+            
             switch(strategy_choice){
                 case 1:
                     strategy_1();
@@ -65,7 +67,7 @@ int main(){
                     cout << "Grupavimo testavimas" << endl;
                     for(int i=1; i<6; i++){
                         cout << i << " testas" << endl;
-                        testing();
+                        testing_v11();
                     }
                 default: break;
             }

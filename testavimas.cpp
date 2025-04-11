@@ -10,7 +10,11 @@
         return std::chrono::duration<double>(end - start).count();
     }
 
-void testing(){
+void testing_v12(){
+    
+}
+
+void testing_v11(){
     for(int i=5; i<=6; i++){
 
         int file_size = pow(10, i);
@@ -197,7 +201,6 @@ void strategy_2(){
 }
 
 // --- Strategy 3 ---
-
 void strategy_3(){
     for(int i=3; i<=7; i++){
 

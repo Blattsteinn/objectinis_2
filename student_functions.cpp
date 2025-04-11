@@ -27,7 +27,6 @@
     void insert_student(vector<Studentas> &student_list, Studentas &student){
         student_list.push_back(std::move(student));
     }
-// ---------- Sort functions for std::vector & std::deque ----------
 
     // --- Sorts students depending on user input  ---
     void sort_students(vector<Studentas> &student_list) {

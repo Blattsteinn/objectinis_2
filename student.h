@@ -28,38 +28,23 @@ class Studentas {
 
     // Destructor
     ~Studentas() {
-        vardas.clear();
-        pavarde.clear();
-        pazymiai.clear();
-
         egzaminoRezultatas = 0;
         galutinisVid = 0.0f;
         galutinisMed = 0.0f;
     }
     
     // Copy constructor
-    Studentas(const Studentas& other): 
-        vardas{other.vardas},
-        pavarde{other.pavarde},
-        pazymiai{other.pazymiai},
-        egzaminoRezultatas{other.egzaminoRezultatas},
-        galutinisVid{other.galutinisVid},
-        galutinisMed{other.galutinisMed}
-    {
-
-    }
+    Studentas(const Studentas& other);
 
     // Move constructor
-    Studentas(Studentas&& other) noexcept:   // guaranteed not to throw any exceptions
-        vardas{std::move(other.vardas)},
-        pavarde{std::move(other.pavarde)},
-        pazymiai{std::move(other.pazymiai)},
-        egzaminoRezultatas{other.egzaminoRezultatas},
-        galutinisVid{other.galutinisVid},
-        galutinisMed{other.galutinisMed}
-    {
-        // Optionally, you might reset other members if needed.
-    }
+    Studentas(Studentas&& other) noexcept;
+    
+    // Copy constructor operator
+    Studentas& operator=(const Studentas& other);
+
+    // Move constructor operator
+    Studentas& operator=(Studentas&& other);
+
 
     // Setters
     void setVardas(const string& v) { vardas = v; }
@@ -82,7 +67,7 @@ class Studentas {
     void calculate_everything();  // Calls both calculateMean and calculateMedian and assigns them.
 
 
-    // Friend function for easier printing
+    // Friend function for printing
     friend ostream& operator<<(ostream &out, const Studentas &s) {
         out << left << setw(15) << s.pavarde
             << setw(15) << s.vardas
@@ -91,5 +76,8 @@ class Studentas {
             << "\n";
         return out;
     }
-    
+
+    friend std::istream& operator>>(std::istream& in, Studentas& s);
+
 };
+

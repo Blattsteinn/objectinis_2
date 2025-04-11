@@ -30,7 +30,7 @@
     // ---------------------------
     /// program_choice.cpp
 
-    Studentas userChoice_1();
+    std::istream& operator>>(std::istream& in, Studentas& s);
     Studentas userChoice_2();
     Studentas userChoice_3();
 
@@ -50,7 +50,8 @@
 
     // ---------------------------
     // testing.cpp
-    void testing();
+    void testing_v12();
+    void testing_v11();
     void strategy_1();
     void strategy_2();
     void strategy_3();

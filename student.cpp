@@ -2,19 +2,66 @@
 #include "student.h"
 
 #include "my_functions.h"
-/* copy konstruktorius
-1. išskiria naują vietą
-2. perkopijuoja reikšmes iš vektoriaus v 
 
-Vector::Vector(const Vector& v): sz{v.sz},elem{new double[v.sz]} { 
-    // copy konstruktorius, inicializuojame sz, išskiriame atminti elem
-    for (int i=0; i!=sz; ++i) 
-            elem[i] = v.elem[i]; // nukopijuojame elementus paeiliui
-  } 
-            */
 
-    // --- Calculation functions
+    // Copy constructor
+    Studentas::Studentas(const Studentas& other): 
+        vardas{other.vardas},
+        pavarde{other.pavarde},
+        pazymiai{other.pazymiai},
+        egzaminoRezultatas{other.egzaminoRezultatas},
+        galutinisVid{other.galutinisVid},
+        galutinisMed{other.galutinisMed}
+    {
 
+    }
+
+    // Move constructor
+    Studentas::Studentas(Studentas&& other) noexcept:   // guaranteed not to throw any exceptions
+        vardas{std::move(other.vardas)},
+        pavarde{std::move(other.pavarde)},
+        pazymiai{std::move(other.pazymiai)},
+        egzaminoRezultatas{other.egzaminoRezultatas},
+        galutinisVid{other.galutinisVid},
+        galutinisMed{other.galutinisMed}
+    {
+
+    }
+
+    // Copy constructor operator
+    Studentas& Studentas::operator=(const Studentas& other) {
+        
+        if(&other != this){
+
+        vardas = other.vardas;
+        pavarde = other.pavarde;
+        pazymiai = other.pazymiai;
+        egzaminoRezultatas = other.egzaminoRezultatas;
+        galutinisVid = other.galutinisVid;
+        galutinisMed = other.galutinisMed;
+        }
+        return *this;
+    }
+
+    // Move constructor operator
+    Studentas& Studentas::operator=(Studentas&& other){
+        if(&other != this){
+            vardas = std::move(other.vardas);
+            pavarde = std::move(other.pavarde);
+            pazymiai = std::move(other.pazymiai);
+
+            egzaminoRezultatas = other.egzaminoRezultatas;
+            galutinisVid = other.galutinisVid;
+            galutinisMed = other.galutinisMed;
+
+            other.egzaminoRezultatas = 0;
+            other.galutinisVid = 0.0f;
+            other.galutinisMed = 0.0f;
+        }
+        return *this;
+    }
+    
+        // --- Calculation functions    
     float Studentas::calculateMean(){
         float sum = 0;
         float vidurkis = 0;
