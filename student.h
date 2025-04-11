@@ -38,12 +38,28 @@ class Studentas {
     }
     
     // Copy constructor
-    Studentas::Studentas(const Studentas& other): vardas(other.vardas), pavarde(other.pavarde),
-            pazymiai(other.pazymiai), egzaminoRezultatas(other.egzaminoRezultatas), galutinisVid(other.galutinisVid), galutinisMed(other.galutinisMed)
-            {
+    Studentas(const Studentas& other): 
+        vardas{other.vardas},
+        pavarde{other.pavarde},
+        pazymiai{other.pazymiai},
+        egzaminoRezultatas{other.egzaminoRezultatas},
+        galutinisVid{other.galutinisVid},
+        galutinisMed{other.galutinisMed}
+    {
 
-            }
+    }
 
+    // Move constructor
+    Studentas(Studentas&& other) noexcept:   // guaranteed not to throw any exceptions
+        vardas{std::move(other.vardas)},
+        pavarde{std::move(other.pavarde)},
+        pazymiai{std::move(other.pazymiai)},
+        egzaminoRezultatas{other.egzaminoRezultatas},
+        galutinisVid{other.galutinisVid},
+        galutinisMed{other.galutinisMed}
+    {
+        // Optionally, you might reset other members if needed.
+    }
 
     // Setters
     void setVardas(const string& v) { vardas = v; }
