@@ -1,4 +1,4 @@
-# v1.1 
+# v1.2
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
 ### Improvements in Version 1.1:
