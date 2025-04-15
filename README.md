@@ -1,8 +1,26 @@
 # v1.2
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
-### Improvements in Version 1.1:
-- Transitioned from using structs to classes for better encapsulation and maintainability.
+### Improvements in Version 1.2:
+- Implementing the 'Rule of Five' (copy/move constructors, their assignment operators and a destructor).
+- File handling logic, such as reading student records from files and exporting results, was encapsulated within the class.
+- Added support for I/O methods via overloaded `>>` and `<<` operators.
+
+**The class now supports multiple input methods:** 
+- `operator>>` now prompts users for names, grades, and exam scores
+- `operator<<` prints names and calculated final grades
+
+
+**working with files:**
+- function appendingContainerViaFile(string file_name, &student_list) is used to read a text file
+- function print_to_file(list_of_students, file_name) is used to write data to a text file
+
+# Installation and Launch Instructions:
+
+- Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
+- Download the repository containing the above files.
+- Run `run.bat` to configure, build, and install the program.
+- Launch the program (`studentai`).
 
  ## Previous releases
 - v.pradine-release – Initial release. The program accepts user input, generates random grades and names, and calculates the final score using both the arithmetic mean and median.
@@ -11,15 +29,9 @@ This program is a student grade management system that handles input, random dat
 - v0.3 – Refactored the code by dividing functions across multiple .cpp and .h files for improved organization. Implemented exception handling for file reading errors and user input validation.
 - v0.4 – Integrated file generation and performance testing features that evaluate the efficiency of reading data, sorting students into groups, and writing each group to a separate file.
 - v1.0-pre-release – Enhanced the program to support three different container types (vector, deque, and list) based on user selection.
-- v1.0 - includes performance testing with 3 different strategies.
+- v1.0 - includes performance testing with 3 different strategies (vector, deque, and list).
+- v1.1 - transitioned from using structs to classes for better encapsulation and maintainability.
    
-# Installation and Launch Instructions:
-
-- Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
-- Download the repository containing the above files.
-- Run `run.bat` to configure, build, and install the program.
-- Launch the program (`studentai`).
-
 
 # V1.1 testing 
 
