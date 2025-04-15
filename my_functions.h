@@ -9,15 +9,8 @@
     namespace fs = std::filesystem;
     string create_folder(string folder_name);
 
-    string readFileToString(const string &file_name);
-    int wordCount(istringstream& iss);
-
     void generate_files(int student_size);
 
-    vector<Studentas> read_student_records(int ndCount, std::istringstream& iss);
-    void appendingContainerViaFile(string file_name, vector <Studentas> &student_list);
-    void print_to_file(vector<Studentas> list_of_students, string file_name);
-    
     // ---------------------------
     /// student_functions.cpp
 
@@ -30,7 +23,6 @@
     // ---------------------------
     /// program_choice.cpp
 
-    std::istream& operator>>(std::istream& in, Studentas& s);
     Studentas userChoice_2();
     Studentas userChoice_3();
 

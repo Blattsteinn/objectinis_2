@@ -28,9 +28,7 @@ class Studentas {
 
     // Destructor
     ~Studentas() {
-        egzaminoRezultatas = 0;
-        galutinisVid = 0.0f;
-        galutinisMed = 0.0f;
+       // cout << "Destruktorius iskviestas" << endl;
     }
     
     // Copy constructor
@@ -68,16 +66,14 @@ class Studentas {
 
 
     // Friend function for printing
-    friend ostream& operator<<(ostream &out, const Studentas &s) {
-        out << left << setw(15) << s.pavarde
-            << setw(15) << s.vardas
-            << fixed << setprecision(2) << setw(22) << s.galutinisVid
-            << fixed << setprecision(2) << setw(15) << s.galutinisMed
-            << "\n";
-        return out;
-    }
+    friend ostream& operator<<(ostream &out, const Studentas &s);
 
+    // Friend function for input
     friend std::istream& operator>>(std::istream& in, Studentas& s);
 
+    // File functions 
+    static void appendingContainerViaFile(string file_name, vector <Studentas> &student_list);
+    static vector<Studentas> read_student_records(int ndCount, std::istringstream& iss);
+    static void print_to_file(vector<Studentas> list_of_students, string file_name);
 };
 

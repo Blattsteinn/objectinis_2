@@ -10,10 +10,8 @@ int main(){
     int strategy_choice{};
 
     cout << "This is v1.2!" << endl;
-    
-    testing_v12();
 
-    while(false){ 
+    while(true){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
         cout << endl;
@@ -39,7 +37,7 @@ int main(){
                 break;
 
             case 4: {   // 4 - Duomenu failo skaitymas
-                appendingContainerViaFile("kursiokai.txt", list_of_students);
+                Studentas::appendingContainerViaFile("kursiokai.txt", list_of_students);
                 cout << "Duomenys sekmingai nuskaityti is failo." << endl;
 
                 break;  
@@ -52,8 +50,8 @@ int main(){
                 break;
 
             case 7:
-            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas, 5 - klasiu testavimas: "
-                , "[Klaida] iveskite skaiciu nuo 1-5", 1,5);
+            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas, 5 - rule of 5: "
+                , "[Klaida] iveskite skaiciu nuo 1-6", 1,5);
             
             switch(strategy_choice){
                 case 1:
@@ -71,10 +69,13 @@ int main(){
                         cout << i << " testas" << endl;
                         testing_v11();
                     }
+                case 5:
+                testing_v12();
+                    break;
                 default: break;
             }
                 break;
-
+            
             default: break;  // The program shouldn't reach this point
 
 
@@ -83,7 +84,7 @@ int main(){
 
     if(list_of_students.size() != 0){
         sort_students(list_of_students);
-        print_to_file(list_of_students, "rezultatai.txt");
+        Studentas::print_to_file(list_of_students, "rezultatai.txt");
     
     } else {
         cout << "Nieko ivesta nebuvo. Programa baigta.";

@@ -25,111 +25,96 @@ string consoleText_testing12() {
         return std::chrono::duration<double>(end - start).count();
     }
 
-void testing_v12(){
-    int strategy_choice;
-
+ void testing_v12(){
+        int strategy_choice;
     
-    while(strategy_choice != 5){
-        strategy_choice = check_the_value(consoleText_testing12(), "[Klaida] iveskite skaiciu nuo 1-5", 1,5);
+        while(strategy_choice != 5){
+            strategy_choice = check_the_value(consoleText_testing12(), "[Klaida] iveskite skaiciu nuo 1-5", 1,5);
+    
+            switch(strategy_choice) {
+            case 1: {
+                vector<float> grades = {8.5f, 9.0f, 7.5f};
+                Studentas A("John", "Doe", grades, 10);
+    
+                cout << "[Copy constructor method]" << endl;
+                cout << "[Student A]: " << A << endl;
+                cout << endl;
+                
 
-        switch(strategy_choice) {
-        case 1: {
-            vector<float> grades = {8.5f, 9.0f, 7.5f};
-            Studentas A("John", "Doe", grades, 10);
+                cout << "Initializing B and copying from A" << endl;
+                Studentas B = A;
+                
+                //--------------    
+                cout << "\n" << "[End result] --->" << "\n\n";
+                cout << "[Student B]: " << B << endl;
+                cout << "[Student A]: " << A << endl;
+            }
+            break;
+    
+            case 2:  {
+                vector<float> grades = {8.5f, 9.0f, 7.5f};
+                Studentas A("John", "Doe", grades, 10);
+    
+                cout << "[Move constructor method]" << endl;
 
-            cout << "Move constructor" << endl;
-            cout << "Student A: ";
-            cout << A << endl;
-            cout << endl;
+                cout << "Student A: " << A << endl;
+                cout << endl;
+    
+                cout << "Initializing B and moving A to B" << endl;
+                Studentas B(std::move(A));
 
-            cout << "Initializing and copying to B" << endl;
-            Studentas B = A;
+                //--------------    
+                cout << "\n" << "[End result] --->" << "\n\n";
+                cout << "[Student B]: " << B << endl;
+                cout << "[Student A]: " << A << endl;
+            }
+            break;
+    
+            case 3: {
+                vector<float> grades = {8.5f, 9.0f, 7.5f};
+                Studentas A("John", "Doe", grades, 10);
+                Studentas B;
 
-            cout << "End result --->" << endl;
-            cout << "Student B: ";
-            cout << B << endl;
+                cout << "[Copy constructor assignment method]" << endl;
+                cout << "[Student A]: " << A << endl;
+                cout << "[Student B]: " << B << endl;
+                cout << endl;
+               
+                cout << "Assigning B to A" << endl;
+                B = A;
+    
+                 //--------------    
+                 cout << "\n" << "[End result] --->" << "\n\n";
+                 cout << "[Student B]: " << B << endl;
+                 cout << "[Student A]: " << A << endl;
+            }
+            break;
+    
+            case 4: {
+                vector<float> grades = {8.5f, 9.0f, 7.5f};
+                Studentas A("John", "Doe", grades, 10);
+                Studentas B;
 
-            cout << "Student A: ";
-            cout << A << endl;
+                cout << "[Move constructor assignment]" << endl;
+                cout << "[Student A]: " << A << endl;
+                cout << "[Student B]: " << B << endl;
+                cout << endl;
+                
+
+                cout << "Moving B to A" << endl;
+                B = std::move(A);
+    
+                //--------------    
+                cout << "\n" << "[End result] --->" << "\n\n";
+                cout << "[Student B]: " << B << endl;
+                cout << "[Student A]: " << A << endl;
+            }
+            break;
+
+            default: break;
         }
-        break;
-
-        case 2:  {
-            vector<float> grades = {8.5f, 9.0f, 7.5f};
-            Studentas A("John", "Doe", grades, 10);
-
-            cout << "Move constructor" << endl;
-            cout << "Student A: ";
-            cout << A << endl;
-            cout << endl;
-
-            cout << "Initializing and copying to B" << endl;
-            Studentas B(std::move(A));
-
-            cout << "End result --->" << endl;
-            cout << "Student B: ";
-            cout << B << endl;
-
-            cout << "Student A: ";
-            cout << A << endl;
         }
-        break;
-
-        case 3: {
-            vector<float> grades = {8.5f, 9.0f, 7.5f};
-            Studentas A("John", "Doe", grades, 10);
-
-            cout << "Copy constructor assignment" << endl;
-            cout << "Initializing student B " << endl;
-            Studentas B;
-
-            cout << "Student A: ";
-            cout << A << endl;
-            cout << endl;
-
-            cout << "Assigning B to A" << endl;
-            B = A;
-
-            cout << "End result --->" << endl;
-            cout << "Student B: ";
-            cout << B << endl;
-
-            cout << "Student A: ";
-            cout << A << endl;
-        }
-        break;
-
-        case 4: {
-            vector<float> grades = {8.5f, 9.0f, 7.5f};
-            Studentas A("John", "Doe", grades, 10);
-            
-            cout << "Move constructor assignment" << endl;
-            cout << "Initializing student B " << endl;
-            Studentas B;
-
-            cout << "Student A: ";
-            cout << A << endl;
-            cout << endl;
-
-            cout << "Moving B to A" << endl;
-            B = std::move(A);
-
-            cout << "End result --->" << endl;
-            cout << "Student B: ";
-            cout << B << endl;
-
-            cout << "Student A: ";
-            cout << A << endl;
-        }
-        break;
-
-        case 5: return; 
-        break;
-
-        default: break;
     }
-    }
-}
 
 void testing_v11(){
     for(int i=5; i<=6; i++){
@@ -146,7 +131,7 @@ void testing_v11(){
         
         // --- Reading ---
             readingTime = measureTime([&]() {
-                appendingContainerViaFile(full_path.string(), list_of_students);
+                Studentas::appendingContainerViaFile(full_path.string(), list_of_students);
             });
                 cout << "Reading completed." << endl;
 
@@ -225,7 +210,7 @@ void strategy_1(){
 
         // --- Reading ---
         readingTime = measureTime([&]() {
-            appendingContainerViaFile(full_path.string(), list_of_students);
+            Studentas::appendingContainerViaFile(full_path.string(), list_of_students);
         });
             cout << "Reading time: " << readingTime << "s" << endl;
 
@@ -281,7 +266,7 @@ void strategy_2(){
         
         // --- Reading ---
             readingTime = measureTime([&]() {
-                appendingContainerViaFile(full_path.string(), list_of_students);
+                Studentas::appendingContainerViaFile(full_path.string(), list_of_students);
             });
                 cout << "Reading completed." << endl;
 
@@ -333,7 +318,7 @@ void strategy_3(){
         
         // --- Reading ---
             readingTime = measureTime([&]() {
-                appendingContainerViaFile(full_path.string(), list_of_students);
+                Studentas::appendingContainerViaFile(full_path.string(), list_of_students);
             });
                 cout << "Reading completed." << endl;
 
