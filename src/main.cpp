@@ -10,9 +10,7 @@ int main(){
     int strategy_choice{};
 
     cout << "This is v1.2!" << endl;
-
-    cin >> program_choice;
-    while(false){ 
+    while(true){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
         cout << endl;
