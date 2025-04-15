@@ -10,7 +10,9 @@ string consoleText_testing12() {
 3 - copy assignment operator 
 4 - move assignment operator, 
 
-5 - exit testing
+5 - I/O (<< / >>) testing,
+
+6 - exit testing
 
             [Pasirinkimas]: )";
 }
@@ -28,8 +30,8 @@ string consoleText_testing12() {
  void testing_v12(){
         int strategy_choice;
     
-        while(strategy_choice != 5){
-            strategy_choice = check_the_value(consoleText_testing12(), "[Klaida] iveskite skaiciu nuo 1-5", 1,5);
+        while(strategy_choice != 6){
+            strategy_choice = check_the_value(consoleText_testing12(), "[Klaida] iveskite skaiciu nuo 1-6", 1,6);
     
             switch(strategy_choice) {
             case 1: {
@@ -108,6 +110,17 @@ string consoleText_testing12() {
                 cout << "\n" << "[End result] --->" << "\n\n";
                 cout << "[Student B]: " << B << endl;
                 cout << "[Student A]: " << A << endl;
+            }
+            break;
+            
+            // input/output test
+            case 5: {
+                Studentas B;
+                cout << "[Testing operator>>]" << "\n\n";
+                cout << "[Testing operator<<]" << "\n\n";
+                cin >> B;
+                cout << endl;
+                cout << B;            
             }
             break;
 

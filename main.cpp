@@ -11,7 +11,8 @@ int main(){
 
     cout << "This is v1.2!" << endl;
 
-    while(true){ 
+    cin >> program_choice;
+    while(false){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
         cout << endl;
@@ -70,8 +71,9 @@ int main(){
                         testing_v11();
                     }
                 case 5:
-                testing_v12();
+                    testing_v12();
                     break;
+                    
                 default: break;
             }
                 break;
