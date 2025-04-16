@@ -1,12 +1,10 @@
 #pragma once
 
+#include "human.h"
 #include "my_library.h"
 
-class Studentas {
+class Studentas : public Human {
     private:
-    string vardas;
-    string pavarde;
-
     vector<float> pazymiai;
     int egzaminoRezultatas;
 
@@ -14,15 +12,18 @@ class Studentas {
     float galutinisMed;
 
     public:
+    
+    // Override the pure virtual function from Human.
+    void unusedFunction() const override;
 
     // Default constructor
     Studentas()
-        : vardas(""), pavarde(""), egzaminoRezultatas(0),
+        : Human("", ""), egzaminoRezultatas(0),
           galutinisVid(0.0f), galutinisMed(0.0f) {}
 
     // Parameterized constructor
     Studentas(const string& vardas, const string& pavarde, const vector<float>& pazymiai, int egzaminoRezultatas)
-        : vardas(vardas), pavarde(pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
+        : Human(vardas, pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
         calculate_everything();
     }
 

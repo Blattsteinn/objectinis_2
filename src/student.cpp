@@ -3,6 +3,7 @@
 
 #include "my_functions.h"
 
+    void unusedFunction();
 
    // --- Calculation functions    
         float Studentas::calculateMean(){
@@ -46,8 +47,7 @@
 
     // Copy constructor
     Studentas::Studentas(const Studentas& other): 
-        vardas{other.vardas},
-        pavarde{other.pavarde},
+        Human(other),
         pazymiai{other.pazymiai},
         egzaminoRezultatas{other.egzaminoRezultatas},
         galutinisVid{other.galutinisVid},
@@ -58,8 +58,7 @@
 
     // Move constructor
     Studentas::Studentas(Studentas&& other) noexcept:   // guaranteed not to throw any exceptions
-        vardas{std::move(other.vardas)},
-        pavarde{std::move(other.pavarde)},
+        Human(other),
         pazymiai{std::move(other.pazymiai)},
         egzaminoRezultatas{other.egzaminoRezultatas},
         galutinisVid{other.galutinisVid},

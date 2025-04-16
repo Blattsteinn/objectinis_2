@@ -9,6 +9,8 @@ int main(){
     int program_choice{};
     int strategy_choice{};
 
+   // Human a("Boom", "Boom");
+
     cout << "This is v1.5!" << endl;
     while(true){ 
         
