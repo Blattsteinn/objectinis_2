@@ -9,7 +9,7 @@ int main(){
     int program_choice{};
     int strategy_choice{};
 
-   // Human a("Boom", "Boom");
+   // Human a("Boo", "Foo22");    // <--- will not work
 
     cout << "This is v1.5!" << endl;
     while(true){ 
