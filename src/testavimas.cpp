@@ -82,7 +82,7 @@ string consoleText_testing12() {
                 cout << "[Student B]: " << B << endl;
                 cout << endl;
                
-                cout << "Assigning B to A" << endl;
+                cout << "Assigning A to B" << endl;
                 B = A;
     
                  //--------------    
