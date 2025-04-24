@@ -11,7 +11,7 @@ int main(){
 
    // Human a("Boo", "Foo22");    // <--- will not work
 
-    cout << "This is v1.5!" << endl;
+    cout << "This is v2.0!" << endl;
     while(true){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
