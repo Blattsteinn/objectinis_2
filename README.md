@@ -1,15 +1,13 @@
-# v1.2
+# v1.5
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
-### Improvements in Version 1.2:
-- Implementing the 'Rule of Five' (copy/move constructors, their assignment operators and a destructor).
-- File handling logic, such as reading student records from files and exporting results, was encapsulated within the class.
-- Added support for I/O methods via overloaded `>>` and `<<` operators.
-
-**The class now supports multiple input methods:** 
+### Improvements in Version 1.5:
+- Introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. No Human objects can be instantiated.
+- `Studentas` now inherits from `Human` and implements the pure virtual function.
+  
+**The class supports multiple input methods:** 
 - `operator>>` now prompts users for names, grades, and exam scores
 - `operator<<` prints names and calculated final grades
-
 
 **working with files:**
 - function appendingContainerViaFile(string file_name, &student_list) is used to read a text file
@@ -31,7 +29,7 @@ This program is a student grade management system that handles input, random dat
 - v1.0-pre-release – Enhanced the program to support three different container types (vector, deque, and list) based on user selection.
 - v1.0 - includes performance testing with 3 different strategies (vector, deque, and list).
 - v1.1 - transitioned from using structs to classes for better encapsulation and maintainability.
-   
+- v1.2 - implementing the 'Rule of Five'. File handling logic, such as reading student records from files and exporting results, was encapsulated within the class. Added support for I/O methods via overloaded `>>` and `<<` operators.
 
 # V1.1 testing 
 
