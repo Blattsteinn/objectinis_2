@@ -3,7 +3,7 @@
 
 #include "my_functions.h"
 
-    void unusedFunction();
+    void Studentas::unusedFunction() const { }
 
    // --- Calculation functions    
         float Studentas::calculateMean(){

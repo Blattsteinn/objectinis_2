@@ -52,8 +52,6 @@ class Studentas : public Human {
     void setExam(int exam) { egzaminoRezultatas = exam; }
 
     // Getters
-    string getVardas() const { return vardas; }
-    string getPavarde() const { return pavarde; }
     vector<float> getPazymiai() const { return pazymiai; }
     int getEgzaminoRezultatas() const { return egzaminoRezultatas; }
     float getGalutinisVid() const { return galutinisVid; }
