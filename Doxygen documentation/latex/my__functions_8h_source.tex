@@ -1,0 +1,52 @@
+\doxysection{my\+\_\+functions.\+h}
+\hypertarget{my__functions_8h_source}{}\label{my__functions_8h_source}\index{Include/my\_functions.h@{Include/my\_functions.h}}
+\mbox{\hyperlink{my__functions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{my__library_8h}{my\_library.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{student_8h}{student.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{my__functions_8h_ab63a14ab11f8f3e47cae861c92e66ce6}{create\_folder}}(\textcolor{keywordtype}{string}\ folder\_name);}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_ad68b3bd335b3a6e1fbe2852cc649a1e7}{generate\_files}}(\textcolor{keywordtype}{int}\ student\_size);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_a0e2a9037fa869d931a4800d6d26e6c38}{print\_students}}(vector<Studentas>\ \&studentas);\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_ad487f8fc7c296889e0e9c2e73615a053}{insert\_student}}(vector<Studentas>\ \&student\_list,\ \mbox{\hyperlink{class_studentas}{Studentas}}\ \&student);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_af10163d810819e634b60b816fc2bf61c}{sort\_students}}(vector<Studentas>\ \&student\_list);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_af10163d810819e634b60b816fc2bf61c}{sort\_students}}(vector<Studentas>\ \&student\_list,\ \textcolor{keywordtype}{int}\ choice);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_studentas}{Studentas}}\ \mbox{\hyperlink{my__functions_8h_a664c7f4661d2234c9cef6e757f86015c}{userChoice\_2}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_studentas}{Studentas}}\ \mbox{\hyperlink{my__functions_8h_ada7986478882f14a2f15181df44c44fd}{userChoice\_3}}();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ random\_generating.cpp}}
+\DoxyCodeLine{00031\ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{my__functions_8h_adb50d7df57e4082b8d9024d6cb539b6b}{randomNumber}}(\textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b);}
+\DoxyCodeLine{00033\ \ \ \ \ vector<float>\ \mbox{\hyperlink{my__functions_8h_ae896d88371cbaad93f5f834dd0d7f642}{random\_grade}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{my__functions_8h_a0fa40e0a849cdb725b948d8156717c7d}{random\_name}}();}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{my__functions_8h_ac4da85971ee44c335602c45b27eea3bb}{random\_last\_name}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ additional\_functions.cpp}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{my__functions_8h_a710b7a80a6bd532d498aadb25c5a3b19}{consoleText\_userChoice}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{my__functions_8h_add68c2f55e61066be5c04e04dace4d3a}{check\_the\_value}}(\textcolor{keywordtype}{string}\ message,\ \textcolor{keywordtype}{string}\ errorMessage,\textcolor{keywordtype}{int}\ minVal,\textcolor{keywordtype}{int}\ maxVal);\ \ \textcolor{comment}{//\ checks\ if\ a\ give\ value\ is\ within\ range./}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ testing.cpp}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_a895d56117309f89c6579fe1332825b4f}{testing\_v12}}();}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_a35bdfe42b2717ebabe0d18e0adf1dc97}{testing\_v11}}();}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_a0b55113dd79ad56f9c39ecd1d661653b}{strategy\_1}}();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_a7f9783f4d1637258ff3555f0810f4023}{strategy\_2}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{my__functions_8h_a05db08334455f8d44e801674826c1ed8}{strategy\_3}}();}
+
+\end{DoxyCode}
