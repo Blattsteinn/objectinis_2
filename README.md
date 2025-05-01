@@ -1,9 +1,8 @@
-# v1.5
+# v2.0
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
-### Improvements in Version 1.5:
-- Introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. No Human objects can be instantiated.
-- `Studentas` now inherits from `Human` and implements the pure virtual function.
+### Improvements in Version 2.0:
+- 
   
 **The class supports multiple input methods:** 
 - `operator>>` now prompts users for names, grades, and exam scores
@@ -30,7 +29,8 @@ This program is a student grade management system that handles input, random dat
 - v1.0 - includes performance testing with 3 different strategies (vector, deque, and list).
 - v1.1 - transitioned from using structs to classes for better encapsulation and maintainability.
 - v1.2 - implementing the 'Rule of Five'. File handling logic, such as reading student records from files and exporting results, was encapsulated within the class. Added support for I/O methods via overloaded `>>` and `<<` operators.
-
+- v1.5- introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. `Studentas` now inherits from `Human`. No Human objects can be instantiated.
+  
 # V1.1 testing 
 
 ### Objective
