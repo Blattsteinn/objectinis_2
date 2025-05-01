@@ -18,6 +18,9 @@ class Human {
         virtual void unusedFunction() const = 0;
 
         // Virtual destructor for proper cleanup
-        virtual ~Human() {}
+        virtual ~Human() {
+            vardas.clear();
+            pavarde.clear();
+        }
 
 };

@@ -22,14 +22,20 @@ class Studentas : public Human {
           galutinisVid(0.0f), galutinisMed(0.0f) {}
 
     // Parameterized constructor
-    Studentas(const string& vardas, const string& pavarde, const vector<float>& pazymiai, int egzaminoRezultatas)
+    Studentas(const string& vardas, const string& pavarde, const vector<float>& pazymiai, const int& egzaminoRezultatas)
         : Human(vardas, pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
         calculate_everything();
     }
 
     // Destructor
     ~Studentas() {
-       // cout << "Destruktorius iskviestas" << endl;
+        vardas.clear();
+        pavarde.clear();
+        pazymiai.clear();
+       
+        egzaminoRezultatas = 0;
+        galutinisVid = 0.0f;
+        galutinisMed = 0.0f;
     }
     
     // Copy constructor
@@ -42,14 +48,14 @@ class Studentas : public Human {
     Studentas& operator=(const Studentas& other);
 
     // Move constructor operator
-    Studentas& operator=(Studentas&& other);
+    Studentas& operator=(Studentas&& other) noexcept;
 
 
     // Setters
     void setVardas(const string& v) { vardas = v; }
     void setPavarde(const string& p) { pavarde = p; }
     void setGrades(const vector<float>& g) { pazymiai = g; }
-    void setExam(int exam) { egzaminoRezultatas = exam; }
+    void setExam(const int& exam) { egzaminoRezultatas = exam; }
 
     // Getters
     vector<float> getPazymiai() const { return pazymiai; }

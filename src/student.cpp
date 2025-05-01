@@ -86,7 +86,7 @@
     }
 
     // Move constructor operator
-    Studentas& Studentas::operator=(Studentas&& other){
+    Studentas& Studentas::operator=(Studentas&& other) noexcept{
         if(&other != this){
             vardas = std::move(other.vardas);
             pavarde = std::move(other.pavarde);
