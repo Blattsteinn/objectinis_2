@@ -9,8 +9,6 @@ int main(){
     int program_choice{};
     int strategy_choice{};
 
-   // Human a("Boo", "Foo22");    // <--- will not work
-
     cout << "This is v2.0!" << endl;
     while(true){ 
         

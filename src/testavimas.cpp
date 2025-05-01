@@ -44,7 +44,7 @@ string consoleText_testing12() {
                 
 
                 cout << "Initializing B and copying from A" << endl;
-                Studentas B = A;
+                Studentas B(A);
                 
                 //--------------    
                 cout << "\n" << "[End result] --->" << "\n\n";
@@ -247,6 +247,9 @@ void strategy_1(){
                 });
                     cout << "Grouping time: " << readingTime << "s" << endl;
 
+                    Studentas::print_to_file(worse_students, "blogi_studentai" + std::to_string(i) + ".txt");
+                    Studentas::print_to_file(good_students, "geri_studentai" + std::to_string(i)+ ".txt");
+    
         // --- Bendras skaitymo laikas
 
                 auto overall_end = std::chrono::high_resolution_clock::now();
@@ -309,6 +312,10 @@ void strategy_2(){
 
             cout << "Grouping time: " << readingTime << "s" << endl;
 
+            Studentas::print_to_file(worse_students, "blogi_studentai" + std::to_string(i) + ".txt");
+            Studentas::print_to_file(good_students, "geri_studentai" + std::to_string(i)+ ".txt");
+
+
         cout << "Finished!" << endl;
         cout << endl;
         cout << endl;
@@ -356,7 +363,11 @@ void strategy_3(){
         
             });
             cout << "Grouping time: " << readingTime << "s" << endl;
-        
+            
+            Studentas::print_to_file(worse_students, "blogi_studentai" + std::to_string(i) + ".txt");
+            Studentas::print_to_file(good_students, "geri_studentai" + std::to_string(i)+ ".txt");
+
+            
         cout << "Finished!" << endl;
         cout << endl;
         cout << endl;
