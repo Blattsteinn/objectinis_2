@@ -2,7 +2,8 @@
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
 ### Improvements in Version 2.0:
-- 
+- introduced Doxygen‐based Documentation. Includes a `Doxyfile` configured to generate both HTML and LaTeX outputs
+- created Unit Tests for `Studentas` class. 
   
 **The class supports multiple input methods:** 
 - `operator>>` now prompts users for names, grades, and exam scores
