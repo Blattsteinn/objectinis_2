@@ -1,24 +1,29 @@
-# v1.5
+# v2.0
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
-### Improvements in Version 1.5:
-- Introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. No Human objects can be instantiated.
-- `Studentas` now inherits from `Human` and implements the pure virtual function.
-  
-**The class supports multiple input methods:** 
-- `operator>>` now prompts users for names, grades, and exam scores
+## Improvements in Version 2.0:
+
+### Doxygen Documentation
+A full API reference has been generated with Doxygen and is available under the Doxygen documentation folder. You’ll find both HTML and LaTeX folder and a compiled PDF. To regenerate the docs yourself, simply run `doxygen Doxyfile` from the project root.
+
+### Unit Testing
+Automated tests for the `Studentas` class and related code are located in the Unit testing folder. To build and execute them, launch `test.bat`, which creates a build directory and compiles the tests into `runTests.exe`. Running `runTests.exe` will check all test cases and report results.
+
+# Installation and Launch Instructions:
+1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
+2) Download the repository containing the above files.
+3) Run `run.bat` to configure, build, and install the program.
+4) Launch the executable (`studentai`).
+
+# Overridden methods:
+
+### I/O methods for class `Studentas`:
+- `operator>>` prompts users for names, grades, and exam scores
 - `operator<<` prints names and calculated final grades
 
 **working with files:**
-- function appendingContainerViaFile(string file_name, &student_list) is used to read a text file
+- function appendingContainerViaFile(string file_name, &student_list) is used to read a text file and add students to a container
 - function print_to_file(list_of_students, file_name) is used to write data to a text file
-
-# Installation and Launch Instructions:
-
-- Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
-- Download the repository containing the above files.
-- Run `run.bat` to configure, build, and install the program.
-- Launch the program (`studentai`).
 
  ## Previous releases
 - v.pradine-release – Initial release. The program accepts user input, generates random grades and names, and calculates the final score using both the arithmetic mean and median.
@@ -30,7 +35,9 @@ This program is a student grade management system that handles input, random dat
 - v1.0 - includes performance testing with 3 different strategies (vector, deque, and list).
 - v1.1 - transitioned from using structs to classes for better encapsulation and maintainability.
 - v1.2 - implementing the 'Rule of Five'. File handling logic, such as reading student records from files and exporting results, was encapsulated within the class. Added support for I/O methods via overloaded `>>` and `<<` operators.
+- v1.5- introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. `Studentas` now inherits from `Human`. No Human objects can be instantiated.
 
+# Testing 
 # V1.1 testing 
 
 ### Objective
