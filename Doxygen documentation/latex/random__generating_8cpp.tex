@@ -6,13 +6,13 @@
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{random__generating_8cpp_adb50d7df57e4082b8d9024d6cb539b6b}{random\+Number}} (int a, int b)
-\item 
+\begin{DoxyCompactList}\small\item\em Produce a uniformly distributed integer within \mbox{[}a, b\mbox{]}. \end{DoxyCompactList}\item 
 vector$<$ float $>$ \mbox{\hyperlink{random__generating_8cpp_ae896d88371cbaad93f5f834dd0d7f642}{random\+\_\+grade}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Generate a vector of 2–8 random float grades (1–10). \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{random__generating_8cpp_a0fa40e0a849cdb725b948d8156717c7d}{random\+\_\+name}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Select a random first name from a fixed list. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{random__generating_8cpp_ac4da85971ee44c335602c45b27eea3bb}{random\+\_\+last\+\_\+name}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Select a random surname from a fixed list. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -22,21 +22,56 @@ string \mbox{\hyperlink{random__generating_8cpp_ac4da85971ee44c335602c45b27eea3b
 {\footnotesize\ttfamily \label{random__generating_8cpp_ae896d88371cbaad93f5f834dd0d7f642} 
 vector$<$ float $>$ random\+\_\+grade (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Generate a vector of 2–8 random float grades (1–10). 
+
+\begin{DoxyReturn}{Returns}
+Vector with randomly determined length and grade values. 
+\end{DoxyReturn}
 \Hypertarget{random__generating_8cpp_ac4da85971ee44c335602c45b27eea3bb}\index{random\_generating.cpp@{random\_generating.cpp}!random\_last\_name@{random\_last\_name}}
 \index{random\_last\_name@{random\_last\_name}!random\_generating.cpp@{random\_generating.cpp}}
 \doxysubsubsection{\texorpdfstring{random\_last\_name()}{random\_last\_name()}}
 {\footnotesize\ttfamily \label{random__generating_8cpp_ac4da85971ee44c335602c45b27eea3bb} 
 string random\+\_\+last\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Select a random surname from a fixed list. 
+
+\begin{DoxyReturn}{Returns}
+Random surname string. 
+\end{DoxyReturn}
 \Hypertarget{random__generating_8cpp_a0fa40e0a849cdb725b948d8156717c7d}\index{random\_generating.cpp@{random\_generating.cpp}!random\_name@{random\_name}}
 \index{random\_name@{random\_name}!random\_generating.cpp@{random\_generating.cpp}}
 \doxysubsubsection{\texorpdfstring{random\_name()}{random\_name()}}
 {\footnotesize\ttfamily \label{random__generating_8cpp_a0fa40e0a849cdb725b948d8156717c7d} 
 string random\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Select a random first name from a fixed list. 
+
+\begin{DoxyReturn}{Returns}
+Random name string. 
+\end{DoxyReturn}
 \Hypertarget{random__generating_8cpp_adb50d7df57e4082b8d9024d6cb539b6b}\index{random\_generating.cpp@{random\_generating.cpp}!randomNumber@{randomNumber}}
 \index{randomNumber@{randomNumber}!random\_generating.cpp@{random\_generating.cpp}}
 \doxysubsubsection{\texorpdfstring{randomNumber()}{randomNumber()}}
 {\footnotesize\ttfamily \label{random__generating_8cpp_adb50d7df57e4082b8d9024d6cb539b6b} 
 int random\+Number (\begin{DoxyParamCaption}\item[{int}]{a}{, }\item[{int}]{b}{}\end{DoxyParamCaption})}
 
+
+
+Produce a uniformly distributed integer within \mbox{[}a, b\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Lower bound (inclusive). \\
+\hline
+{\em b} & Upper bound (inclusive). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Random integer between a and b. 
+\end{DoxyReturn}

@@ -113,9 +113,9 @@ $(function(){initNavTree('file__functions_8cpp.html',''); initResizable(true); }
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ab63a14ab11f8f3e47cae861c92e66ce6" id="r_ab63a14ab11f8f3e47cae861c92e66ce6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab63a14ab11f8f3e47cae861c92e66ce6">create_folder</a> (string folder_name)</td></tr>
-<tr class="memdesc:ab63a14ab11f8f3e47cae861c92e66ce6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="file__functions_8cpp.html">file_functions.cpp</a>  <br /></td></tr>
 <tr class="separator:ab63a14ab11f8f3e47cae861c92e66ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad68b3bd335b3a6e1fbe2852cc649a1e7" id="r_ad68b3bd335b3a6e1fbe2852cc649a1e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad68b3bd335b3a6e1fbe2852cc649a1e7">generate_files</a> (int student_size)</td></tr>
+<tr class="memdesc:ad68b3bd335b3a6e1fbe2852cc649a1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate test files with random student records.  <br /></td></tr>
 <tr class="separator:ad68b3bd335b3a6e1fbe2852cc649a1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -134,8 +134,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="file__functions_8cpp.html">file_functions.cpp</a> </p>
-
 </div>
 </div>
 <a id="ad68b3bd335b3a6e1fbe2852cc649a1e7" name="ad68b3bd335b3a6e1fbe2852cc649a1e7"></a>
@@ -152,6 +150,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate test files with random student records. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">student_size</td><td>Exponent used to compute record count: 10^student_size.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Creates a "Generated Files" folder, then writes a header (name, surname, 5 NDs, exam) and &lt;size&gt; lines of randomly generated data into "testavimasFailas&lt;size&gt;.txt". Upon completion, prints the file creation message and path to std::cout. </p>
 
 </div>
 </div>

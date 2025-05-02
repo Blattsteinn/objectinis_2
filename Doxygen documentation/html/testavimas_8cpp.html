@@ -118,16 +118,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a61a28ac8391103f2f37f41c37284d83b"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a61a28ac8391103f2f37f41c37284d83b">measureTime</a> (Func func)</td></tr>
 <tr class="separator:a61a28ac8391103f2f37f41c37284d83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a895d56117309f89c6579fe1332825b4f" id="r_a895d56117309f89c6579fe1332825b4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a895d56117309f89c6579fe1332825b4f">testing_v12</a> ()</td></tr>
+<tr class="memdesc:a895d56117309f89c6579fe1332825b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interactive tests for constructors, assignment, and I/O.  <br /></td></tr>
 <tr class="separator:a895d56117309f89c6579fe1332825b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35bdfe42b2717ebabe0d18e0adf1dc97" id="r_a35bdfe42b2717ebabe0d18e0adf1dc97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35bdfe42b2717ebabe0d18e0adf1dc97">testing_v11</a> ()</td></tr>
+<tr class="memdesc:a35bdfe42b2717ebabe0d18e0adf1dc97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Batch performance tests for file reading, sorting, and grouping.  <br /></td></tr>
 <tr class="separator:a35bdfe42b2717ebabe0d18e0adf1dc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95493f7f2bb22fd766cdafab6d260fe2" id="r_a95493f7f2bb22fd766cdafab6d260fe2"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95493f7f2bb22fd766cdafab6d260fe2">divide_students_unoptimized</a> (const vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;list_of_students, int choice)</td></tr>
 <tr class="separator:a95493f7f2bb22fd766cdafab6d260fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b55113dd79ad56f9c39ecd1d661653b" id="r_a0b55113dd79ad56f9c39ecd1d661653b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b55113dd79ad56f9c39ecd1d661653b">strategy_1</a> ()</td></tr>
+<tr class="memdesc:a0b55113dd79ad56f9c39ecd1d661653b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strategy 1: read, sort, divide via unoptimized loops, and write results.  <br /></td></tr>
 <tr class="separator:a0b55113dd79ad56f9c39ecd1d661653b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f9783f4d1637258ff3555f0810f4023" id="r_a7f9783f4d1637258ff3555f0810f4023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f9783f4d1637258ff3555f0810f4023">strategy_2</a> ()</td></tr>
+<tr class="memdesc:a7f9783f4d1637258ff3555f0810f4023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strategy 2: read, sort, divide via pop_back, and measure times.  <br /></td></tr>
 <tr class="separator:a7f9783f4d1637258ff3555f0810f4023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05db08334455f8d44e801674826c1ed8" id="r_a05db08334455f8d44e801674826c1ed8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05db08334455f8d44e801674826c1ed8">strategy_3</a> ()</td></tr>
+<tr class="memdesc:a05db08334455f8d44e801674826c1ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strategy 3: read, sort, divide via find/erase, and measure times.  <br /></td></tr>
 <tr class="separator:a05db08334455f8d44e801674826c1ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -202,6 +207,8 @@ template&lt;typename Func&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Strategy 1: read, sort, divide via unoptimized loops, and write results. </p>
 <p>&lt;&mdash; sparta pradedama skaiciuoti cia</p>
 
 </div>
@@ -221,6 +228,8 @@ template&lt;typename Func&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Strategy 2: read, sort, divide via pop_back, and measure times. </p>
+
 </div>
 </div>
 <a id="a05db08334455f8d44e801674826c1ed8" name="a05db08334455f8d44e801674826c1ed8"></a>
@@ -237,6 +246,8 @@ template&lt;typename Func&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Strategy 3: read, sort, divide via find/erase, and measure times. </p>
 
 </div>
 </div>
@@ -255,6 +266,8 @@ template&lt;typename Func&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Batch performance tests for file reading, sorting, and grouping. </p>
+
 </div>
 </div>
 <a id="a895d56117309f89c6579fe1332825b4f" name="a895d56117309f89c6579fe1332825b4f"></a>
@@ -271,6 +284,8 @@ template&lt;typename Func&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Interactive tests for constructors, assignment, and I/O. </p>
 
 </div>
 </div>

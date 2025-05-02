@@ -3,53 +3,57 @@
 #include "human.h"
 #include "my_library.h"
 
+/// \file student.h
+/// \brief Declaration of the Studentas class, extending Human to manage grades and compute final scores.
+
+/// \class Studentas
+/// \brief Represents a student with homework grades and an exam score,
+///        providing calculations for mean- and median-based final grades.
 class Studentas : public Human {
-    private:
-    vector<float> pazymiai;
-    int egzaminoRezultatas;
-
-    float galutinisVid;
-    float galutinisMed;
-
-    public:
-    
-    // Override the pure virtual function from Human.
-    void unusedFunction() const override;
-
-    // Default constructor
+public:
+    /// \brief Default constructor.
     Studentas()
         : Human("", ""), egzaminoRezultatas(0),
           galutinisVid(0.0f), galutinisMed(0.0f) {}
 
-    // Parameterized constructor
-    Studentas(const string& vardas, const string& pavarde, const vector<float>& pazymiai, const int& egzaminoRezultatas)
+    /**
+     * \brief Parameterized constructor.
+     * Initializes student name, surname, grades vector, and exam result,
+     * then computes final grades.
+     * \param vardas            First name of the student.
+     * \param pavarde           Surname of the student.
+     * \param pazymiai          Vector of homework grades.
+     * \param egzaminoRezultatas  Integer score of the exam.
+     */
+    Studentas(const string& vardas,
+              const string& pavarde,
+              const vector<float>& pazymiai,
+              const int& egzaminoRezultatas)
         : Human(vardas, pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
         calculate_everything();
     }
 
-    // Destructor
+    /// \brief Destructor.
     ~Studentas() {
         vardas.clear();
         pavarde.clear();
         pazymiai.clear();
-       
         egzaminoRezultatas = 0;
         galutinisVid = 0.0f;
         galutinisMed = 0.0f;
     }
-    
-    // Copy constructor
+
+    /// \brief Copy constructor.
     Studentas(const Studentas& other);
 
-    // Move constructor
+    /// \brief Move constructor.
     Studentas(Studentas&& other) noexcept;
-    
-    // Copy constructor operator
+
+    /// \brief Copy assignment operator.
     Studentas& operator=(const Studentas& other);
 
-    // Move constructor operator
+    /// \brief Move assignment operator.
     Studentas& operator=(Studentas&& other) noexcept;
-
 
     // Setters
     void setVardas(const string& v) { vardas = v; }
@@ -63,22 +67,46 @@ class Studentas : public Human {
     float getGalutinisVid() const { return galutinisVid; }
     float getGalutinisMed() const { return galutinisMed; }
 
+    /// \brief Implementation of unused pure virtual from Human.
+    void unusedFunction() const override;
 
-    // Member functions
+    /// \brief Calculate mean of homework grades.
     float calculateMean();
-	float calculateMedian();
-    void calculate_everything();  // Calls both calculateMean and calculateMedian and assigns them.
 
+    /// \brief Calculate median of homework grades.
+    float calculateMedian();
 
-    // Friend function for printing
+    /// \brief Compute both mean- and median-based final grades.
+    void calculate_everything();
+
+    /// \brief Print surname, name, and final grades.
     friend ostream& operator<<(ostream &out, const Studentas &s);
 
-    // Friend function for input
+    /// \brief Prompt for surname, name, grades, and exam; then compute final grades.
     friend std::istream& operator>>(std::istream& in, Studentas& s);
 
-    // File functions 
-    static void appendingContainerViaFile(string file_name, vector <Studentas> &student_list);
-    static vector<Studentas> read_student_records(int ndCount, std::istringstream& iss);
-    static void print_to_file(vector<Studentas> list_of_students, string file_name);
-};
+    /// \brief Read students from a text file and append to a container.
+    /// \param file_name     Input file name.
+    /// \param student_list  Vector to append parsed Studentas objects.
+    static void appendingContainerViaFile(string file_name,
+                                          vector<Studentas>& student_list);
 
+    /// \brief Parse student records from a stream.
+    /// \param ndCount  Number of grades per record.
+    /// \param iss      Input string stream.
+    /// \return         Vector of parsed Studentas.
+    static vector<Studentas> read_student_records(int ndCount,
+                                                  istringstream& iss);
+
+    /// \brief Write a list of students to a text file in "Rezultatai".
+    /// \param list_of_students  Vector of Studentas to write.
+    /// \param file_name         Name of output file.
+    static void print_to_file(vector<Studentas> list_of_students,
+                              string file_name);
+
+private:
+    vector<float> pazymiai;   ///< Homework grades
+    int egzaminoRezultatas;    ///< Exam score
+    float galutinisVid;        ///< Final grade by average
+    float galutinisMed;        ///< Final grade by median
+};

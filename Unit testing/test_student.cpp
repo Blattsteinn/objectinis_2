@@ -26,6 +26,12 @@ TEST_CASE("Medianos funkcijos testavimas, [LYGINIS] skaicius", "[Studentas]") {
     REQUIRE(s.calculateMedian() == Approx(5.0f));
 }
 
+TEST_CASE("Empty grades vector returns zero for mean and median", "[Boundary]") {
+    Studentas s("Test", "Empty", {}, 5);
+    REQUIRE(s.calculateMean()  == Approx(0.0f));
+    REQUIRE(s.calculateMedian() == Approx(0.0f));
+}
+
 TEST_CASE("calculate_everything() funkcijos testavimas", "[Studentas]") {
     vector<float> grades{2.0f, 4.0f, 6.0f};
     int examScore = 8;

@@ -5,6 +5,6 @@ var searchData=
   ['getgalutinismed_2',['getGalutinisMed',['../class_studentas.html#a318c5f12fc1d778681cb7402a6c288c5',1,'Studentas']]],
   ['getgalutinisvid_3',['getGalutinisVid',['../class_studentas.html#aa877495a93cf4978dd0246d3678f3ba3',1,'Studentas']]],
   ['getpavarde_4',['getPavarde',['../class_human.html#ac511c3577911bfcb9640448c5ef0f6a4',1,'Human']]],
-  ['getpazymiai_5',['getPazymiai',['../class_studentas.html#aca44354adceb401213911473481a4f3a',1,'Studentas']]],
+  ['getpazymiai_5',['getPazymiai',['../class_studentas.html#acba0796ab617405240ef8669c236f9d3',1,'Studentas']]],
   ['getvardas_6',['getVardas',['../class_human.html#a5c946ebc214813815784beac2174a47e',1,'Human']]]
 ];

@@ -6,9 +6,9 @@
 \begin{DoxyCompactItemize}
 \item 
 string \mbox{\hyperlink{file__functions_8cpp_ab63a14ab11f8f3e47cae861c92e66ce6}{create\+\_\+folder}} (string folder\+\_\+name)
-\begin{DoxyCompactList}\small\item\em \doxylink{file__functions_8cpp}{file\+\_\+functions.\+cpp} \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{file__functions_8cpp_ad68b3bd335b3a6e1fbe2852cc649a1e7}{generate\+\_\+files}} (int student\+\_\+size)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Generate test files with random student records. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -18,13 +18,19 @@ void \mbox{\hyperlink{file__functions_8cpp_ad68b3bd335b3a6e1fbe2852cc649a1e7}{ge
 {\footnotesize\ttfamily \label{file__functions_8cpp_ab63a14ab11f8f3e47cae861c92e66ce6} 
 string create\+\_\+folder (\begin{DoxyParamCaption}\item[{string}]{folder\+\_\+name}{}\end{DoxyParamCaption})}
 
-
-
-\doxylink{file__functions_8cpp}{file\+\_\+functions.\+cpp} 
-
 \Hypertarget{file__functions_8cpp_ad68b3bd335b3a6e1fbe2852cc649a1e7}\index{file\_functions.cpp@{file\_functions.cpp}!generate\_files@{generate\_files}}
 \index{generate\_files@{generate\_files}!file\_functions.cpp@{file\_functions.cpp}}
 \doxysubsubsection{\texorpdfstring{generate\_files()}{generate\_files()}}
 {\footnotesize\ttfamily \label{file__functions_8cpp_ad68b3bd335b3a6e1fbe2852cc649a1e7} 
 void generate\+\_\+files (\begin{DoxyParamCaption}\item[{int}]{student\+\_\+size}{}\end{DoxyParamCaption})}
 
+
+
+Generate test files with random student records. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student\+\_\+size} & Exponent used to compute record count\+: 10\texorpdfstring{$^\wedge$}{\string^}student\+\_\+size.\\
+\hline
+\end{DoxyParams}
+Creates a "{}\+Generated Files"{} folder, then writes a header (name, surname, 5 NDs, exam) and $<$size$>$ lines of randomly generated data into "{}testavimas\+Failas$<$size$>$.\+txt"{}. Upon completion, prints the file creation message and path to std\+::cout. 

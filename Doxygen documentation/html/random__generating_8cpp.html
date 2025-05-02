@@ -113,12 +113,16 @@ $(function(){initNavTree('random__generating_8cpp.html',''); initResizable(true)
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:adb50d7df57e4082b8d9024d6cb539b6b" id="r_adb50d7df57e4082b8d9024d6cb539b6b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb50d7df57e4082b8d9024d6cb539b6b">randomNumber</a> (int a, int b)</td></tr>
+<tr class="memdesc:adb50d7df57e4082b8d9024d6cb539b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Produce a uniformly distributed integer within [a, b].  <br /></td></tr>
 <tr class="separator:adb50d7df57e4082b8d9024d6cb539b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae896d88371cbaad93f5f834dd0d7f642" id="r_ae896d88371cbaad93f5f834dd0d7f642"><td class="memItemLeft" align="right" valign="top">vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae896d88371cbaad93f5f834dd0d7f642">random_grade</a> ()</td></tr>
+<tr class="memdesc:ae896d88371cbaad93f5f834dd0d7f642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a vector of 2–8 random float grades (1–10).  <br /></td></tr>
 <tr class="separator:ae896d88371cbaad93f5f834dd0d7f642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fa40e0a849cdb725b948d8156717c7d" id="r_a0fa40e0a849cdb725b948d8156717c7d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0fa40e0a849cdb725b948d8156717c7d">random_name</a> ()</td></tr>
+<tr class="memdesc:a0fa40e0a849cdb725b948d8156717c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a random first name from a fixed list.  <br /></td></tr>
 <tr class="separator:a0fa40e0a849cdb725b948d8156717c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4da85971ee44c335602c45b27eea3bb" id="r_ac4da85971ee44c335602c45b27eea3bb"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4da85971ee44c335602c45b27eea3bb">random_last_name</a> ()</td></tr>
+<tr class="memdesc:ac4da85971ee44c335602c45b27eea3bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a random surname from a fixed list.  <br /></td></tr>
 <tr class="separator:ac4da85971ee44c335602c45b27eea3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -137,6 +141,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Generate a vector of 2–8 random float grades (1–10). </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector with randomly determined length and grade values. </dd></dl>
+
 </div>
 </div>
 <a id="ac4da85971ee44c335602c45b27eea3bb" name="ac4da85971ee44c335602c45b27eea3bb"></a>
@@ -154,6 +161,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Select a random surname from a fixed list. </p>
+<dl class="section return"><dt>Returns</dt><dd>Random surname string. </dd></dl>
+
 </div>
 </div>
 <a id="a0fa40e0a849cdb725b948d8156717c7d" name="a0fa40e0a849cdb725b948d8156717c7d"></a>
@@ -170,6 +180,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Select a random first name from a fixed list. </p>
+<dl class="section return"><dt>Returns</dt><dd>Random name string. </dd></dl>
 
 </div>
 </div>
@@ -191,6 +204,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Produce a uniformly distributed integer within [a, b]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Lower bound (inclusive). </td></tr>
+    <tr><td class="paramname">b</td><td>Upper bound (inclusive). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Random integer between a and b. </dd></dl>
 
 </div>
 </div>
