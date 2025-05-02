@@ -15,13 +15,24 @@ Automated tests for the `Studentas` class and related code are located in the Un
 3) Run `run.bat` to configure, build, and install the program.
 4) Launch the executable (`studentai`).
 
-# Overridden methods:
+# Documentation and Testing Instructions
 
+## 1) Generating Doxygen Documentation
+1. Install [Doxygen](https://www.doxygen.nl/download.html)  
+2. Open a command prompt in the project root (where `Doxyfile` is).
+3. Run `doxygen Doxyfile` to create 'Doxygen documentation' folder
+
+## 2) Running Unit Tests
+1. Open a command prompt in the **Unit testing** folder  
+2. Run `test.bat`. This will create a build folder, configure and compile the tests into `runTests.exe`.
+3. Run `runTests.exe` or open command prompt where `runTests.exe` is and run `runTests.exe -s` for more detailed tests.
+   
+# Overridden methods:
 ### I/O methods for class `Studentas`:
 - `operator>>` prompts users for names, grades, and exam scores
 - `operator<<` prints names and calculated final grades
 
-**working with files:**
+**Working with files:**
 - function appendingContainerViaFile(string file_name, &student_list) is used to read a text file and add students to a container
 - function print_to_file(list_of_students, file_name) is used to write data to a text file
 
