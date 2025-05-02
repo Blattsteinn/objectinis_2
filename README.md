@@ -9,11 +9,25 @@ A full API reference has been generated with Doxygen and is available under the 
 ### Unit Testing
 Automated tests for the `Studentas` class and related code are located in the Unit testing folder. To build and execute them, launch `test.bat`, which creates a build directory and compiles the tests into `runTests.exe`. Running `runTests.exe` will check all test cases and report results.
 
-# Installation and Launch Instructions:
+# Installation and Launch Instructions 
+
+Windows:
 1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
 2) Download the repository containing the above files.
-3) Run `run.bat` to configure, build, and install the program.
-4) Launch the executable (`studentai`).
+3) run `run.bat` to configure, build, and install the program.
+4) Run the program (`studentai`).
+
+Linux / macOS:
+1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
+2) Download the repository containing the above files.
+3) From a terminal in the project root, run:
+   ```bash
+   mkdir -p build
+   cd build
+   cmake ..
+   cmake --build .
+   ```
+4) Lauch `./studentai`
 
 # Documentation and Testing Instructions
 
@@ -26,6 +40,15 @@ Automated tests for the `Studentas` class and related code are located in the Un
 1. Open a command prompt in the **Unit testing** folder  
 2. Run `test.bat`. This will create a build folder, configure and compile the tests into `runTests.exe`.
 3. Run `runTests.exe` or open command prompt where `runTests.exe` is and run `runTests.exe -s` for more detailed tests.
+
+For Linux/macOS:
+From a terminal in the 'Unit testing' folder, run:
+```bash
+   mkdir -p build
+   cd build
+   cmake ..
+   cmake --build .
+```
    
 # Overridden methods:
 ### I/O methods for class `Studentas`:
