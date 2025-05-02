@@ -1,0 +1,3 @@
+Vardas                   Pavarde                    ND1       ND2       ND3       Egz.
+Good                     Dog                        10        10        10        10
+Boom                     God                        9         8         4         7
