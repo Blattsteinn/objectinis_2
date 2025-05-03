@@ -15,14 +15,48 @@ class Vector {
     using iterator       = T*;
     using const_iterator = const T*;
 
-
-    // iterator access
-    iterator       begin()       noexcept { return array; }
-    iterator       end()         noexcept { return array + size_; }
-    const_iterator begin() const noexcept { return array; }
-    const_iterator end()   const noexcept { return array + size_; }
+    using reverse_iterator       = std::reverse_iterator<iterator>;
+    using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     void double_the_capacity();
+
+// ----- iterators
+    constexpr iterator begin() noexcept { return array; }
+    constexpr const_iterator begin() const noexcept { return array; }
+    constexpr const_iterator cbegin() const noexcept { return array; }
+
+    constexpr iterator end() noexcept { return array + size_; }
+    constexpr const_iterator end() const noexcept { return array + size_; }
+    constexpr const_iterator cend() const noexcept { return array + size_; }
+
+    // --- reverse
+    constexpr reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
+    constexpr const_reverse_iterator rbegin() const noexcept { return const_reverse_iterator(end()); }
+    constexpr const_reverse_iterator crbegin() const noexcept {return const_reverse_iterator(end()); }
+    
+    constexpr reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
+    constexpr const_reverse_iterator rend()   const noexcept { return const_reverse_iterator(begin()); }
+    constexpr const_reverse_iterator crend()   const noexcept { return const_reverse_iterator(begin()); }
+
+// ------------------------------------ Capacity ------------------------------
+    // in "vector_capacity.h"
+    // ---- empty() ----
+    constexpr bool empty() const noexcept;
+
+    // ----- size() ----
+    constexpr size_type size() const noexcept;
+
+    // ----- max_size() ----
+    constexpr size_type max_size() const noexcept;
+
+    // ----- reserve() ----
+    constexpr void reserve(size_type new_cap);
+
+    // ----- capacity() ----
+    constexpr size_type capacity() const noexcept;
+
+    // ----- shrink_to_fit() ----
+    constexpr void shrink_to_fit();
 
 // ------------------------------------ Modifiers ------------------------------
     // in "vector_modifiers.h"
@@ -71,25 +105,6 @@ class Vector {
 
     // ---- swap() ----
     void swap( Vector& other ) noexcept;
-
-// ------------------------------------ Capacity ------------------------------
-    // ---- empty() ----
-    constexpr bool empty() const noexcept;
-
-    // ----- size() ----
-    constexpr size_type size() const noexcept;
-
-    // ----- max_size() ----
-    constexpr size_type max_size() const noexcept;
-
-    // ----- reserve() ----
-    constexpr void reserve(size_type new_cap);
-
-    // ----- capacity() ----
-    constexpr size_type capacity() const noexcept;
-
-    // ----- shrink_to_fit() ----
-    constexpr void shrink_to_fit();
 // ----------------------------------------------------------------------------
     // Default Constructor
     Vector() : array(nullptr), size_(0), capacity_(0)

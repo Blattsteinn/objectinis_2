@@ -27,6 +27,7 @@ template<typename T>
 constexpr typename Vector<T>::size_type Vector<T>::max_size() const noexcept {
     return std::numeric_limits<size_type>::max() / sizeof(T);
 }
+
 // reserve
 // reserves storage
 // (public member function)
@@ -43,6 +44,7 @@ constexpr void Vector<T>::reserve(size_type n) {
     array = new_array;
     capacity_ = n;
 }
+
 // capacity
 // returns the number of elements that can be held in currently allocated storage
 // (public member function)
@@ -50,6 +52,7 @@ template<typename T>
 constexpr typename Vector<T>::size_type Vector<T>::capacity() const noexcept { 
     return capacity_; 
 }
+
 // shrink_to_fit
 // (DR*)
 // reduces memory usage by freeing unused memory
