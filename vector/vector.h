@@ -18,7 +18,33 @@ class Vector {
     using reverse_iterator       = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
+
+    using reference       = T&;
+    using const_reference = const T&;
+
+
     void double_the_capacity();
+
+// ----- Element access
+    // ----- at()
+    constexpr reference at(size_type pos);
+    constexpr const_reference at(size_type pos) const;
+
+    // ----- operator[]
+    T& operator[](size_type idx) { return array[idx]; }
+    const T& operator[](size_type idx) const { return array[idx]; }
+
+    // ----- front()
+    constexpr reference front();
+    constexpr const_reference front() const;
+
+    // ----- back()
+    constexpr reference back();
+    constexpr const_reference back() const;
+
+    // ----- data()  <---- ???
+    constexpr T* data() noexcept { return array;}
+    constexpr const T* data() const noexcept { return array; }
 
 // ----- iterators
     constexpr iterator begin() noexcept { return array; }
@@ -119,9 +145,7 @@ class Vector {
         array[i] = value;
     }
 
-    // int data[] = { 10, 20, 30, 40};
-    // Vector<int> v3(std::begin(data), std::end(data));
-    // prints: 10 20 30 40 
+
     template<
     typename InputIt,
     typename = std::enable_if_t<!std::is_integral<InputIt>::value>
@@ -147,11 +171,9 @@ class Vector {
     // Vector(Vector&&) noexcept = delete;
     // Vector& operator=(Vector&&) noexcept = delete;
     
-    // Accessors
-    T& operator[](size_type idx)         { return array[idx]; }
-    const T& operator[](size_type idx) const { return array[idx]; }
 };
 
 #include "Vector_impl.h"
 #include "vector_modifiers.h"
 #include "vector_capacity.h"
+#include "vector_elementAccess.h"

@@ -11,13 +11,11 @@ int main(){
     }
 
     for(int i = 0; i < v.size(); i++){
-        cout << v[i] << endl;
-    }
+        cout << v[i] << " ";
+    } cout << endl;
 
-    auto pos = v.rbegin();
-    for(auto i = pos; i != v.rend(); i++){
-        cout << *i;
-    }
+    cout << v.back();
+
 
     return 0;
 }

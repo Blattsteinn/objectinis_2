@@ -1,4 +1,4 @@
-// Vector_impl.h
+// vector_impl.h
 #pragma once
 
 #include "vector.h"
