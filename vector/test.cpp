@@ -4,27 +4,21 @@
 int main(){
     cout << "This is v3.0" << endl;
 
-    int A [5] = {5,4,2,4,10};
+    Vector<int> v;
+    v.push_back(0);
+    v.push_back(0);
+    v.push_back(0);
+    v.push_back(0);
 
-    Vector<int> v(A, A + 5);
-    for(int i = 0; i< v.size(); i++){
-        cout << v[i] << " ";
-    } cout << endl;
+    cout << v.capacity() << endl;
 
+    v.pop_back();
+    v.pop_back();
 
-    cout << "inserting 5!" << endl;
-    auto pos = v.begin();
-    v.insert(pos, 88);
+    cout << v.capacity() << endl;
+    v.shrink_to_fit();
 
-    int gamer = 777;
-    pos = v.begin() + 2;
-    v.insert(pos, std::move(gamer));  // also binds to the T&& overload
-
-    for(int i = 0; i< v.size(); i++){
-        cout << v[i] << " ";
-    } cout << endl;
-
-    cout << "x value is: " << gamer << endl;
+    cout << v.capacity() << endl;
 
     return 0;
 }
