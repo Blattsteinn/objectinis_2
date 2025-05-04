@@ -20,28 +20,31 @@ constexpr void Vector<T>::clear() noexcept
 // insert
 //   Inserts one or more elements at a given position.
 //   (public member function)
-// inserts one element
+
+// 1) Inserts a copy of value before pos.
 template <typename T>
-void Vector<T>::insert(const_iterator pos, const T &value)
+constexpr typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, const T &value)
 {
 
     size_type idx = pos - begin();
 
-    while (size_ + 1 > capacity_)
-    {
+    while (size_ + 1 > capacity_){
         double_the_capacity();
     }
 
-    for (size_type i = size_; i > idx; --i)
-    {
+    for (size_type i = size_; i > idx; --i){
         array[i] = std::move(array[i - 1]);
     }
+
     array[idx] = value;
     ++size_;
+
+    return array + idx;
 }
 
+// 2) Inserts value before pos, possibly using move semantics.
 template <typename T>
-void Vector<T>::insert(const_iterator pos, T &&value)
+constexpr typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, T &&value)
 {
     size_type idx = pos - begin();
 
@@ -56,63 +59,105 @@ void Vector<T>::insert(const_iterator pos, T &&value)
     }
     array[idx] = std::forward<T>(value);
     ++size_;
+
+    return array + idx;
 }
 
+// 3) Inserts count copies of the value before pos.
 template <typename T>
-void Vector<T>::insert(const_iterator pos, size_type count, const T &value)
-{
+constexpr typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, size_type count, const T &value){
     size_type idx = pos - begin();
 
-    while (size_ + count > capacity_)
-    {
+    while (size_ + count > capacity_){
         double_the_capacity();
     }
 
-    for (size_type i = size_; i > idx; --i)
-    {
+    // Move forward 'count' times
+    for (size_type i = size_; i > idx; --i){
         array[i - 1 + count] = std::move(array[i - 1]);
     }
 
-    for (size_type j = 0; j < count; ++j)
-    {
+    for (size_type j = 0; j < count; ++j){
         array[idx + j] = value;
     }
 
     size_ += count;
+    return array + idx;
 }
 
-template <typename T>
-void Vector<T>::insert(const_iterator pos, std::initializer_list<T> ilist)
-{
+// 4) Inserts elements from range [first, last) before pos.
+template<typename T>
+template<class InputIt> 
+constexpr typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, InputIt first, InputIt last){
     size_type idx = pos - begin();
-    size_type count = ilist.end() - ilist.begin();
+    size_type count = last - first;
 
-    while (size_ + count > capacity_)
-    {
+    while (size_ + count > capacity_){
         double_the_capacity();
     }
 
-    for (size_type i = size_; i > idx; --i)
-    {
+    // Move forward 'count' times
+    for (size_type i = size_; i > idx; --i){
+        array[i - 1 + count] = std::move(array[i - 1]);
+    }
+    // Add new elements
+    size_type j = 0;
+    for (auto i = first; i != last; ++i, ++j){
+        array[idx + j] = *i;
+    }
+
+    size_ += count;
+    return array + idx;
+}
+
+// 5) Inserts elements from initializer list ilist before pos.
+// Equivalent to insert(pos, ilist.begin(), ilist.end()).
+template <typename T>
+constexpr typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, std::initializer_list<T> ilist){
+    size_type idx = pos - begin();
+    size_type count = ilist.end() - ilist.begin();
+
+    while (size_ + count > capacity_){
+        double_the_capacity();
+    }
+
+    for (size_type i = size_; i > idx; --i){
         array[i - 1 + count] = std::move(array[i - 1]);
     }
 
     const T *ptr = ilist.begin();
-    for (size_type j = 0; j < ilist.size(); ++j)
-    {
+    for (size_type j = 0; j < ilist.size(); ++j){
         array[idx + j] = ptr[j]; // copy the j-th element
     }
 
     size_ += count;
+    return array + idx;
 }
-
-// insert_range (C++23)
-//   Inserts a range of elements [first, last) at a given position.
-//   (public member function)
 
 // emplace (C++11)
 //   Constructs an element in-place at a given position.
 //   (public member function)
+
+template<typename T>
+template< class... Args >
+typename Vector<T>::iterator Vector<T>::emplace(const_iterator pos, Args&&... args){
+
+    size_type idx = pos - begin();
+
+    if (size_ + 1 > capacity_){
+    double_the_capacity();
+    }
+
+    for (size_type i = size_; i > idx; --i){
+        array[i] = std::move(array[i - 1]);
+    }
+
+    // 4) construct the new T in-place
+    new (&array[idx]) T(std::forward<Args>(args)...);
+
+    ++size_;
+    return array + idx;
+}
 
 // erase
 //   Removes the element at a given position (or a range of elements).
@@ -250,18 +295,19 @@ void Vector<T>::push_back(T &&value)
 // emplace_back (C++11)
 //   Constructs an element in-place at the end of the vector.
 //   (public member function)
-
-// append_range (C++23)
-//   Appends a range of elements [first, last) to the end of the vector.
-//   (public member function)
+template<typename T>
+template< class... Args >
+typename Vector<T>::reference Vector<T>::emplace_back(Args&&... args){
+    auto it = emplace(end(), std::forward<Args>(args)...);
+    return *it;
+}
 
 // pop_back
 //   Removes the last element from the vector.
 //   (public member function)
 template <typename T>
-void Vector<T>::pop_back()
-{
-    array[size_].~T();
+void Vector<T>::pop_back(){
+    array[size_ - 1].~T();
     --size_;
 }
 
