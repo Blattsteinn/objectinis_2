@@ -78,6 +78,48 @@ class Vector {
         return *this;
      }
 
+
+// ----- Non-member functions 
+     bool operator==(const Vector& other) const {
+        if (size_ != other.size_) return false;
+
+        return std::equal(begin(), end(), 
+                  other.begin(), other.end());
+     }
+
+     bool operator!=(const Vector& other) const {
+        return !(other == *this);
+     }
+
+     bool operator>(const Vector& other) const {   // is *this > other?
+        //Return value  
+        // true if the first range is lexicographically less than the second, otherwise false.  
+        // Note: always uses < (so it's -  other < this)
+       return std::lexicographical_compare(other.begin(), other.end(),   // first range  (other)
+                                           begin(), end());              // second range (*this)
+     }
+
+    bool operator>=(const Vector& other) const {
+        return !std::lexicographical_compare(begin(),      end(),
+                                             other.begin(), other.end()
+        );
+    }
+
+    bool operator<(const Vector& other) const {
+       return std::lexicographical_compare(begin(), end(), 
+                                           other.begin(), other.end());
+     }
+
+     bool operator<=(const Vector& other) const {
+        return !std::lexicographical_compare(other.begin(), other.end(),
+                                             begin(), end());
+    }
+    
+
+    
+
+
+
 // ----- Element access
     // ----- at()
     constexpr reference at(size_type pos);

@@ -4,17 +4,28 @@
 int main(){
     cout << "This is v3.0" << endl;
 
-    Vector<int> v;
-    v.push_back(14);
-    for(int i = 0; i < 5; i++){
-        v.push_back(i+2);
-    }
+    const int n = 5;
+    int A1[n] = {10, 4, 7, 8, 9};
+    int A2[n] = {9, 3, 5, 4, 8};
 
-    for(int i = 0; i < v.size(); i++){
-        cout << v[i] << " ";
+    Vector<int> v1(A1, A1+n);
+    Vector<int> v2(A2, A2+n);
+
+    // V1
+    for(int i=0; i < v1.size(); i++){
+        cout << v1[i] << " ";
     } cout << endl;
 
-    cout << v.back();
+    
+    // V2
+    for(int i=0; i < v2.size(); i++){
+        cout << v2[i] << " ";
+    } cout << endl;
+
+    if(v1 > v2){
+        cout << "v1 is bigger!" << endl;
+    }
+
 
 
     return 0;
