@@ -11,19 +11,72 @@ class Vector {
     public:
     using size_type = std::size_t;
 
+    using reference       = T&;
+    using const_reference = const T&;
+
     // iterator types
     using iterator       = T*;
     using const_iterator = const T*;
-
     using reverse_iterator       = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 
-    using reference       = T&;
-    using const_reference = const T&;
-
-
     void double_the_capacity();
+
+// ----- rule-of-five
+    // ---- Copy constructor
+    Vector(const Vector& other)
+      : array(other.size_ ? new T[other.size_] : nullptr),
+        size_(other.size_),
+        capacity_(other.capacity_)
+    {
+        for (size_t i = 0; i < size_; ++i) {
+            array[i] = other.array[i];
+        }
+    }
+
+    // ---- Move constructor
+    Vector(Vector&& other)  noexcept
+      : array(other.array),
+        size_(other.size_),
+        capacity_(other.capacity_)
+    {
+        other.array    = nullptr;
+        other.size_    = 0;
+        other.capacity_= 0;
+    }
+
+    // ---- Copy assignment operator
+    Vector& operator=(const Vector& other) {
+        if (this != &other) {
+
+            T* new_array = other.capacity_ ? new T[other.capacity_] : nullptr;
+            for (size_t i = 0; i < other.size_; ++i) {
+                new_array[i] = other.array[i];
+            }
+            delete [] array;
+
+            array     = new_array;
+            size_     = other.size_;
+            capacity_ = other.capacity_;
+        }
+        return *this;
+    }
+
+     // ---- Move assignment operator
+     Vector& operator=(Vector&& other) noexcept {
+        if(&other != this){
+            delete[] array;
+            array = other.array;
+            size_ = other.size_;
+            capacity_ = other.capacity_;
+
+            other.array    = nullptr;
+            other.size_    = 0;
+            other.capacity_= 0;
+        }
+        return *this;
+     }
 
 // ----- Element access
     // ----- at()
@@ -91,20 +144,17 @@ class Vector {
     constexpr void clear() noexcept;
 
     // ---- insert() ----
-    void insert(const_iterator pos, const T& value);
-    void insert(const_iterator pos, T&& value);  
-    void insert(const_iterator pos, size_type count, const T& value);
-    // template<typename InputIt, typename = std::enable_if_t<!std::is_integral<InputIt>::value>>
-    // void Vector<T>::insert(const_iterator pos, InputIt first, InputIt last);          // <---- raketu mokslas
-    void insert(const_iterator pos, std::initializer_list<T> ilist); // <---- raketu mokslas
+    constexpr iterator insert(const_iterator pos, const T& value);
+    constexpr iterator insert(const_iterator pos, T&& value);  
+    constexpr iterator insert(const_iterator pos, size_type count, const T& value);
+    template<class InputIt>
+    constexpr iterator insert(const_iterator pos, InputIt first, InputIt last);
+    constexpr iterator insert(const_iterator pos, std::initializer_list<T> ilist); // <---- raketu mokslas
 
-    // ---- insert_range() ----  <------------ TO DO
-        //template< container-compatible-range<T> R >
-        //constexpr iterator insert_range( const_iterator pos, R&& rg );
-
-    // ---- emplace() ----  <------------ TO DO
-        //template< class... Args >
-        //iterator emplace( const_iterator pos, Args&&... args );
+    // ---- insert_range() ---- c++ 23
+    // ---- emplace() ----
+    template< class... Args >
+    iterator emplace(const_iterator pos, Args&&... args);
 
     // ---- erase() ----
     iterator erase(iterator pos);
@@ -116,12 +166,11 @@ class Vector {
     void push_back(const T& value);
     void push_back( T&& value );
 
-    // ---- emplace_back() ----  <------------ TO DO
-     /// empty
+    // ---- emplace_back() ----
+    template< class... Args >
+    reference emplace_back( Args&&... args );
 
-    // ---- append_range() ----  <------------ TO DO
-     /// empty
-
+    // ---- append_range() ----  c++ 23
     // ---- pop_back() ----
     void pop_back();
     
@@ -132,6 +181,7 @@ class Vector {
     // ---- swap() ----
     void swap( Vector& other ) noexcept;
 // ----------------------------------------------------------------------------
+
     // Default Constructor
     Vector() : array(nullptr), size_(0), capacity_(0)
         {}
