@@ -41,7 +41,7 @@ constexpr typename Vector<T>::const_reference Vector<T>::front() const{
 template<typename T>
 constexpr typename Vector<T>::reference Vector<T>::back(){
     if (empty()) {
-        throw std::out_of_range("Vector::front(): empty vector");
+        throw std::out_of_range("Vector::back(): empty vector");
     }
     return *(end()-1);
 }

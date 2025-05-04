@@ -7,10 +7,12 @@
 
 #include <algorithm>   // for std::move_backward, std::copy
 #include <iterator>    // for std::distance
-#include <type_traits> // for std::enable_if_t, std::is_integral
 #include <ranges>
-
+#include <ostream>
+#include <cassert>
 
 using std::cout;
 using std::endl;
 using std::swap;
+
+#include <type_traits> // for std::enable_if_t, std::is_integral

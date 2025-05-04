@@ -33,6 +33,9 @@ constexpr typename Vector<T>::size_type Vector<T>::max_size() const noexcept {
 // (public member function)
 template<typename T>
 constexpr void Vector<T>::reserve(size_type n) {
+    //if (n > max_size()){
+   //     throw std::length_error; }
+
     if (n <= capacity_)
         return;
     
@@ -58,14 +61,20 @@ constexpr typename Vector<T>::size_type Vector<T>::capacity() const noexcept {
 // reduces memory usage by freeing unused memory
 // (public member function)
 template<typename T>
-constexpr void Vector<T>::shrink_to_fit(){
+void Vector<T>::shrink_to_fit(){
         if (capacity_ == size_) 
         return;   // nothing to shrink
 
     T* newArray = new T[size_];
 
-    for (size_type i = 0; i < size_; ++i) {
-        newArray[i] = std::move(array[i]);
+    
+    try {
+        for (size_type i = 0; i < size_; ++i) {
+            newArray[i] = std::move(array[i]);
+        }
+    } catch (...) {
+        delete[] newArray;
+        throw;
     }
 
     delete[] array;

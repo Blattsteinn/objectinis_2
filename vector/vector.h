@@ -1,6 +1,8 @@
 // Vector.h
 #pragma once
 
+#include "my_library.h"
+
 template<typename T>
 class Vector {
     private:
@@ -23,76 +25,68 @@ class Vector {
 
     void double_the_capacity();
 
-// ----- rule-of-five
-    // ---- Copy constructor
-    Vector(const Vector& other)
-      : array(other.size_ ? new T[other.size_] : nullptr),
-        size_(other.size_),
-        capacity_(other.capacity_)
+// ----- Constructors
+
+    Vector() : array(nullptr), size_(0), capacity_(0)
+        {}
+
+    Vector(size_type count, const T& value = T())
+    : array(new T[count]), size_(count), capacity_(count)
     {
-        for (size_t i = 0; i < size_; ++i) {
-            array[i] = other.array[i];
-        }
+        for (size_type i = 0; i < count; ++i)
+        array[i] = value;
     }
 
-    // ---- Move constructor
-    Vector(Vector&& other)  noexcept
-      : array(other.array),
-        size_(other.size_),
-        capacity_(other.capacity_)
+    template<typename InputIt, typename = std::enable_if_t<!std::is_integral<InputIt>::value>>
+    Vector(InputIt first, InputIt last)
+        : array(nullptr), size_(0), capacity_(0)
     {
-        other.array    = nullptr;
-        other.size_    = 0;
-        other.capacity_= 0;
+        size_type count = static_cast<size_type>(last - first);
+        reserve(count);
+        for (size_type i = 0; i < count; ++i)
+        array[i] = first[i];
+        size_ = count;
     }
+
+ // ----- Destructor
+    ~Vector() { delete[] array;}  
+
+// ----- Member functions in "vector_memberFunctions.h"
+
+    // ---- Copy constructor
+    Vector(const Vector& other);
+    // ---- Move constructor
+    Vector(Vector&& other)  noexcept;
+
+    // -- initializer_list
+    Vector(std::initializer_list<T> ilist);
+    Vector& operator=(std::initializer_list<T> ilist);
 
     // ---- Copy assignment operator
-    Vector& operator=(const Vector& other) {
-        if (this != &other) {
+    Vector& operator=(const Vector& other);
 
-            T* new_array = other.capacity_ ? new T[other.capacity_] : nullptr;
-            for (size_t i = 0; i < other.size_; ++i) {
-                new_array[i] = other.array[i];
-            }
-            delete [] array;
+    // ---- Move assignment operator
+    Vector& operator=(Vector&& other) noexcept;
 
-            array     = new_array;
-            size_     = other.size_;
-            capacity_ = other.capacity_;
-        }
-        return *this;
-    }
-
-     // ---- Move assignment operator
-     Vector& operator=(Vector&& other) noexcept {
-        if(&other != this){
-            delete[] array;
-            array = other.array;
-            size_ = other.size_;
-            capacity_ = other.capacity_;
-
-            other.array    = nullptr;
-            other.size_    = 0;
-            other.capacity_= 0;
-        }
-        return *this;
-     }
-
+     // ---- assign
+    void assign(size_type count, const T& value);
+    template<class InputIt, typename = std::enable_if_t<!std::is_integral<InputIt>::value>>
+    void assign(InputIt first, InputIt last);
+    void assign(std::initializer_list<T> ilist);
 
 // ----- Non-member functions 
-     bool operator==(const Vector& other) const {
+    bool operator==(const Vector& other) const {
         if (size_ != other.size_) return false;
 
         return std::equal(begin(), end(), 
                   other.begin(), other.end());
      }
 
-     bool operator!=(const Vector& other) const {
+    bool operator!=(const Vector& other) const {
         return !(other == *this);
      }
 
-     bool operator>(const Vector& other) const {   // is *this > other?
-        //Return value  
+    bool operator>(const Vector& other) const {
         // true if the first range is lexicographically less than the second, otherwise false.  
         // Note: always uses < (so it's -  other < this)
        return std::lexicographical_compare(other.begin(), other.end(),   // first range  (other)
@@ -110,17 +104,14 @@ class Vector {
                                            other.begin(), other.end());
      }
 
-     bool operator<=(const Vector& other) const {
+    bool operator<=(const Vector& other) const {
         return !std::lexicographical_compare(other.begin(), other.end(),
                                              begin(), end());
     }
     
 
-    
+// ----- Element access in "vector_elementAccess.h"
 
-
-
-// ----- Element access
     // ----- at()
     constexpr reference at(size_type pos);
     constexpr const_reference at(size_type pos) const;
@@ -159,8 +150,8 @@ class Vector {
     constexpr const_reverse_iterator rend()   const noexcept { return const_reverse_iterator(begin()); }
     constexpr const_reverse_iterator crend()   const noexcept { return const_reverse_iterator(begin()); }
 
-// ------------------------------------ Capacity ------------------------------
-    // in "vector_capacity.h"
+// ----- Capacity, in "vector_capacity.h"
+
     // ---- empty() ----
     constexpr bool empty() const noexcept;
 
@@ -177,23 +168,22 @@ class Vector {
     constexpr size_type capacity() const noexcept;
 
     // ----- shrink_to_fit() ----
-    constexpr void shrink_to_fit();
+    void shrink_to_fit();
 
-// ------------------------------------ Modifiers ------------------------------
-    // in "vector_modifiers.h"
+// ----- Modifiers, in "vector_modifiers.h"
 
     // ---- clear() ----
     constexpr void clear() noexcept;
 
     // ---- insert() ----
-    constexpr iterator insert(const_iterator pos, const T& value);
-    constexpr iterator insert(const_iterator pos, T&& value);  
-    constexpr iterator insert(const_iterator pos, size_type count, const T& value);
-    template<class InputIt>
-    constexpr iterator insert(const_iterator pos, InputIt first, InputIt last);
-    constexpr iterator insert(const_iterator pos, std::initializer_list<T> ilist); // <---- raketu mokslas
+    iterator insert(const_iterator pos, const T& value);
+    iterator insert(const_iterator pos, T&& value);  
+    iterator insert(const_iterator pos, size_type count, const T& value);
+    template<class InputIt, typename = std::enable_if_t<!std::is_integral<InputIt>::value>>
+    iterator insert(const_iterator pos, InputIt first, InputIt last);
+    iterator insert(const_iterator pos, std::initializer_list<T> ilist); // <---- raketu mokslas
 
-    // ---- insert_range() ---- c++ 23
+    // ---- insert_range() ---- c++ 23 (not doing)
     // ---- emplace() ----
     template< class... Args >
     iterator emplace(const_iterator pos, Args&&... args);
@@ -212,7 +202,7 @@ class Vector {
     template< class... Args >
     reference emplace_back( Args&&... args );
 
-    // ---- append_range() ----  c++ 23
+    // ---- append_range() ----  c++ 23 (not doing)
     // ---- pop_back() ----
     void pop_back();
     
@@ -223,49 +213,23 @@ class Vector {
     // ---- swap() ----
     void swap( Vector& other ) noexcept;
 // ----------------------------------------------------------------------------
-
-    // Default Constructor
-    Vector() : array(nullptr), size_(0), capacity_(0)
-        {}
-
-    // Vector<int> v2(5, 42);    // size() == 5, capacity() == 5
-    // prints: 42 42 42 42 42 
-    Vector(size_type count, const T& value = T())
-    : array(new T[count]), size_(count), capacity_(count)
-    {
-        for (size_type i = 0; i < count; ++i)
-        array[i] = value;
-    }
-
-
-    template<
-    typename InputIt,
-    typename = std::enable_if_t<!std::is_integral<InputIt>::value>
-    >
-    Vector(InputIt first, InputIt last)
-        : array(nullptr), size_(0), capacity_(0)
-    {
-        size_type count = static_cast<size_type>(last - first);
-        reserve(count);
-        for (size_type i = 0; i < count; ++i)
-        array[i] = first[i];
-        size_ = count;
-    }
-
-    // Destructor
-    ~Vector() {
-        delete[] array;
-        }    
-
-    // (implement Rule of Five)
-    // Vector(const Vector&) = delete;
-    // Vector& operator=(const Vector&) = delete;
-    // Vector(Vector&&) noexcept = delete;
-    // Vector& operator=(Vector&&) noexcept = delete;
-    
+   
 };
 
 #include "Vector_impl.h"
 #include "vector_modifiers.h"
 #include "vector_capacity.h"
 #include "vector_elementAccess.h"
+#include "vector_memberFunctions.h"
+
+
+// operator << )debugging_
+template<typename U>
+std::ostream& operator<<(std::ostream& os, const Vector<U>& v) {
+  os << '[';
+  for (size_t i = 0; i < v.size(); ++i) {
+    if (i) os << ", ";
+    os << v[i];
+  }
+  return os << ']';
+}
