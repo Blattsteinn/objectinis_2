@@ -25,21 +25,21 @@
 
     /// \brief Print all students to the console.
     /// \param studentas Vector of Studentas objects to print.
-    void print_students(vector<Studentas> &studentas);
+    void print_students(Vector<Studentas> &studentas);
 
     /// \brief Insert a student into the list.
     /// \param student_list Vector to append to.
     /// \param student      Studentas instance to add.
-    void insert_student(vector<Studentas> &student_list, Studentas &student);
+    void insert_student(Vector<Studentas> &student_list, Studentas &student);
 
     /// \brief Sort students by default criterion.
     /// \param student_list Vector of students to sort.
-    void sort_students(vector<Studentas> &student_list);
+    void sort_students(Vector<Studentas> &student_list);
 
     /// \brief Sort students by a specific choice.
     /// \param student_list Vector of students to sort.
     /// \param choice       Criterion identifier.
-    void sort_students(vector<Studentas> &student_list, int choice);
+    void sort_students(Vector<Studentas> &student_list, int choice);
 
     // ---------------------------
     /// \brief User input routines (program_choice.cpp)
@@ -63,7 +63,7 @@
 
     /// \brief Generate a random list of grades.
     /// \return Vector of random float grades.
-    vector<float> random_grade();
+    Vector<float> random_grade();
 
     /// \brief Generate a random first name.
     /// \return Random name string.
@@ -91,6 +91,8 @@
     // ---------------------------
     /// \brief Testing routines (testing.cpp)
 
+    void testing_v3__1();
+    void testing_v3__2();
     /// \brief Run test suite v1.2.
     void testing_v12();
 
