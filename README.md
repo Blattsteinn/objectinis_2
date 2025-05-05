@@ -57,7 +57,8 @@ This program is a student grade management system that handles input, random dat
 Full test results can be found here - excel file...
 # Test 1
 ### Objective
-Measure and compare the performance of element insertion (`push_back`) into `std::vector<int>` versus a custom `Vector<int>` implementation across exponentially increasing sizes (from 10⁴ to 10⁹), in order to quantify overhead and scalability differences.
+Measure and compare the performance of element insertion (`push_back`) into `std::vector<int>` versus a custom `Vector<int>` implementation across exponentially increasing sizes (from 10⁴ to 10⁹), in order to quantify overhead and scalability differences. 
+Function: `void testing3__1()`
 
 ## Test results (average)
 | sz            | avg std::vector time (s) | avg Vector<T> time (s) | avg difference (s)   |
@@ -71,3 +72,16 @@ Measure and compare the performance of element insertion (`push_back`) into `std
 
 
 # Test 2
+### Objective
+Compare how many times the containers (`std::vector` and `Vector<T>`) in version V1.5 reallocate memory when filling 100,000,000 elements. A reallocation occurs when `capacity() == size()`, i.e., when there is no room for new elements. 
+Function: `void testing3__2()`
+
+## Test results (Vector<T> matches std::vector)
+
+| Size       | `std::vector` growths | `Vector<T>` growths | Difference |
+|------------|-----------------------:|---------------------:|-----------:|
+| 100,000,000 |                     30 |                  30 |          30|
+
+
+![image](https://github.com/user-attachments/assets/397800c3-2dbf-467f-bc10-5e5f75f3e003)
+
