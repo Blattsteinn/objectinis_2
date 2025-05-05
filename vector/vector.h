@@ -1,7 +1,7 @@
 // Vector.h
 #pragma once
 
-#include "my_library.h"
+#include "vector_Library.h"
 
 template<typename T>
 class Vector {
@@ -17,7 +17,7 @@ class Vector {
     using const_reference = const T&;
 
     // iterator types
-    using iterator       = T*;
+    using iterator               = T*;
     using const_iterator = const T*;
     using reverse_iterator       = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
