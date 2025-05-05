@@ -85,3 +85,17 @@ Function: `void testing3__2()`
 
 ![image](https://github.com/user-attachments/assets/397800c3-2dbf-467f-bc10-5e5f75f3e003)
 
+# Test 3
+### Objective
+Benchmark the time taken by `std::vector` vs `Vector<T>` to read student records from a .txt file, sort them (including median and average calculations), and write the results to an output file.
+
+## Average test results of Vector<T> (done 5x times)
+| Filename   | Reading   | Sorting    | Printing to file | Overall time (s) |
+|------------|-----------|------------|------------------|------------------|
+| 100 000    | 1.325898  | 0.00923818 | 0.09424762       | 1.4293838        |
+| 1 000 000  | 13.58962  | 0.04733822 | 0.9282586        | 14.56521682      |
+| 10 000 000 | 143.4926  | 0.4389946  | 10.38386         | 154.3154546      |
+
+
+
+
