@@ -1,7 +1,7 @@
 // vector_capacity.h
 #pragma once
 
-#include "vector_Library.h"
+#include "vector_library.h"
 
 // empty
 // checks whether the container is empty
@@ -57,7 +57,6 @@ constexpr typename Vector<T>::size_type Vector<T>::capacity() const noexcept {
 }
 
 // shrink_to_fit
-// (DR*)
 // reduces memory usage by freeing unused memory
 // (public member function)
 template<typename T>

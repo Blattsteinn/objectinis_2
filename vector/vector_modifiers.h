@@ -1,7 +1,7 @@
 // vector_modifiers.h
 #pragma once
 
-#include "vector_Library.h"
+#include "vector_library.h"
 
 // --------------------  MODIFIERS  --------------------
 // clear
@@ -47,7 +47,7 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, const T &valu
     return array + idx;
 }
 
-// 2) Inserts value before pos, possibly using move semantics.
+// 2) Inserts value before pos, using move
 template <typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, T &&value){
     size_type idx = pos - begin();

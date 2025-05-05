@@ -1,14 +1,14 @@
 // vector_impl.h
 #pragma once
 
-#include "vector_Library.h"
+#include "vector_library.h"
 
 template<typename T>
 void Vector<T>::double_the_capacity() {
-    // 1) Compute new capacity (at least 1, then ×2)
+    // Compute new capacity
     size_type newCap = std::max<size_type>(size_type(1), capacity_ * 2);
 
-    // 2) Allocate raw, uninitialized memory
+    // Allocate uninitialized memory
     T* new_array = static_cast<T*>(
         ::operator new[](newCap * sizeof(T))
     );
@@ -20,7 +20,7 @@ void Vector<T>::double_the_capacity() {
             new (&new_array[i]) T(std::move(array[i]));
         }
     } catch (...) {
-        // Rollback: destroy what we did manage to construct, then free
+        // Destroys what we did, then frees
         for (size_type j = 0; j < i; ++j) {
             new_array[j].~T();
         }
@@ -28,13 +28,12 @@ void Vector<T>::double_the_capacity() {
         throw;
     }
 
-    // 4) All moves succeeded → destroy old objects
+    // If succeess --> destroy old objects & free  old memory and commit the new one
     for (size_type j = 0; j < size_; ++j) {
         array[j].~T();
     }
-
-    // 5) Free old buffer and commit the new one
     ::operator delete[](array);
+
     array     = new_array;
     capacity_ = newCap;
 }

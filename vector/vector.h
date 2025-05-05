@@ -1,7 +1,7 @@
 // Vector.h
 #pragma once
 
-#include "vector_Library.h"
+#include "vector_library.h"
 
 template<typename T>
 class Vector {
@@ -183,9 +183,9 @@ class Vector {
     iterator insert(const_iterator pos, size_type count, const T& value);
     template<class InputIt, typename = std::enable_if_t<!std::is_integral<InputIt>::value>>
     iterator insert(const_iterator pos, InputIt first, InputIt last);
-    iterator insert(const_iterator pos, std::initializer_list<T> ilist); // <---- raketu mokslas
+    iterator insert(const_iterator pos, std::initializer_list<T> ilist);
 
-    // ---- insert_range() ---- c++ 23 (not doing)
+    // ---- insert_range() ---- c++ 23 (no)
     // ---- emplace() ----
     template< class... Args >
     iterator emplace(const_iterator pos, Args&&... args);
@@ -204,7 +204,7 @@ class Vector {
     template< class... Args >
     reference emplace_back( Args&&... args );
 
-    // ---- append_range() ----  c++ 23 (not doing)
+    // ---- append_range() ----  c++ 23 (no)
     // ---- pop_back() ----
     void pop_back();
     

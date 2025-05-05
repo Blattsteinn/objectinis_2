@@ -1,7 +1,7 @@
 // vector_memberFunctions.h
 #pragma once
 
-#include "vector_Library.h"
+#include "vector_library.h"
 
 template<typename T>
 void Vector<T>::assign(size_type count, const T& value){
@@ -16,7 +16,7 @@ void Vector<T>::assign(size_type count, const T& value){
             new (&new_array[constructed]) T(value);
         }
     } catch (...) {
-        // Destroy exactly the ones we built
+        // If fails destroys what we did, then frees the memory
         for (size_type j = 0; j < constructed; ++j)
             new_array[j].~T();
         ::operator delete[](new_array);
@@ -60,12 +60,11 @@ Vector<T>::Vector(const Vector<T>& other)
 {
     size_type i = 0;
     try {
-        // placement‐new each element from 'other'
         for (; i < other.size_; ++i) {
             new (&array[i]) T(other.array[i]);
         }
     } catch (...) {
-        // if a constructor throws, roll back what we built
+        // If fails destroys what we did, then frees the memory
         for (size_type j = 0; j < i; ++j) {
             array[j].~T();
         }
@@ -85,8 +84,7 @@ Vector<T>::Vector(std::initializer_list<T> ilist)
     capacity_(ilist.size())
 {
     for (auto const &elem : ilist) {
-        push_back(elem);   // placement-new + size_++ under the hood
-    }
+        push_back(elem);}
 }
     
 template<typename T>
@@ -111,8 +109,8 @@ Vector<T>::Vector(Vector<T>&& other) noexcept
 template<typename T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
     if (this != &other) {
-        Vector tmp(other);   // invokes your fixed, placement-new copy-ctor
-        swap(tmp);           // noexcept swap of raw pointers + sizes
+        Vector tmp(other);
+        swap(tmp);
     }
     return *this;
 }

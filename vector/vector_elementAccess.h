@@ -1,7 +1,7 @@
 // vector_elementAccess.h
 #pragma once
 
-#include "vector_Library.h"
+#include "vector_library.h"
 
 // ----- at()
 template<typename T>
