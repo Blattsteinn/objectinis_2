@@ -4,6 +4,45 @@ This program is a student grade management system that handles input, random dat
 ## Improvements in Version 3.0:
 - introduced a custom implementation `Vector<T>` of `std::vector<T>`
 
+## Usage Examples
+
+```cpp
+#include <iostream>
+#include "Vector.h"
+
+using namespace std;
+
+int main() {
+    Vector<int> v{10, 20, 30};
+
+    // 1) Element access: at()
+    try {
+        cout << "v.at(1) = " << v.at(1) << endl; // prints 20
+    } catch (const std::out_of_range& e) {
+        cerr << e.what() << std::endl;
+    }
+
+    // 2) Modifiers: push_back()
+    v.push_back(40);
+    cout << "After push_back(40): " << v << endl; // [10, 20, 30, 40]
+
+    // 3) Modifiers: insert()
+    auto it = v.insert(v.begin() + 2, 25);
+    cout << "After insert 25 at pos 2: " << v << endl; // [10, 20, 25, 30, 40]
+    cout << "Inserted element = " << *it << endl;       // prints 25
+
+    // 4) Capacity control: reserve()
+    v.reserve(10);
+    cout << "Capacity after reserve(10): " << v.capacity() << std::endl;
+
+    // 5) Operators: copy assignment
+    Vector<int> u;
+    u = v;
+    cout << "Copied vector u: " << u << endl; // [10, 20, 25, 30, 40]
+
+    return 0;
+}
+
 # Installation and Launch Instructions:
 1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
 2) Download the repository containing the above files.
