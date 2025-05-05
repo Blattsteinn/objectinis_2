@@ -2,8 +2,7 @@
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
 ## Improvements in Version 3.0:
-
-[...]
+- introduced a custom implementation `Vector<T>` of `std::vector<T>`
 
 # Installation and Launch Instructions:
 1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
@@ -11,18 +10,6 @@ This program is a student grade management system that handles input, random dat
 3) Run `run.bat` to configure, build, and install the program.
 4) Launch the executable (`studentai`).
 
-# Documentation and Testing Instructions
-
-## 1) Generating Doxygen Documentation
-1. Install [Doxygen](https://www.doxygen.nl/download.html)  
-2. Open a command prompt in the project root (where `Doxyfile` is).
-3. Run `doxygen Doxyfile` to create 'Doxygen documentation' folder
-
-## 2) Running Unit Tests
-1. Open a command prompt in the **Unit testing** folder  
-2. Run `test.bat`. This will create a build folder, configure and compile the tests into `runTests.exe`.
-3. Run `runTests.exe` or open command prompt where `runTests.exe` is and run `runTests.exe -s` for more detailed tests.
-   
 # Overridden methods:
 ### I/O methods for class `Studentas`:
 - `operator>>` prompts users for names, grades, and exam scores
@@ -45,22 +32,21 @@ This program is a student grade management system that handles input, random dat
 - v1.5- introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. `Studentas` now inherits from `Human`. No Human objects can be instantiated.
 - v2.0 - generated doxygen Documentation, created unit tests
   
-# V3.0 testing 
+# V3.0 benchmarks 
 
-### Testing system parameters:
+### System parameters:
 - Operating System: Windows 11
 - Compiler: g++ 14.2.0 (MinGW)
 - Processor: AMD Ryzen 7 8845HS (3.80 GHz, 8 Cores, 16 Threads)
 - Memory: 16 GB DDR5
 - Storage: 1TB NVMe SSD
 
-Full test results can be found here - excel file...
-# Test 1
-### Objective
-Measure and compare the performance of element insertion (`push_back`) into `std::vector<int>` versus a custom `Vector<int>` implementation across exponentially increasing sizes (from 10⁴ to 10⁹), in order to quantify overhead and scalability differences. 
-Function: `void testing3__1()`
+Full results can be found here - excel file...
 
-## Test results (average)
+# Benchmark test 1
+Compares the time to push_back() integers from 10⁴ to 10⁹ into `std::vector<int>` vs a custom `Vector<int>`
+
+## Results (average)
 | sz            | avg std::vector time (s) | avg Vector<T> time (s) | avg difference (s)   |
 |--------------:|-------------------------:|-----------------------:|---------------------:|
 |      10,000   |                0.0002125 |              0.0000734 |            -0.0001391 |
@@ -71,12 +57,26 @@ Function: `void testing3__1()`
 |1,000,000,000  |                2.0946560 |              2.3812340 |             0.2865781 |
 
 
-# Test 2
-### Objective
-Compare how many times the containers (`std::vector` and `Vector<T>`) in version V1.5 reallocate memory when filling 100,000,000 elements. A reallocation occurs when `capacity() == size()`, i.e., when there is no room for new elements. 
-Function: `void testing3__2()`
+# Benchmark test 2
+Measure (s) the time taken by `std::vector` vs `Vector<T>` to read student records from a .txt file, sort them (calculate median and average), and write the results to an output file.
 
-## Test results (Vector<T> matches std::vector)
+## Average test results of Vector<T> (done 5x times)
+| Filename   | Reading   | Sorting    | Printing to file | Overall time (s) |
+|------------|-----------|------------|------------------|------------------|
+| 100 000    | 1.325898  | 0.00923818 | 0.09424762       | 1.4293838        |
+| 1 000 000  | 13.58962  | 0.04733822 | 0.9282586        | 14.56521682      |
+| 10 000 000 | 143.4926  | 0.4389946  | 10.38386         | 154.3154546      |
+
+## Average test results of std::vector<T> (done 5x times)
+| Filename   | Reading   | Sorting     | Printing to file | Overall time (s) |
+|------------|-----------|-------------|------------------|------------------|
+| 100 000    | 1.292616  | 0.00446054  | 0.1227304        | 1.41980694       |
+| 1 000 000  | 13.70252  | 0.03302834  | 1.273494         | 15.00904234      |
+| 10 000 000 | 141.0708  | 0.4732446   | 14.51076         | 156.0548046      |
+
+# Reallocation
+When comparing how many times the containers (`std::vector` and `Vector<T>`) reallocate in version V1.5, we see that Vector<T> matches std::vector
+Function: `void testing3__2()`
 
 | Size       | `std::vector` growths | `Vector<T>` growths | Difference |
 |------------|-----------------------:|---------------------:|-----------:|
@@ -85,16 +85,6 @@ Function: `void testing3__2()`
 
 ![image](https://github.com/user-attachments/assets/397800c3-2dbf-467f-bc10-5e5f75f3e003)
 
-# Test 3
-### Objective
-Benchmark the time taken by `std::vector` vs `Vector<T>` to read student records from a .txt file, sort them (including median and average calculations), and write the results to an output file.
-
-## Average test results of Vector<T> (done 5x times)
-| Filename   | Reading   | Sorting    | Printing to file | Overall time (s) |
-|------------|-----------|------------|------------------|------------------|
-| 100 000    | 1.325898  | 0.00923818 | 0.09424762       | 1.4293838        |
-| 1 000 000  | 13.58962  | 0.04733822 | 0.9282586        | 14.56521682      |
-| 10 000 000 | 143.4926  | 0.4389946  | 10.38386         | 154.3154546      |
 
 
 
