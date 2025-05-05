@@ -9,7 +9,7 @@ int main(){
     int program_choice{};
     int strategy_choice{};
 
-    cout << "This is v2.0!" << endl;
+    cout << "This is v3.0!" << endl;
 
     while(true){ 
         
