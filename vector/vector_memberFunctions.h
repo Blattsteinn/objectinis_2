@@ -6,19 +6,28 @@
 template<typename T>
 void Vector<T>::assign(size_type count, const T& value){
 
-    T* new_array = count ? new T[count] : nullptr;
+    T* new_array = static_cast<T*>(
+        ::operator new[](count * sizeof(T))
+    );
 
+    size_type constructed = 0;
     try {
-        // if this throws, catch below
-        for (size_type i = 0; i < count; ++i) {
-            new_array[i] = value;
+        for (; constructed < count; ++constructed) {
+            new (&new_array[constructed]) T(value);
         }
     } catch (...) {
-        delete[] new_array;
+        // Destroy exactly the ones we built
+        for (size_type j = 0; j < constructed; ++j)
+            new_array[j].~T();
+        ::operator delete[](new_array);
         throw;
     }
 
-    delete[] array;
+    for (size_type j = 0; j < size_; ++j) {
+        array[j].~T();
+    }
+    ::operator delete[](array);
+
     array     = new_array;
     size_     = count;
     capacity_ = count;
@@ -27,25 +36,12 @@ void Vector<T>::assign(size_type count, const T& value){
 template<typename T>
 template<typename InputIt, typename>
 void Vector<T>::assign(InputIt first, InputIt last){
-    auto count = last - first;
+    for (size_type i = 0; i < size_; ++i)
+    array[i].~T();
 
-    T* new_array = count ? new T[count] : nullptr;
-
-    try {
-        for(size_type i = 0; first != last; ++first, ++i){
-            new_array[i] = *first;
-        }
-
-    } catch (...) {
-        delete[] new_array;
-        throw;
-    }
-
-
-    delete[] array;
-    array     = new_array;
-    size_     = count;
-    capacity_ = count;
+    size_ = 0;
+    for (; first != last; ++first)
+        push_back(*first);
 }
 
 template<typename T>
@@ -56,40 +52,46 @@ void Vector<T>::assign(std::initializer_list<T> ilist){
 // ---- Copy constructor
 template<typename T>
 Vector<T>::Vector(const Vector<T>& other)
-    : array(other.capacity_ ? new T[other.capacity_] : nullptr),
-    size_(other.size_),
-    capacity_(other.capacity_)
-    {
-        for (size_t i = 0; i < size_; ++i) {
-            array[i] = other.array[i];
+    : array(other.capacity_ 
+            ? static_cast<T*>(::operator new[](other.capacity_ * sizeof(T)))
+            : nullptr),
+      size_(other.size_),
+      capacity_(other.capacity_)
+{
+    size_type i = 0;
+    try {
+        // placement‐new each element from 'other'
+        for (; i < other.size_; ++i) {
+            new (&array[i]) T(other.array[i]);
         }
+    } catch (...) {
+        // if a constructor throws, roll back what we built
+        for (size_type j = 0; j < i; ++j) {
+            array[j].~T();
+        }
+        ::operator delete[](array);
+        throw;
     }
+}
 
 
 // --- initializer_list
 template<typename T>
 Vector<T>::Vector(std::initializer_list<T> ilist)
-        : array(ilist.size() ? new T[ilist.size()] : nullptr),
-        size_(ilist.size()),
-        capacity_(ilist.size())
-    {
-        auto pos = ilist.begin();
-        for (size_t i = 0; pos < ilist.end(); ++i, ++pos) {
-            array[i] = *pos;
-        }
+  : array(ilist.size()
+            ? static_cast<T*>(::operator new[](ilist.size() * sizeof(T)))
+            : nullptr),
+    size_(0),
+    capacity_(ilist.size())
+{
+    for (auto const &elem : ilist) {
+        push_back(elem);   // placement-new + size_++ under the hood
     }
+}
     
 template<typename T>
 Vector<T>& Vector<T>::operator=(std::initializer_list<T> ilist){
-    array = ilist.size() ? new T[ilist.size()] : nullptr;
-    size_ = ilist.size();
-    capacity_ = ilist.size();
-
-    auto pos = ilist.begin();
-    for (size_t i = 0; pos < ilist.end(); ++i, ++pos) {
-        array[i] = *pos;
-    }
-
+    assign(ilist);
     return *this;
 }
 
@@ -109,25 +111,10 @@ Vector<T>::Vector(Vector<T>&& other) noexcept
 template<typename T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
     if (this != &other) {
-
-        T* new_array = other.capacity_ ? new T[other.capacity_] : nullptr;
-
-    try {    
-        for (size_t i = 0; i < other.size_; ++i) {
-            new_array[i] = other.array[i];
-            }
-    } catch (...) {
-        delete[] new_array;
-        throw;
+        Vector tmp(other);   // invokes your fixed, placement-new copy-ctor
+        swap(tmp);           // noexcept swap of raw pointers + sizes
     }
-    
-        delete [] array;
-        array     = new_array;
-        size_     = other.size_;
-        capacity_ = other.capacity_;
-    }
-
-        return *this;
+    return *this;
 }
 
 // ---- Move assignment operator

@@ -1,7 +1,7 @@
 // vector_modifiers.h
 #pragma once
 
-#include "vector.h"
+#include "vector_Library.h"
 
 // --------------------  MODIFIERS  --------------------
 // clear
@@ -307,22 +307,20 @@ Vector<T>::erase(const_iterator first, const_iterator last)
 //   (public member function)
 template <typename T>
 void Vector<T>::push_back(const T &value){
-    if (size_ == capacity_)
-    {
+    if (size_ == capacity_){
         Vector::double_the_capacity();
     }
-    array[size_] = value;
+    new (&array[size_]) T(value);           // construct from const T&
     ++size_;
 }
 
 template <typename T>
 void Vector<T>::push_back(T &&value)
 {
-    if (size_ == capacity_)
-    {
+    if (size_ == capacity_){
         Vector::double_the_capacity();
     }
-    array[size_] = std::move(value);
+    new (&array[size_]) T(std::move(value)); // construct from T&&
     ++size_;
 }
 

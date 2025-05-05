@@ -32,18 +32,19 @@ constexpr typename Vector<T>::size_type Vector<T>::max_size() const noexcept {
 // (public member function)
 template<typename T>
 constexpr void Vector<T>::reserve(size_type n) {
-    //if (n > max_size()){
-   //     throw std::length_error; }
-
-    if (n <= capacity_)
+    if (n <= capacity_) 
         return;
-    
-    T* new_array = new T[n];
-    for (size_type i = 0; i < size_; ++i)
-        new_array[i] = array[i];
-    
-    delete[] array;
-    array = new_array;
+    T* new_array = static_cast<T*>(
+        ::operator new[](n * sizeof(T))
+    );
+
+    for (size_type i = 0; i < size_; ++i) {
+        new (&new_array[i]) T(std::move(array[i]));
+        array[i].~T();
+    }
+
+    ::operator delete[](array);
+    array     = new_array;
     capacity_ = n;
 }
 
@@ -64,19 +65,26 @@ void Vector<T>::shrink_to_fit(){
         if (capacity_ == size_) 
         return;   // nothing to shrink
 
-    T* newArray = new T[size_];
+        T* new_array = static_cast<T*>(
+            ::operator new[](size_ * sizeof(T))
+        );
 
     
     try {
         for (size_type i = 0; i < size_; ++i) {
-            newArray[i] = std::move(array[i]);
+            new (&new_array[i]) T(std::move(array[i]));
+            array[i].~T();
         }
     } catch (...) {
-        delete[] newArray;
+        for (size_type j = 0; j < size_; ++j) {
+            new_array[j].~T();
+        }
+        ::operator delete[](new_array);
         throw;
     }
 
-    delete[] array;
-    array     = newArray;
+    ::operator delete[](array);
+
+    array     = new_array;
     capacity_ = size_;
 }

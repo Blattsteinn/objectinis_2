@@ -31,25 +31,27 @@ class Vector {
         {}
 
     Vector(size_type count, const T& value = T())
-    : array(new T[count]), size_(count), capacity_(count)
+        : array(nullptr), size_(0), capacity_(0)
     {
-        for (size_type i = 0; i < count; ++i)
-        array[i] = value;
+        assign(count, value);
     }
 
     template<typename InputIt, typename = std::enable_if_t<!std::is_integral<InputIt>::value>>
     Vector(InputIt first, InputIt last)
         : array(nullptr), size_(0), capacity_(0)
-    {
-        size_type count = static_cast<size_type>(last - first);
-        reserve(count);
-        for (size_type i = 0; i < count; ++i)
-        array[i] = first[i];
-        size_ = count;
+    {  
+        for (; first != last; ++first) {
+            push_back(*first);
+        }
     }
 
  // ----- Destructor
-    ~Vector() { delete[] array;}  
+    ~Vector() { 
+        for (size_type i = 0; i < size_; ++i){
+            array[i].~T();
+        }
+    ::operator delete[](array);
+}  
 
 // ----- Member functions in "vector_memberFunctions.h"
 

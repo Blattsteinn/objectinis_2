@@ -196,7 +196,7 @@
                             if (!file) {
                                 throw "[Klaida] Failas neegzistuoja / neatsidaro.\n";
                             }
-                            
+                            cout << "size: ";
                             // Get file size and seek back to the beginning.
                             std::streamsize size = file.tellg();
                             file.seekg(0, ios::beg);
@@ -210,10 +210,10 @@
                                 throw "[Klaida] Skaitymo klaida!\n";
                             }
                     // ---------------------        
-                    
                     istringstream iss(content);  // Creates a stream for parsing the file
 
                     // ----- counts the amount of ND in the file ------
+
                             string header;
                             getline(iss, header);
                             istringstream headerStream(header);
