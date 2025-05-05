@@ -27,6 +27,85 @@ string consoleText_testing12() {
         return std::chrono::duration<double>(end - start).count();
     }
 
+    void iterpimo_testavimas(string file_name, vector <Studentas> &student_list, int i){
+           
+        double readingTime;
+        vector<Studentas> studentList;
+        fs::path full_path = fs::path("Archive") / file_name;      // Combine folder and file name
+
+        auto overall_start = std::chrono::high_resolution_clock::now();   /// <--- sparta pradedama skaiciuoti cia
+        try{
+            // ----- reading whole file into a string ------
+                    // Open the file in binary mode with the pointer at the end.
+                    ifstream file(full_path.string(), ios::binary | ios::ate);
+                    if (!file) {
+                        throw "[Klaida] Failas neegzistuoja / neatsidaro.\n";
+                    }
+                    
+                    // Get file size and seek back to the beginning.
+                    std::streamsize size = file.tellg();
+                    file.seekg(0, ios::beg);
+                    
+                    // Pre-allocate a string of the appropriate size.
+                    string content;
+                    content.resize(size);
+                    
+                    // Read the file content directly into the string.
+                    if (!file.read(&content[0], size)) {
+                        throw "[Klaida] Skaitymo klaida!\n";
+                    }
+            // ---------------------        
+            
+            istringstream iss(content);  // Creates a stream for parsing the file
+
+            // ----- counts the amount of ND in the file ------
+                    string header;
+                    getline(iss, header);
+                    istringstream headerStream(header);
+                    vector<string> words((std::istream_iterator<string>(headerStream)), std::istream_iterator<string>());
+                    if (words.size() < 3) {
+                        throw "[Klaida] Neteisinga failo antraste.";
+                    }
+                    // ND count is total words minus 3 (name, lastName, exam score)
+                    int ndCount = words.size() - 3;
+                 
+            // DO-HERE !!    1) count how long it takes to read the file.
+            readingTime = measureTime([&]() {
+                studentList = Studentas::read_student_records(ndCount, iss);
+            }); cout << "Reading time: " << readingTime << endl;
+            
+            // DO-HERE !! 
+            // 2) count how long it takes to sort and calculate median/average
+            readingTime = measureTime([&]() {
+                for( auto &student : studentList){
+                    student.calculate_everything();
+                }
+            }); cout << "Sorting and inserting students: " << readingTime << endl;
+                
+
+             // DO-HERE !!  
+             // 3) Inserting students into a vector  
+                readingTime = measureTime([&]() {
+                    for( auto &student : studentList){
+                        insert_student(student_list, student);
+                    }
+                }); cout << "Inserting students into a vector: " << readingTime << endl;
+            
+        } catch (const char* msg) {
+            cerr << msg << endl;
+        }
+        // DO-HERE !!    4) count how long it takes to print to the file.
+        readingTime = measureTime([&]() {
+            Studentas::print_to_file(studentList,  "rezultatai" + std::to_string(i) + ".txt");
+        }); cout << "Printing everything to a file: " << readingTime << endl;
+
+    auto overall_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> overall = overall_end - overall_start;
+    std::cout << "Overall reading time: " << overall.count() << "s" << std::endl;
+    cout << endl;
+}
+
+
  void testing_v12(){
         int strategy_choice;
     
