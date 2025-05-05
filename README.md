@@ -1,13 +1,9 @@
-# v2.0
+# v3.0
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
-## Improvements in Version 2.0:
+## Improvements in Version 3.0:
 
-### Doxygen Documentation
-A full API reference has been generated with Doxygen and is available under the Doxygen documentation folder. You’ll find both HTML and LaTeX folder and a compiled PDF. To regenerate the docs yourself, simply run `doxygen Doxyfile` from the project root.
-
-### Unit Testing
-Automated tests for the `Studentas` class and related code are located in the Unit testing folder. To build and execute them, launch `test.bat`, which creates a build directory and compiles the tests into `runTests.exe`. Running `runTests.exe` will check all test cases and report results.
+[...]
 
 # Installation and Launch Instructions:
 1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
@@ -47,40 +43,9 @@ Automated tests for the `Studentas` class and related code are located in the Un
 - v1.1 - transitioned from using structs to classes for better encapsulation and maintainability.
 - v1.2 - implementing the 'Rule of Five'. File handling logic, such as reading student records from files and exporting results, was encapsulated within the class. Added support for I/O methods via overloaded `>>` and `<<` operators.
 - v1.5- introduced an abstract class `Human` (pure virtual), encapsulating common attributes for people. `Studentas` now inherits from `Human`. No Human objects can be instantiated.
-
-# Testing 
-# V1.1 testing 
-
-### Objective
-Measure the efficiency of grouping student records into two distinct groups, and evaluate performance under various optimization levels (-O1, -O2, and -O3).
-
-In this test, a vector containing student records is split into two groups:
-- **Top-Performing Students:** Students whose average final score is 5 or above remain in the primary container.
-- **Underperforming Students:** Students whose average final score is below 5 are transferred to a separate container.
-
-The procedure involves:
-1. Sorting the student records in descending order based on their average final score.
-2. Removing students with scores below 5 from the primary container and adding them to a new container.
-
-At the end of the test, only top-performing students remain in the main container, while the underperforming students are in a separate container.
-
-## Test results
-
-Gouping performance using classes
-| File      | Average (-o1) | Average (-o2) | Average (-o3) |
-|-----------|---------------|---------------|---------------|
-| 100,000   | 0.00840548    | 0.0092536     | 0.00834536    |
-| 1,000,000 | 0.08980532    | 0.08771468    | 0.0799193     |
-| .exe size | 335KB         | 338KB         | 571KB         |
-
-Gouping performance using structs
-| File      | Average (-o1) | Average (-o2) | Average (-o3) |
-|-----------|---------------|---------------|---------------|
-| 100,000   | 0.0155993     | 0.01317164    | 0.01357718    |
-| 1,000,000 | 0.1269012     | 0.1168168     | 0.1159462     |
-| .exe size | 323KB         | 287KB         | 286KB         |
-
-Full test results can be found here - [Testavimas v1.1.xlsx](https://github.com/user-attachments/files/19428354/Testavimas.v1.1.xlsx)
+- v2.0 - generated doxygen Documentation, created unit tests
+  
+# V3.0 testing 
 
 ### Testing system parameters:
 - Operating System: Windows 11
@@ -89,87 +54,34 @@ Full test results can be found here - [Testavimas v1.1.xlsx](https://github.com/
 - Memory: 16 GB DDR5
 - Storage: 1TB NVMe SSD
 
-# V1.0 testing 
+Full test results can be found here - excel file...
+# Test 1
+### Objective
+Measure and compare the performance of element insertion (`push_back`) into `std::vector<int>` versus a custom `Vector<int>` implementation across exponentially increasing sizes (from 10⁴ to 10⁹), in order to quantify overhead and scalability differences. 
+Function: `void testing3__1()`
 
-# Container Performance Comparison (Vector, List, Deque)
-This analyzes how the choice of container (vector, list, deque)  affects program performance when managing student data under different grouping strategies. Performance metrics considered include memory efficiency and execution time (reading, sorting, grouping). The tests are conducted with varying file sizes, with 1,000; 10,000; 100,000; 1,000,000 & 10,000,000 students data.
-
-Full test results can be found here - [Test results.xlsx](https://github.com/user-attachments/files/19260760/Test.results.xlsx)
-
- You can change the container by opening my_library.h & editing the code (Look at V1.0). The default container is vector.
-
- - Average is calculated using the results of 5 different tests
- - Testing uses the same input files
-
-## 1st strategy 
-This strategy involves splitting a container of students into two new containers of the same type: one for "good" students and one for "bad" students. 
-
-In this approach, the same student is stored in two containers making it memory inefficient.
-
+## Test results (average)
+| sz            | avg std::vector time (s) | avg Vector<T> time (s) | avg difference (s)   |
+|--------------:|-------------------------:|-----------------------:|---------------------:|
+|      10,000   |                0.0002125 |              0.0000734 |            -0.0001391 |
+|     100,000   |                0.0004679 |              0.0003474 |            -0.0001205 |
+|   1,000,000   |                0.0031003 |              0.0028508 |            -0.0002495 |
+|  10,000,000   |                0.0305887 |              0.0320830 |             0.0014943 |
+| 100,000,000   |                0.2358850 |              0.2446802 |             0.0087951 |
+|1,000,000,000  |                2.0946560 |              2.3812340 |             0.2865781 |
 
 
-## Results
-**Deque average**
-Memory inefficient, has issues working with large sizes
-| Size       | Read Avg (s) | Sort Avg (s) | Group Avg (s) | Total Avg (s) |
-|------------|---------------------|---------------------|----------------------|---------------------|
-| 1,000      | 0.02844956          | 0.0005178           | 0.00064116           | 0.03019116          |
-| 10,000     | 0.10552896          | 0.00517462          | 0.00517562           | 0.1163678           |
-| 100,000    | 1.035632            | 0.07265532          | 0.06195668           | 1.171086            |
-| 1,000,000  | 10.623              | 0.9315776           | 0.8973906            | 12.45276            |
-| 10,000,000 | 192.141             | 16.55702            | 51.33604             | 260.4148            |
+# Test 2
+### Objective
+Compare how many times the containers (`std::vector` and `Vector<T>`) in version V1.5 reallocate memory when filling 100,000,000 elements. A reallocation occurs when `capacity() == size()`, i.e., when there is no room for new elements. 
+Function: `void testing3__2()`
 
-**Vector average**
-| Size       | Read Avg (s) | Sort Avg (s) | Group Avg (s) | Total Avg (s) |
-|------------|------------|------------|------------|------------|
-| 1,000      | 0.010337   | 0.00009786 | 0.00017876 | 0.01092928 |
-| 10,000     | 0.09128952 | 0.00185314 | 0.00215056 | 0.09576322 |
-| 100,000    | 0.8871364  | 0.01464122 | 0.03292928 | 0.93549    |
-| 1,000,000  | 8.740884   | 0.186925   | 0.4305424  | 9.359252   |
-| 10,000,000 | 90.82808   | 1.769656   | 7.583668   | 100.18238  |
+## Test results (Vector<T> matches std::vector)
 
-**List average**
-| Size       | Read Avg (s) | Sort Avg (s) | Group Avg (s) | Total Avg (s) |
-|------------|------------|------------|------------|------------|
-| 1,000      | 0.01216484 | 0.00008752 | 0.00058418 | 0.0132518  |
-| 10,000     | 0.0998488  | 0.00235064 | 0.00898998 | 0.1117702  |
-| 100,000    | 1.0053898  | 0.01892004 | 0.165474   | 1.190548   |
-| 1,000,000  | 9.977394   | 0.5905198  | 2.034754   | 12.60358   |
-| 10,000,000 | 106.6492   | 13.05704   | 26.07286   | 145.78     |
-
-## 2nd strategy
-This strategy involves splitting a student container using only one new container for "bad" students. In this approach, if a student is classified as a worse, we transfer them to the new  container and remove them from the main student container. After this step, only top students remain in the main container thus being more memory efficient.
-
-## Grouping Performance Compared to 1st strategy 
-(average results)
-
-## Grouping Performance Compared to 1st strategy 
-(average results)
-
-| File       | Deque (S2)  | Deque (S1)   |   | List (S2)  | List (S1)   |   | Vector (S2)  | Vector (S1) |
-|------------|-------------|--------------|---|------------|-------------|---|--------------|-------------|
-| 1,000      | 0.00025062  | 0.00064116   |   | 0.00020806 | 0.00058418  |   | 0.00008544   | 0.00058418  |
-| 10,000     | 0.00310692  | 0.00517562   |   | 0.00283066 | 0.00898998  |   | 0.00070916   | 0.00898998  |
-| 100,000    | 0.02776866  | 0.06195668   |   | 0.04780796 | 0.165474    |   | 0.0141482    | 0.165474    |
-| 1,000,000  | 0.3512722   | 0.8973906    |   | 0.5217682  | 2.034754    |   | 0.1192752    | 2.034754    |
-| 10,000,000 | 29.29084    | 51.33604     |   | 7.631878   | 26.07286    |   | 1.274536     | 26.07286    |
+| Size       | `std::vector` growths | `Vector<T>` growths | Difference |
+|------------|-----------------------:|---------------------:|-----------:|
+| 100,000,000 |                     30 |                  30 |          30|
 
 
-**Key Takeaways:**
-- **Deque:** Strategy 2 is **2x faster** than Strategy 1.
-- **List:** Strategy 2 is **4x faster** than Strategy 1.
-- **Vector:** Strategy 2 is **29x faster**
+![image](https://github.com/user-attachments/assets/397800c3-2dbf-467f-bc10-5e5f75f3e003)
 
-## 3rd strategy
-Uses 2nd strategy, but also utilizes efficient STL methods to optimize container handling when grouping students into two groups. (std::find_if, .assign(), .erase())
-
-## Grouping Performance Comparison to 1st & 2nd strategy
- (average results)
-
-| File       | Deque (S3)  | Deque (S2)  | Deque (S1)  |   | Vector (S3)  | Vector (S2)   | Vector (S1)  |   | List (S3)   | List (S2)   | List (S1)   |
-|------------|-------------|-------------|-------------|---|--------------|---------------|--------------|---|-------------|-------------|-------------|
-| 1,000      | 0.00011425  | 0.00021374  | 0.00064116  |   | 0.0000599   | 0.00008544    | 0.00017876   |   | 0.00019066  | 0.00020806  | 0.00058418  |
-| 10,000     | 0.00287695  | 0.00316602  | 0.00517562  |   | 0.00112366  | 0.00070916    | 0.00215056   |   | 0.00319796  | 0.00283066  | 0.00898998  |
-| 100,000    | 0.0266666   | 0.0273609   | 0.06195668  |   | 0.01488562  | 0.0141482     | 0.03292928   |   | 0.0566572   | 0.04780796  | 0.165474    |
-| 1,000,000  | 0.2981615   | 0.3290822   | 0.8973906   |   | 0.1729368   | 0.1192752     | 0.4305424    |   | 0.6462056   | 0.5217682   | 2.034754    |
-| 10,000,000 | 24.438075   | 28.11586    | 51.33604    |   | 3.128188    | 1.274536      | 7.583668     |   | 8.18736     | 7.631878    | 26.07286    |
