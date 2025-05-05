@@ -3,11 +3,6 @@
 
 int main(){
 
-        cout  << "Testas" << endl;
-        cout << "----------------------------------------------------------------------------" << endl;
-        testing_v3__2();
-
-
     Vector<Studentas> list_of_students;
     Studentas temp;   
 
@@ -15,11 +10,24 @@ int main(){
     int strategy_choice{};
     cout << "This is v3.0!" << endl;
 
-    //strategy_1();
-    //cout << "strategy 1 done" << endl;
-    
-    cin >> program_choice;
-    while(true){ 
+        // ------------ Testavimas
+        for(int j = 1; j <= 6; j++){
+            cout << "Testing number nr.: " << j << endl << endl;
+            for(int i = 100000; i != 100000000; i *= 10){
+                string file_name = "testavimasFailas" + std::to_string(i) + ".txt";
+                cout << "Currently testing: " << file_name << endl << endl;
+                list_of_students.clear();
+                iterpimo_testavimas(file_name, list_of_students, i);
+            } cout << endl;
+        }
+        
+        
+        cout << "Testing is done !!" << endl;
+        cout << "---------------------------------------------------" << endl;
+        cin >> program_choice;
+        //--------------------------------------------
+        
+    while(false){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-6", 1,6);
         cout << endl;
