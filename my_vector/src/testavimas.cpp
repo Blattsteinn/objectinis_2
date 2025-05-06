@@ -24,7 +24,7 @@ string consoleText_testing12() {
         return std::chrono::duration<double>(end - start).count();
     }
 
-    void iterpimo_testavimas(string file_name, Vector <Studentas> &student_list, int i){
+    void iterpimo_testavimas(string file_name, int i){
            
         double readingTime;
         Vector<Studentas> studentList;

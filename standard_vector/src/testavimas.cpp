@@ -27,8 +27,10 @@ string consoleText_testing12() {
         return std::chrono::duration<double>(end - start).count();
     }
 
-    void iterpimo_testavimas(string file_name, vector <Studentas> &student_list, int i){
-           
+    void iterpimo_testavimas(string file_name, int i){
+        
+        cout << "Testing: " << file_name << endl << endl;
+
         double readingTime;
         vector<Studentas> studentList;
         fs::path full_path = fs::path("Archive") / file_name;      // Combine folder and file name

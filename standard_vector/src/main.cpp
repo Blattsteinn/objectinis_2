@@ -10,24 +10,8 @@ int main(){
     int strategy_choice{};
 
     cout << "This is v3.0!" << endl;
-        // ------------ Testavimas
-        for(int j = 1; j <= 6; j++){
-            cout << "Testing number nr.: " << j << endl << endl;
-            for(int i = 100000; i != 100000000; i *= 10){
-                string file_name = "testavimasFailas" + std::to_string(i) + ".txt";
-                cout << "Currently testing: " << file_name << endl << endl;
-                list_of_students.clear();
-                iterpimo_testavimas(file_name, list_of_students, i);
-            } cout << endl;
-        }
-        
-        
-        cout << "Testing is done !!" << endl;
-        cout << "---------------------------------------------------" << endl;
-        cin >> program_choice;
-        //--------------------------
 
-    while(false){ 
+    while(true){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-7", 1,7);
         cout << endl;
@@ -66,8 +50,8 @@ int main(){
                 break;
 
             case 7:
-            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas, 5 - rule of 5: "
-                , "[Klaida] iveskite skaiciu nuo 1-6", 1,5);
+            strategy_choice = check_the_value("Testavimo strategijos pasirinkimas (1,2 arba 3), 4 - grupavimo testavimas, 5 - rule of 5,  6 - iterpimo testavimas"
+                , "[Klaida] iveskite skaiciu nuo 1-6", 1,6);
             
             switch(strategy_choice){
                 case 1:
@@ -88,7 +72,8 @@ int main(){
                 case 5:
                     testing_v12();
                     break;
-                    
+                case 6:
+                    iterpimo_testavimas("file_10000.txt", 0);
                 default: break;
             }
                 break;

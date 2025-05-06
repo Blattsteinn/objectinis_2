@@ -91,7 +91,7 @@
     // ---------------------------
     /// \brief Testing routines (testing.cpp)
 
-    void iterpimo_testavimas(string file_name, Vector <Studentas> &student_list, int i);
+    void iterpimo_testavimas(string file_name, int i);
     void testing_v3__1();
     void testing_v3__2();
     /// \brief Run test suite v1.2.
