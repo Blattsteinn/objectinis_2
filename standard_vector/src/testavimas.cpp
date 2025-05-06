@@ -81,20 +81,11 @@ string consoleText_testing12() {
                     student.calculate_everything();
                 }
             }); cout << "Sorting and inserting students: " << readingTime << endl;
-                
-
-             // DO-HERE !!  
-             // 3) Inserting students into a vector  
-                readingTime = measureTime([&]() {
-                    for( auto &student : studentList){
-                        insert_student(student_list, student);
-                    }
-                }); cout << "Inserting students into a vector: " << readingTime << endl;
             
         } catch (const char* msg) {
             cerr << msg << endl;
         }
-        // DO-HERE !!    4) count how long it takes to print to the file.
+        // DO-HERE !!    3) count how long it takes to print to the file.
         readingTime = measureTime([&]() {
             Studentas::print_to_file(studentList,  "rezultatai" + std::to_string(i) + ".txt");
         }); cout << "Printing everything to a file: " << readingTime << endl;
