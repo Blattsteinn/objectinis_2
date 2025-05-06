@@ -42,6 +42,7 @@ int main() {
 
     return 0;
 }
+```
 
 # Installation and Launch Instructions:
 1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
