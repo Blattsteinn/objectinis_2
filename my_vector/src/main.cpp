@@ -10,6 +10,7 @@ int main(){
     int strategy_choice{};
 
     cout << "This is v3.0!" << endl;
+    cout << "Vector<T> version"<< endl;
         
     while(true){ 
         
