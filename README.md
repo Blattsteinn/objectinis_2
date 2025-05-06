@@ -1,14 +1,33 @@
 # v3.0
 This program is a student grade management system that handles input, random data generation, and file-based operations for processing student records. It computes final grades using both average and median methods while offering functionalities for sorting, grouping, and performance testing.
 
+# Installation and Launch Instructions:
+- to install the program that uses `Vector<T>` run `Setup_cvector.msi`
+- to install the program that uses `std::vector<T>` run `Setup_vector.msi`\
+
+- Both installers deploy to `C:\Program Files\VU\User` and create a Desktop shortcut named **StudentApp**.
+
 ## Improvements in Version 3.0:
 - introduced a custom implementation `Vector<T>` of `std::vector<T>`
+
+# `Vector<T>`
+Can be found in `vector.h` folder.\
+**Key Features:**
+- **Contiguous storage**: Elements live in a single dynamically allocated block—fast random access via `operator[]` or `at()`.
+- **Automatic growth**: Capacity doubles whenever more space is needed.
+
+- **Standard-like interface**: Supports all common `std::vector` member functions:
+- Construction: default, fill, range, initializer list
+- Capacity: `size()`, `capacity()`, `reserve()`, `shrink_to_fit()`, `empty()`
+- Element access: `operator[]`, `at()`, `front()`, `back()`, `data()`
+- Modifiers: `clear()`, `insert()`, `emplace()`, `erase()`, `push_back()`, `emplace_back()`, `pop_back()`, `resize()`, `swap()`
+- Assignments and comparisons: copy/move constructors, copy/move assignment, equality and comparison operators
 
 ## Usage Examples
 
 ```cpp
 #include <iostream>
-#include "Vector.h"
+#include "vector.h/Vector.h"
 
 using namespace std;
 
@@ -40,17 +59,31 @@ int main() {
     u = v;
     cout << "Copied vector u: " << u << endl; // [10, 20, 25, 30, 40]
 
+    // 6) Element access: operator[]
+    cout << "v[0] = " << v[0] << endl;  // prints 10
+
+    // 7) Element access: front() and back()
+    cout << "front() = " << v.front() << ", back() = " << v.back() << endl;  
+    // prints front() = 10, back() = 40
+
+    // 8) Modifiers: pop_back()
+    v.pop_back();
+    cout << "After pop_back(): " << v << endl;  // [10, 20, 25, 30]
+
+    // 9) Modifiers: erase() (remove element at position 1)
+    v.erase(v.begin() + 1);
+    cout << "After erase at pos 1: " << v << endl;  // [10, 25, 30]
+
+    // 10) Capacity control: shrink_to_fit()
+    cout << "Capacity before shrink_to_fit() = " << v.capacity() << endl;
+    v.shrink_to_fit();
+    cout << "Size = " << v.size() << ", Capacity after shrink_to_fit() = " << v.capacity() << endl;
+
     return 0;
 }
 ```
-
-# Installation and Launch Instructions:
-1) Install [MinGW](http://www.mingw.org/) (or [MinGW-w64](https://mingw-w64.org/doku.php/download)) and [CMake (version 3.25 or higher)](https://cmake.org/download/).
-2) Download the repository containing the above files.
-3) Run `run.bat` to configure, build, and install the program.
-4) Launch the executable (`studentai`).
-
-# Overridden methods:
+# `class Studentas`
+## Overridden methods:
 ### I/O methods for class `Studentas`:
 - `operator>>` prompts users for names, grades, and exam scores
 - `operator<<` prints names and calculated final grades
@@ -81,7 +114,7 @@ int main() {
 - Memory: 16 GB DDR5
 - Storage: 1TB NVMe SSD
 
-Full results can be found here - excel file...
+Full results can be found here - [Testavimas v3.xlsx](https://github.com/user-attachments/files/20068551/Testavimas.v3.xlsx)
 
 # Benchmark test 1
 Compares the time to push_back() integers from 10⁴ to 10⁹ into `std::vector<int>` vs a custom `Vector<int>`
