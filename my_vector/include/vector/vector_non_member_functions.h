@@ -1,3 +1,7 @@
+// vector_non_member_functions.h
+#pragma once
+
+#include "vector_library.h"
 
 template <typename T>
 bool Vector<T>::operator==(const Vector& other) const {

@@ -387,6 +387,7 @@ public:
 #include "vector_capacity.h"
 #include "vector_elementAccess.h"
 #include "vector_memberFunctions.h"
+#include "vector_non_member_functions.h"
 
 /**
  * @todo Add `insert_range` and `append_range` once the codebase targets C++23.

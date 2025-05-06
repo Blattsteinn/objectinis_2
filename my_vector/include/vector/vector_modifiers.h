@@ -35,10 +35,11 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, const T &valu
     }
     
     for (size_type i = tmp.size_; i > idx; --i) {
-        tmp.array[i] = std::move(tmp.array[i - 1]);
+        new (&tmp.array[i]) T(std::move(tmp.array[i-1]));
+        tmp.array[i-1].~T();
     }
 
-    tmp.array[idx] = value;
+    new (&tmp.array[idx]) T(value);
     ++tmp.size_;
 
     // if everything is OK
@@ -60,10 +61,11 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, T &&value){
     }
 
     for (size_type i = tmp.size_; i > idx; --i) {
-        tmp.array[i] = std::move(tmp.array[i - 1]);
+        new (&tmp.array[i]) T(std::move(tmp.array[i - 1]));
+        tmp.array[i - 1].~T();
     }
 
-    tmp.array[idx] = std::move(value);
+    new (&tmp.array[idx]) T(value);
     ++tmp.size_;
 
     // if everything is OK
@@ -75,98 +77,74 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, T &&value){
 // 3) Inserts count copies of the value before pos.
 template <typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, size_type count, const T &value){
-    size_type idx = pos - begin();
-
-    // Make a copy incase it throws
-    Vector tmp(*this);
     
-    while (tmp.size_ + count > tmp.capacity_) {
-        tmp.double_the_capacity();
+    size_type idx = pos - begin();
+    Vector tmp;                 // start fresh, not a copy
+    tmp.reserve(size_ + count);
+    
+    // 1) copy elements [0, idx)
+    for (size_type i = 0; i < idx; ++i) {
+        tmp.push_back(std::move_if_noexcept(array[i]));
     }
-
-    // Move forward 'count' times
-    for (size_type i = tmp.size_; i > idx; --i) {
-        tmp.array[i - 1 + count] = std::move(tmp.array[i - 1]);
+        
+    for (size_type i = 0; i < count; ++i){
+        tmp.push_back(value);
     }
-
-    for (size_type j = 0; j < count; ++j){
-        tmp.array[idx + j] = value;
+        
+    for (size_type i = idx; i < size_; ++i){
+        tmp.push_back(std::move_if_noexcept(array[i]));
     }
-
-    tmp.size_ += count;
 
     // if everything is OK
     swap(tmp);
 
-    return array + idx;
+    return begin() + idx;
 }
 
 // 4) Inserts elements from range [first, last) before pos.
 template<typename T>
 template<class InputIt, typename> 
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, InputIt first, InputIt last){
-    size_type idx = pos - begin();
-    size_type count = last - first;
+    size_type idx   = pos - begin();
+    size_type count = static_cast<size_type>(std::distance(first, last));
 
     if (count == 0)
-    return const_cast<iterator>(pos);
+        return const_cast<iterator>(pos);
 
-    // Make a copy incase it throws
-    Vector tmp(*this);
+    Vector tmp;
+    tmp.reserve(size_ + count);
 
-    while (tmp.size_ + count > tmp.capacity_) {
-        tmp.double_the_capacity();
-    }
+    for (size_type i = 0; i < idx; ++i)
+        tmp.push_back(std::move_if_noexcept(array[i]));
 
-    // Move forward 'count' times
-    for (size_type i = tmp.size_; i > idx; --i){
-        tmp.array[i - 1 + count] = std::move(tmp.array[i - 1]);
-    }
-    // Add new elements
-    size_type j = 0;
-    for (auto i = first; i != last; ++i, ++j){
-        tmp.array[idx + j] = *i;
-    }
+    for (; first != last; ++first)
+        tmp.push_back(*first);
 
-    tmp.size_ += count;
-    // if everything is OK
+    for (size_type i = idx; i < size_; ++i)
+        tmp.push_back(std::move_if_noexcept(array[i]));
+
     swap(tmp);
-
-    return array + idx;
+    return begin() + idx;
 }
 
 // 5) Inserts elements from initializer list ilist before pos.
 // Equivalent to insert(pos, ilist.begin(), ilist.end()).
 template <typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, std::initializer_list<T> ilist){
+   
     size_type idx = pos - begin();
-    size_type count = ilist.size();
+    Vector tmp;
+    tmp.reserve(size_ + ilist.size());
 
-    if (count == 0)
-    return const_cast<iterator>(pos);
+    for (size_type i = 0; i < idx; ++i)
+        tmp.push_back(std::move_if_noexcept(array[i]));
+    for (auto &x : ilist)
+        tmp.push_back(x);
+    for (size_type i = idx; i < size_; ++i)
+        tmp.push_back(std::move_if_noexcept(array[i]));
 
-    // Make a copy incase it throws
-    Vector tmp(*this);
-
-    while (tmp.size_ + count > tmp.capacity_){
-        tmp.double_the_capacity();
-    }
-
-    for (size_type i = tmp.size_; i > idx; --i){
-        tmp.array[i - 1 + count] = std::move(tmp.array[i - 1]);
-    }
-
-    const T *ptr = ilist.begin();
-    for (size_type j = 0; j < ilist.size(); ++j){
-        tmp.array[idx + j] = ptr[j]; // copy the j-th element
-    }
-
-    tmp.size_ += count;
-
-    // if everything is OK
     swap(tmp);
-
-    return array + idx;
+    return begin() + idx;
 }
 
 // emplace (C++11)
