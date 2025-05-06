@@ -1,0 +1,137 @@
+\doxysection{vector\+\_\+member\+Functions.\+h}
+\hypertarget{vector__member_functions_8h_source}{}\label{vector__member_functions_8h_source}\mbox{\hyperlink{vector__member_functions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ vector\_memberFunctions.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vector__library_8h}{vector\_library.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00007\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector_a613830748694d6fecedd0596eb9e1b54}{Vector<T>::assign}}(\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ count,\ \textcolor{keyword}{const}\ T\&\ value)\{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ T*\ new\_array\ =\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{new}[](count\ *\ \textcolor{keyword}{sizeof}(T))}
+\DoxyCodeLine{00011\ \ \ \ \ );}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ constructed\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ constructed\ <\ count;\ ++constructed)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (\&new\_array[constructed])\ T(value);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00018\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ fails\ destroys\ what\ we\ did,\ then\ frees\ the\ memory}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ j\ =\ 0;\ j\ <\ constructed;\ ++j)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ new\_array[j].\string~T();}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](new\_array);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ j\ =\ 0;\ j\ <\ size\_;\ ++j)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ array[j].\string~T();}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](array);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ array\ \ \ \ \ =\ new\_array;}
+\DoxyCodeLine{00032\ \ \ \ \ size\_\ \ \ \ \ =\ count;}
+\DoxyCodeLine{00033\ \ \ \ \ capacity\_\ =\ count;}
+\DoxyCodeLine{00034\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00037\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ InputIt,\ \textcolor{keyword}{typename}>}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector_a613830748694d6fecedd0596eb9e1b54}{Vector<T>::assign}}(InputIt\ first,\ InputIt\ last)\{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ i\ =\ 0;\ i\ <\ size\_;\ ++i)}
+\DoxyCodeLine{00040\ \ \ \ \ array[i].\string~T();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ size\_\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ first\ !=\ last;\ ++first)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector_a4415960a83615855ec32f8169f641786}{push\_back}}(*first);}
+\DoxyCodeLine{00045\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector_a613830748694d6fecedd0596eb9e1b54}{Vector<T>::assign}}(std::initializer\_list<T>\ ilist)\{}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_vector_a613830748694d6fecedd0596eb9e1b54}{assign}}(ilist.begin(),\ ilist.end());}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ -\/-\/-\/-\/\ Copy\ constructor}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00054\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>::Vector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\ other)}
+\DoxyCodeLine{00055\ \ \ \ \ :\ array(other.capacity\_\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ static\_cast<T*>(::operator\ new[](other.capacity\_\ *\ sizeof(T)))}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ :\ nullptr),}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ size\_(other.size\_),}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ capacity\_(other.capacity\_)}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ i\ =\ 0;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ other.size\_;\ ++i)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (\&array[i])\ T(other.array[i]);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ fails\ destroys\ what\ we\ did,\ then\ frees\ the\ memory}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ j\ =\ 0;\ j\ <\ i;\ ++j)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ array[j].\string~T();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](array);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ -\/-\/-\/\ initializer\_list}}
+\DoxyCodeLine{00078\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00079\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>::Vector}}(std::initializer\_list<T>\ ilist)}
+\DoxyCodeLine{00080\ \ \ :\ array(ilist.\mbox{\hyperlink{class_vector_ac02a21ddf7e0a06672dbcc8b8273e000}{size}}()}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ static\_cast<T*>(::operator\ new[](ilist.\mbox{\hyperlink{class_vector_ac02a21ddf7e0a06672dbcc8b8273e000}{size}}()\ *\ sizeof(T)))}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ :\ nullptr),}
+\DoxyCodeLine{00083\ \ \ \ \ size\_(0),}
+\DoxyCodeLine{00084\ \ \ \ \ capacity\_(ilist.\mbox{\hyperlink{class_vector_ac02a21ddf7e0a06672dbcc8b8273e000}{size}}())}
+\DoxyCodeLine{00085\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ \&elem\ :\ ilist)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector_a4415960a83615855ec32f8169f641786}{push\_back}}(elem);\}}
+\DoxyCodeLine{00088\ \}}
+\DoxyCodeLine{00089\ \ \ \ \ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00091\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\ \mbox{\hyperlink{class_vector_aad0ab10918f27cf712f3cef6cac0ddf8}{Vector<T>::operator=}}(std::initializer\_list<T>\ ilist)\{}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_vector_a613830748694d6fecedd0596eb9e1b54}{assign}}(ilist);}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00094\ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ -\/-\/-\/-\/\ Move\ constructor}}
+\DoxyCodeLine{00097\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00098\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>::Vector}}(\mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\&\ other)\ noexcept}
+\DoxyCodeLine{00099\ \ \ \ \ :\ array(other.array),}
+\DoxyCodeLine{00100\ \ \ \ \ size\_(other.size\_),}
+\DoxyCodeLine{00101\ \ \ \ \ capacity\_(other.capacity\_)}
+\DoxyCodeLine{00102\ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ other.array\ \ \ \ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ other.size\_\ \ \ \ =\ 0;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ other.capacity\_=\ 0;}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ -\/-\/-\/-\/\ Copy\ assignment\ operator}}
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00110\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\ \mbox{\hyperlink{class_vector_aad0ab10918f27cf712f3cef6cac0ddf8}{Vector<T>::operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\ other)\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector}}\ tmp(other);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector_a04719915f34b27674e1eca2c42e48eb2}{swap}}(tmp);}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00116\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ -\/-\/-\/-\/\ Move\ assignment\ operator}}
+\DoxyCodeLine{00119\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00120\ \mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\ \mbox{\hyperlink{class_vector_aad0ab10918f27cf712f3cef6cac0ddf8}{Vector<T>::operator=}}(\mbox{\hyperlink{class_vector_a39d6069675db4ecfc1ab81d440da759a}{Vector<T>}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{if}(\&other\ !=\ \textcolor{keyword}{this})\{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ array;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ array\ =\ other.array;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ size\_\ =\ other.size\_;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ capacity\_\ =\ other.capacity\_;}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ other.array\ \ \ \ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ other.size\_\ \ \ \ =\ 0;}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ other.capacity\_=\ 0;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \}}
+
+\end{DoxyCode}

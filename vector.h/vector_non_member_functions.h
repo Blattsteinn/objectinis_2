@@ -42,3 +42,15 @@ bool Vector<T>::operator<=(const Vector& other) const {
     return !std::lexicographical_compare(other.begin(), other.end(),
                                          begin(), end());
 }
+
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const Vector<T>& vec) {
+    os << '[';
+    for (typename Vector<T>::size_type i = 0; i < vec.size(); ++i) {
+        os << vec[i];
+        if (i + 1 < vec.size())
+            os << ", ";
+    }
+    os << ']';
+    return os;
+}

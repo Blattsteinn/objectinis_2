@@ -375,6 +375,7 @@ public:
      * @post This vector contains the previous contents of @p other and vice‑versa.
      */
     void swap(Vector& other) noexcept;
+
 };
 
 //------------------------------------------------------------------------------

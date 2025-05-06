@@ -1,0 +1,94 @@
+\doxysection{vector\+\_\+capacity.\+h}
+\hypertarget{vector__capacity_8h_source}{}\label{vector__capacity_8h_source}\mbox{\hyperlink{vector__capacity_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ vector\_capacity.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vector__library_8h}{vector\_library.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ empty}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ checks\ whether\ the\ container\ is\ empty}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ (public\ member\ function)}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00010\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_vector_ac1b626201b41a7b86c532b0ddf9552fb}{Vector<T>::empty}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordflow}{return}\ size\_\ ==\ 0;}
+\DoxyCodeLine{00012\ \}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ size}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ returns\ the\ number\ of\ elements}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ (public\ member\ function)}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{Vector<T>::size\_type}}\ \mbox{\hyperlink{class_vector_ac02a21ddf7e0a06672dbcc8b8273e000}{Vector<T>::size}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{return}\ size\_;}
+\DoxyCodeLine{00020\ \}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ max\_size}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ returns\ the\ maximum\ possible\ number\ of\ elements}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ (public\ member\ function)}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00026\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{Vector<T>::size\_type}}\ \mbox{\hyperlink{class_vector_abfca230d393870fde35df6af70cc74f7}{Vector<T>::max\_size}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ std::numeric\_limits<size\_type>::max()\ /\ \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ reserve}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ reserves\ storage}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ (public\ member\ function)}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector_a18ced2e01a4cd11e87c20d1442a19353}{Vector<T>::reserve}}(\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ n)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <=\ capacity\_)\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00037\ \ \ \ \ T*\ new\_array\ =\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{new}[](n\ *\ \textcolor{keyword}{sizeof}(T))}
+\DoxyCodeLine{00039\ \ \ \ \ );}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ i\ =\ 0;\ i\ <\ size\_;\ ++i)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (\&new\_array[i])\ T(std::move(array[i]));}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ array[i].\string~T();}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](array);}
+\DoxyCodeLine{00047\ \ \ \ \ array\ \ \ \ \ =\ new\_array;}
+\DoxyCodeLine{00048\ \ \ \ \ capacity\_\ =\ n;}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ capacity}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ returns\ the\ number\ of\ elements\ that\ can\ be\ held\ in\ currently\ allocated\ storage}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ (public\ member\ function)}}
+\DoxyCodeLine{00054\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00055\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{Vector<T>::size\_type}}\ \mbox{\hyperlink{class_vector_a2022b8504838ec2d7efc74517793826c}{Vector<T>::capacity}}()\ const\ noexcept\ \{\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ capacity\_;\ }
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ shrink\_to\_fit}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ reduces\ memory\ usage\ by\ freeing\ unused\ memory}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ (public\ member\ function)}}
+\DoxyCodeLine{00062\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector_ad6454ce193263b8000d4c18cb0c3a0c8}{Vector<T>::shrink\_to\_fit}}()\{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (capacity\_\ ==\ size\_)\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \ \ \textcolor{comment}{//\ nothing\ to\ shrink}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ T*\ new\_array\ =\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{new}[](size\_\ *\ \textcolor{keyword}{sizeof}(T))}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ i\ =\ 0;\ i\ <\ size\_;\ ++i)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (\&new\_array[i])\ T(std::move(array[i]));}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ array[i].\string~T();}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_vector_abafb4cad9801440d5379d777088cf3ef}{size\_type}}\ j\ =\ 0;\ j\ <\ size\_;\ ++j)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ new\_array[j].\string~T();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](new\_array);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](array);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ array\ \ \ \ \ =\ new\_array;}
+\DoxyCodeLine{00088\ \ \ \ \ capacity\_\ =\ size\_;}
+\DoxyCodeLine{00089\ \}}
+
+\end{DoxyCode}

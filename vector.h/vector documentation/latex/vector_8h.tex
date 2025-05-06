@@ -1,0 +1,36 @@
+\doxysection{vector.\+h File Reference}
+\hypertarget{vector_8h}{}\label{vector_8h}\index{vector.h@{vector.h}}
+
+
+A light‑weight replacement for {\ttfamily std\+::vector} that allocates with raw {\ttfamily new}/{\ttfamily delete} instead of an allocator. overloads.  
+
+
+{\ttfamily \#include "{}vector\+\_\+library.\+h"{}}\newline
+{\ttfamily \#include "{}Vector\+\_\+impl.\+h"{}}\newline
+{\ttfamily \#include "{}vector\+\_\+modifiers.\+h"{}}\newline
+{\ttfamily \#include "{}vector\+\_\+capacity.\+h"{}}\newline
+{\ttfamily \#include "{}vector\+\_\+element\+Access.\+h"{}}\newline
+{\ttfamily \#include "{}vector\+\_\+member\+Functions.\+h"{}}\newline
+{\ttfamily \#include "{}vector\+\_\+non\+\_\+member\+\_\+functions.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_vector}{Vector$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Contiguous grow‑able array owning its storage (similar to {\ttfamily std\+::vector}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A light‑weight replacement for {\ttfamily std\+::vector} that allocates with raw {\ttfamily new}/{\ttfamily delete} instead of an allocator. overloads. 
+
+The implementation is distributed across several helper headers included at the bottom of this file\+:
+\begin{DoxyItemize}
+\item \doxylink{_vector__impl_8h}{Vector\+\_\+impl.\+h} — core private helpers (growth, moves)
+\item \doxylink{vector__member_functions_8h}{vector\+\_\+member\+Functions.\+h} — constructors/assignments
+\item \doxylink{vector__element_access_8h}{vector\+\_\+element\+Access.\+h} — element accessors
+\item \doxylink{vector__capacity_8h}{vector\+\_\+capacity.\+h} — capacity helpers
+\item \doxylink{vector__modifiers_8h}{vector\+\_\+modifiers.\+h} — modifiers
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+This header {\bfseries{does not}} depend on allocators; memory is managed with {\ttfamily \+::operator new\mbox{[}$\,$\mbox{]}} / {\ttfamily \+::operator delete\mbox{[}$\,$\mbox{]}}. 
+\end{DoxyNote}

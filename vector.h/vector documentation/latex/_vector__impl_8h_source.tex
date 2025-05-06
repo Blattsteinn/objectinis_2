@@ -1,0 +1,44 @@
+\doxysection{Vector\+\_\+impl.\+h}
+\hypertarget{_vector__impl_8h_source}{}\label{_vector__impl_8h_source}\mbox{\hyperlink{_vector__impl_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ vector\_impl.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vector__library_8h}{vector\_library.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00007\ \textcolor{keywordtype}{void}\ Vector<T>::double\_the\_capacity()\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{//\ Compute\ new\ capacity}}
+\DoxyCodeLine{00009\ \ \ \ \ size\_type\ newCap\ =\ std::max<size\_type>(size\_type(1),\ capacity\_\ *\ 2);}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//\ Allocate\ uninitialized\ memory}}
+\DoxyCodeLine{00012\ \ \ \ \ T*\ new\_array\ =\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{new}[](newCap\ *\ \textcolor{keyword}{sizeof}(T))}
+\DoxyCodeLine{00014\ \ \ \ \ );}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ 3)\ Move-\/construct\ existing\ elements\ into\ new\_array}}
+\DoxyCodeLine{00017\ \ \ \ \ size\_type\ i\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ size\_;\ ++i)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (\&new\_array[i])\ T(std::move(array[i]));}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Destroys\ what\ we\ did,\ then\ frees}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (size\_type\ j\ =\ 0;\ j\ <\ i;\ ++j)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ new\_array[j].\string~T();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](new\_array);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ If\ succeess\ -\/-\/>\ destroy\ old\ objects\ \&\ free\ \ old\ memory\ and\ commit\ the\ new\ one}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{for}\ (size\_type\ j\ =\ 0;\ j\ <\ size\_;\ ++j)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ array[j].\string~T();}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ \ \ \ \ ::operator\ \textcolor{keyword}{delete}[](array);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ array\ \ \ \ \ =\ new\_array;}
+\DoxyCodeLine{00038\ \ \ \ \ capacity\_\ =\ newCap;}
+\DoxyCodeLine{00039\ \}}
+
+\end{DoxyCode}
