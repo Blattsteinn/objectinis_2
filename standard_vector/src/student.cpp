@@ -261,7 +261,7 @@
             isvedimas << buffer.str();
             isvedimas.close();
 
-            //cout << endl;
-            //cout << "Rezultatai issaugoti: " << full_path.string() << '\n' << endl; 
+            cout << endl;
+            cout << "Rezultatai issaugoti: " << full_path.string() << '\n' << endl; 
 
         }

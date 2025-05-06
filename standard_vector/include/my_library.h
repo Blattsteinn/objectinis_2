@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vector/vector.h"
+
 // --- Containers ---
 #include <vector>
 using std::vector;

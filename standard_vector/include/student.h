@@ -11,7 +11,7 @@
 ///        providing calculations for mean- and median-based final grades.
 class Studentas : public Human {
     private:
-    vector<float> pazymiai;   ///< Homework grades
+        Vector<float> pazymiai;   ///< Homework grades
         int egzaminoRezultatas;    ///< Exam score
         float galutinisVid;        ///< Final grade by average
         float galutinisMed;        ///< Final grade by median
@@ -33,7 +33,7 @@ class Studentas : public Human {
          */
         Studentas(const string& vardas,
                 const string& pavarde,
-                const vector<float>& pazymiai,
+                const Vector<float>& pazymiai,
                 const int& egzaminoRezultatas)
             : Human(vardas, pavarde), pazymiai(pazymiai), egzaminoRezultatas(egzaminoRezultatas) {
             calculate_everything();
@@ -64,11 +64,11 @@ class Studentas : public Human {
         // Setters
         void setVardas(const string& v) { vardas = v; }
         void setPavarde(const string& p) { pavarde = p; }
-        void setGrades(const vector<float>& g) { pazymiai = g; }
+        void setGrades(const Vector<float>& g) { pazymiai = g; }
         void setExam(const int& exam) { egzaminoRezultatas = exam; }
 
         // Getters
-        vector<float> getPazymiai() const { return pazymiai; }
+        Vector<float> getPazymiai() const { return pazymiai; }
         int getEgzaminoRezultatas() const { return egzaminoRezultatas; }
         float getGalutinisVid() const { return galutinisVid; }
         float getGalutinisMed() const { return galutinisMed; }
@@ -95,19 +95,19 @@ class Studentas : public Human {
         /// \param file_name     Input file name.
         /// \param student_list  Vector to append parsed Studentas objects.
         static void appendingContainerViaFile(string file_name,
-            vector<Studentas>& student_list);
+                                            Vector<Studentas>& student_list);
 
         /// \brief Parse student records from a stream.
         /// \param ndCount  Number of grades per record.
         /// \param iss      Input string stream.
         /// \return         Vector of parsed Studentas.
-        static vector<Studentas> read_student_records(int ndCount,
+        static Vector<Studentas> read_student_records(int ndCount,
                                                     istringstream& iss);
 
         /// \brief Write a list of students to a text file in "Rezultatai".
         /// \param list_of_students  Vector of Studentas to write.
         /// \param file_name         Name of output file.
-        static void print_to_file(vector<Studentas> list_of_students,
+        static void print_to_file(Vector<Studentas> list_of_students,
                                 string file_name);
 
 };
