@@ -1,0 +1,14 @@
+INPUT                  = 
+RECURSIVE              = YES
+
+OUTPUT_DIRECTORY       = Doxygen documentation
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+
+QUIET                  = NO
+FILE_PATTERNS          = *.cpp *.h
+EXTRACT_ALL 	       = YES
