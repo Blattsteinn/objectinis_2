@@ -31,7 +31,7 @@ constexpr typename Vector<T>::size_type Vector<T>::max_size() const noexcept {
 // reserves storage
 // (public member function)
 template<typename T>
-constexpr void Vector<T>::reserve(size_type n) {
+void Vector<T>::reserve(size_type n) {
     if (n <= capacity_) 
         return;
     T* new_array = static_cast<T*>(
