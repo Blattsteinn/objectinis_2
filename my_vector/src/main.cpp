@@ -27,7 +27,7 @@ int main(){
         cin >> program_choice;
         //--------------------------------------------
         
-    while(false){ 
+    while(true){ 
         
         program_choice = check_the_value(consoleText_userChoice(), "[Klaida] iveskite skaiciu nuo 1-6", 1,6);
         cout << endl;

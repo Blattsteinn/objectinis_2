@@ -5,7 +5,7 @@
 
 // ----- at()
 template<typename T>
-constexpr typename Vector<T>::reference Vector<T>::at(size_type pos){
+typename Vector<T>::reference Vector<T>::at(size_type pos){
     if (pos >= size_) {
         throw std::out_of_range("Vector::at: index out of range");
     }
@@ -13,7 +13,7 @@ constexpr typename Vector<T>::reference Vector<T>::at(size_type pos){
 }
 
 template<typename T>
-constexpr typename Vector<T>::const_reference Vector<T>::at(size_type pos) const{
+typename Vector<T>::const_reference Vector<T>::at(size_type pos) const{
     if (pos >= size_) {
         throw std::out_of_range("Vector::at: index out of range");
     }
@@ -22,7 +22,7 @@ constexpr typename Vector<T>::const_reference Vector<T>::at(size_type pos) const
 
 // ----- front()
 template<typename T>
-constexpr typename Vector<T>::reference Vector<T>::front(){
+typename Vector<T>::reference Vector<T>::front(){
     if (empty()) {
         throw std::out_of_range("Vector::front(): empty vector");
     }
@@ -30,7 +30,7 @@ constexpr typename Vector<T>::reference Vector<T>::front(){
 }
 
 template<typename T>
-constexpr typename Vector<T>::const_reference Vector<T>::front() const{
+typename Vector<T>::const_reference Vector<T>::front() const{
     if (empty()) {
         throw std::out_of_range("Vector::front(): empty vector");
     }
@@ -39,7 +39,7 @@ constexpr typename Vector<T>::const_reference Vector<T>::front() const{
 
 // ----- back()
 template<typename T>
-constexpr typename Vector<T>::reference Vector<T>::back(){
+typename Vector<T>::reference Vector<T>::back(){
     if (empty()) {
         throw std::out_of_range("Vector::back(): empty vector");
     }
@@ -47,7 +47,7 @@ constexpr typename Vector<T>::reference Vector<T>::back(){
 }
 
 template<typename T>
-constexpr typename Vector<T>::const_reference Vector<T>::back() const{
+typename Vector<T>::const_reference Vector<T>::back() const{
     if (empty()) {
         throw std::out_of_range("Vector::front(): empty vector");
     }

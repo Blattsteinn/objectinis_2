@@ -8,7 +8,7 @@
 //   Clears all elements from the vector.
 //   (public member function)
 template <typename T>
-constexpr void Vector<T>::clear() noexcept
+void Vector<T>::clear() noexcept
 {
     for (size_type i = 0; i < size_; ++i)
     {
