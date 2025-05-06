@@ -16,8 +16,7 @@
  *   - @ref vector_modifiers.h       — modifiers
  *
  * @note  This header **does not** depend on allocators; memory is managed with
- *        `::operator new[]` / `::operator delete[]` to satisfy the project’s
- *        constraints.
+ *        `::operator new[]` / `::operator delete[]`.
  */
 
 #include "vector_library.h"
